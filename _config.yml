@@ -105,6 +105,6 @@ deploy:
 gitment:
   enable: true #如果不使用则设置false关闭
   owner: itiwll # 你的github名称或者id id的获取方式为https://api.github.com/users/forvoid（你的名称）中的id极为github id
-  repo: itiwll/blog # 你的留言存放的位置 我的是放在我的github的github page上面
+  repo: blog # 你的留言存放的位置 我的是放在我的github的github page上面
   client_id: a5b54382b569b2319bf # Register a new OAuth application https://github.com/settings/applications/new 
   client_secret: 5332b45bde88a13f961a7651895efbf67f3689d6 
