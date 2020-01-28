@@ -115,7 +115,7 @@ social:
   github: https://github.com/itiwll
 
 # WeChat 微信公众号二维码url
-wechat_url: /wechat.png ## 启用wechat widget才会生效
+wechat_url: /asset/wechat.png ## 启用wechat widget才会生效
 
 google_analytics: UA-96241139-3
 
