@@ -3,13 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Eson Wong&#39;s Blog</title>
+  <title>怎么用 webpack 实现 js 模块按需懒加载？ | Eson Wong&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Eson Wong&#39;s Blog">
-<meta property="og:url" content="https://blog.esonwong.com/index.html">
+  <meta name="description" content="动态导入，ECMAScript import() 提案ECMAScript 有一项允许使用 import() 方法传入 url 返回 Promise 动态导入 ES 模块的提案。已经进入 stage 4(Finished) 阶段，等待加入标准。 示例 1234import(&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;vue@2.6.11&#x2F;dist&#x2F;vue.esm.browser.j">
+<meta property="og:type" content="article">
+<meta property="og:title" content="怎么用 webpack 实现 js 模块按需懒加载？">
+<meta property="og:url" content="https://blog.esonwong.com/2020/01/28/%E6%80%8E%E4%B9%88%E7%94%A8-webpack-%E5%AE%9E%E7%8E%B0-js-%E6%A8%A1%E5%9D%97%E6%8C%89%E9%9C%80%E6%87%92%E5%8A%A0%E8%BD%BD%EF%BC%9F/index.html">
 <meta property="og:site_name" content="Eson Wong&#39;s Blog">
+<meta property="og:description" content="动态导入，ECMAScript import() 提案ECMAScript 有一项允许使用 import() 方法传入 url 返回 Promise 动态导入 ES 模块的提案。已经进入 stage 4(Finished) 阶段，等待加入标准。 示例 1234import(&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;vue@2.6.11&#x2F;dist&#x2F;vue.esm.browser.j">
 <meta property="og:locale" content="zh">
+<meta property="article:published_time" content="2020-01-28T11:28:49.000Z">
+<meta property="article:modified_time" content="2020-01-28T04:54:37.412Z">
 <meta property="article:author" content="Eson Wong">
 <meta name="twitter:card" content="summary">
   
@@ -66,9 +70,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-怎么用-webpack-实现-js-模块按需懒加载？" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-怎么用-webpack-实现-js-模块按需懒加载？" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/01/28/%E6%80%8E%E4%B9%88%E7%94%A8-webpack-%E5%AE%9E%E7%8E%B0-js-%E6%A8%A1%E5%9D%97%E6%8C%89%E9%9C%80%E6%87%92%E5%8A%A0%E8%BD%BD%EF%BC%9F/" class="article-date">
   <time datetime="2020-01-28T11:28:49.000Z" itemprop="datePublished">2020-01-28</time>
@@ -81,8 +83,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/01/28/%E6%80%8E%E4%B9%88%E7%94%A8-webpack-%E5%AE%9E%E7%8E%B0-js-%E6%A8%A1%E5%9D%97%E6%8C%89%E9%9C%80%E6%87%92%E5%8A%A0%E8%BD%BD%EF%BC%9F/">怎么用 webpack 实现 js 模块按需懒加载？</a>
+    <h1 class="article-title" itemprop="name">
+      怎么用 webpack 实现 js 模块按需懒加载？
     </h1>
   
 
@@ -115,51 +117,78 @@
     </footer>
   </div>
   
-</article>
+    
  
+<script src="/jquery/jquery.min.js"></script>
 
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/01/28/hello-world/" class="article-date">
-  <time datetime="2020-01-28T04:54:37.412Z" itemprop="datePublished">2020-01-28</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/01/28/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <!-- Table of Contents -->
-        
-        <p>Hello world!</p>
-
-      
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
     </div>
-    <footer class="article-footer">
-      <a data-url="https://blog.esonwong.com/2020/01/28/hello-world/" data-id="ck5xepu2g0000f9hg1aischwc" class="article-share-link">分享</a>
-      
-      
-      
-    </footer>
   </div>
+
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/01/28/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
   
 </article>
  
-
-
+     
+  <div class="comments" id="comments">
+    
+     
+       
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+       
+      
+      
+           <div id="gitment_comments"></div>
+    
+  </div>
+ 
   
 
 </section>
@@ -167,91 +196,34 @@
     <aside id="sidebar">
   
     
-  <div class="widget-wrap">
-     
-        <h3 class="follow-title ">Follow me</h3>
-     
-    <div class="widget follow">
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
       
-              <a class="github" aria-hidden="true" href="https://github.com/giscafer" target="_blank" title="Github"></a>
-      
-      
-            <a class="weibo" aria-hidden="true"  href="http://weibo.com/laohoubin" target="_blank" title="微博"></a>
-      
-      
-              <a class="zhihu" aria-hidden="true"  href="http://www.zhihu.com/people/giscafer" target="_blank" title="知乎"></a>
-      
-      
-            <a class="email" aria-hidden="true"  href="mailto:youemail@outlook.com" target="_blank" title="邮箱"></a>
-      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#动态导入，ECMAScript-import-提案"><span class="toc-number">1.</span> <span class="toc-text">动态导入，ECMAScript import() 提案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vue-router"><span class="toc-number">2.</span> <span class="toc-text">vue router</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#加载动画"><span class="toc-number">3.</span> <span class="toc-text">加载动画</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">4.</span> <span class="toc-text">参考:</span></a></li></ol>
+          </div>
+      </div>
     </div>
-  </div>
 
+  
+    
 
   
     
   
     
+  
+    
 
   
     
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title recent-posts">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2020/01/28/%E6%80%8E%E4%B9%88%E7%94%A8-webpack-%E5%AE%9E%E7%8E%B0-js-%E6%A8%A1%E5%9D%97%E6%8C%89%E9%9C%80%E6%87%92%E5%8A%A0%E8%BD%BD%EF%BC%9F/">怎么用 webpack 实现 js 模块按需懒加载？</a>
-          </li>
-        
-          <li>
-            <a href="/2020/01/28/hello-world/">Hello World</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title archive">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a><span class="archive-list-count">2</span></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-<div class="widget-wrap">
-    <h3 class="widget-title">Links</h3>
-    <div class="widget">
-        <ul>
-            
-            <li>
-                <a href="http://blog.giscafer.com" target="_blank" rel="noopener">giscafer&#39;s blog</a>
-            </li>
-            
-            <li>
-                <a href="http://www.gis520.com" target="_blank" rel="noopener">GIS520社区</a>
-            </li>
-            
-        </ul>
-    </div>
-</div>
-
   
     <!--微信公众号二维码-->
-
-  <div class="widget-wrap">
-    <h3 class="follow-title ">WeChat</h3>
-    <div class="widget wechat-widget">
-        <img src="http://blog.giscafer.com/static/images/qrcode_giscafer.jpg" alt="扫码关注" width="250"/>
-    </div>
-  </div>
 
 
   
