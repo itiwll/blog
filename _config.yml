@@ -4,9 +4,9 @@
 
 # Site
 title: Eson Wong's Blog
-subtitle: ''
-description: ''
-keywords:
+subtitle: '编程记录，心得分享'
+description: Eson Wong's Blog，编程记录，心得分享
+keywords: 前端,javascript,emscript,vue,react,webpack
 author:  Eson Wong
 language: zh
 timezone: ''
@@ -108,3 +108,19 @@ gitment:
   repo: blog # 你的留言存放的位置 我的是放在我的github的github page上面
   client_id: 7c83e84529d5a45c3a2e # Register a new OAuth application https://github.com/settings/applications/new 
   client_secret: 8276b20b3f3724312b2dcd11d54b590b9891661b 
+
+email: 'youemail@outlook.com'
+
+social:
+  github: https://github.com/itiwll
+
+# WeChat 微信公众号二维码url
+wechat_url: /wechat.png ## 启用wechat widget才会生效
+
+google_analytics: UA-96241139-3
+
+rss: /atom.xml
+feed:
+  # Generate atom feed
+  type: atom
+
