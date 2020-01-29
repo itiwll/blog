@@ -91,6 +91,47 @@ ga('send', 'pageview');
       <div class="outer">
         <section id="main">
   
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/01/29/hello-world/" class="article-date">
+  <time datetime="2020-01-29T03:47:59.827Z" itemprop="datePublished">2020-01-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/29/hello-world/">Hello World</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>Hello world!</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://blog.esonwong.com/2020/01/29/hello-world/" data-id="ck5yrrz7x0000c5hh2pq8e7qv" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
     <article id="post-怎么用-webpack-实现-js-模块按需懒加载？" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/01/28/%E6%80%8E%E4%B9%88%E7%94%A8-webpack-%E5%AE%9E%E7%8E%B0-js-%E6%A8%A1%E5%9D%97%E6%8C%89%E9%9C%80%E6%87%92%E5%8A%A0%E8%BD%BD%EF%BC%9F/" class="article-date">
@@ -117,13 +158,14 @@ ga('send', 'pageview');
         
         <h2 id="动态导入，ECMAScript-import-提案"><a href="#动态导入，ECMAScript-import-提案" class="headerlink" title="动态导入，ECMAScript import() 提案"></a>动态导入，ECMAScript <code>import()</code> 提案</h2><p>ECMAScript 有一项允许使用 <code>import()</code> 方法传入 url 返回 <code>Promise</code> 动态导入 ES 模块的提案。已经进入 stage 4(Finished) 阶段，等待加入标准。</p>
 <p>示例</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span>(<span class="string">"https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.esm.browser.js"</span>)</span><br><span class="line">.then(<span class="function"><span class="params">rep</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Vue'</span>,rep.default)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span>(<span class="string">"https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.esm.browser.js"</span>)</span><br><span class="line">  .then(<span class="function"><span class="params">rep</span> =&gt;</span> &#123; </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Vue'</span>,rep.default)</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
 
-<p>Webpack 提供了 <code>import()</code> 语法的支持，并且扩展了，使其可以打包和导入本地路径的模块。</p>
-<blockquote>
-<p>注： 使用 Webpack 的 <code>import()</code> 传递动态的本地 path 需要一些技巧</p>
-</blockquote>
-<h2 id="vue-router"><a href="#vue-router" class="headerlink" title="vue router"></a>vue router</h2><h2 id="加载动画"><a href="#加载动画" class="headerlink" title="加载动画"></a>加载动画</h2><h2 id="参考"><a href="#参考" class="headerlink" title="参考:"></a>参考:</h2><ul>
+<p>Webpack 提供了 <code>import()</code> 语法，但是 Webpack 并不支持网络模块的导入。 Webpack 可以以本地路径或项目中安装的模块名动态导入模块。</p>
+<p><em>注： 使用 Webpack 的 <code>import()</code> 传递动态的本地 path 需要一些技巧</em></p>
+<p>示例</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span>(<span class="string">"./a.js"</span>) <span class="comment">// 本地路径</span></span><br><span class="line">  .then(<span class="function"><span class="params">rep</span> =&gt;</span> &#123; </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Vue'</span>,rep.default)</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span>(<span class="string">"vue"</span>) <span class="comment">// 安装的模块名</span></span><br><span class="line">  .then(<span class="function"><span class="params">rep</span> =&gt;</span> &#123; </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'a'</span>,rep.default)</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="vue-router"><a href="#vue-router" class="headerlink" title="vue router"></a>vue router</h2><h2 id="加载动画"><a href="#加载动画" class="headerlink" title="加载动画"></a>加载动画</h2><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li><a href="https://github.com/tc39/proposal-dynamic-import" target="_blank" rel="noopener">tc39/proposal-dynamic-import</a></li>
 <li><a href="https://tc39.es/process-document/" target="_blank" rel="noopener">The TC39 Process</a></li>
 </ul>
@@ -131,48 +173,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.esonwong.com/2020/01/28/%E6%80%8E%E4%B9%88%E7%94%A8-webpack-%E5%AE%9E%E7%8E%B0-js-%E6%A8%A1%E5%9D%97%E6%8C%89%E9%9C%80%E6%87%92%E5%8A%A0%E8%BD%BD%EF%BC%9F/" data-id="ck5xilds30001awhe6chwea23" class="article-share-link">分享</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
- 
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/01/28/hello-world/" class="article-date">
-  <time datetime="2020-01-28T06:43:16.738Z" itemprop="datePublished">2020-01-28</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/01/28/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <!-- Table of Contents -->
-        
-        <p>Hello world!</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://blog.esonwong.com/2020/01/28/hello-world/" data-id="ck5xildry0000awhegen5drfe" class="article-share-link">分享</a>
+      <a data-url="https://blog.esonwong.com/2020/01/28/%E6%80%8E%E4%B9%88%E7%94%A8-webpack-%E5%AE%9E%E7%8E%B0-js-%E6%A8%A1%E5%9D%97%E6%8C%89%E9%9C%80%E6%87%92%E5%8A%A0%E8%BD%BD%EF%BC%9F/" data-id="ck5yrrz830001c5hhcshydp6z" class="article-share-link">分享</a>
       
       
       
@@ -220,11 +221,11 @@ ga('send', 'pageview');
       <ul>
         
           <li>
-            <a href="/2020/01/28/%E6%80%8E%E4%B9%88%E7%94%A8-webpack-%E5%AE%9E%E7%8E%B0-js-%E6%A8%A1%E5%9D%97%E6%8C%89%E9%9C%80%E6%87%92%E5%8A%A0%E8%BD%BD%EF%BC%9F/">怎么用 webpack 实现 js 模块按需懒加载？</a>
+            <a href="/2020/01/29/hello-world/">Hello World</a>
           </li>
         
           <li>
-            <a href="/2020/01/28/hello-world/">Hello World</a>
+            <a href="/2020/01/28/%E6%80%8E%E4%B9%88%E7%94%A8-webpack-%E5%AE%9E%E7%8E%B0-js-%E6%A8%A1%E5%9D%97%E6%8C%89%E9%9C%80%E6%87%92%E5%8A%A0%E8%BD%BD%EF%BC%9F/">怎么用 webpack 实现 js 模块按需懒加载？</a>
           </li>
         
       </ul>
