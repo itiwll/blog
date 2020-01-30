@@ -93,8 +93,8 @@ ga('send', 'pageview');
   
     <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2020/01/29/hello-world/" class="article-date">
-  <time datetime="2020-01-29T04:03:32.806Z" itemprop="datePublished">2020-01-29</time>
+    <a href="/2020/01/30/hello-world/" class="article-date">
+  <time datetime="2020-01-30T04:46:49.771Z" itemprop="datePublished">2020-01-30</time>
 </a>
     
   </div>
@@ -105,7 +105,7 @@ ga('send', 'pageview');
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/01/29/hello-world/">Hello World</a>
+      <a class="article-title" href="/2020/01/30/hello-world/">Hello World</a>
     </h1>
   
 
@@ -120,7 +120,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.esonwong.com/2020/01/29/hello-world/" data-id="ck5ysbshg000094hpbb32fkus" class="article-share-link">分享</a>
+      <a data-url="https://blog.esonwong.com/2020/01/30/hello-world/" data-id="ck609bmcd0000dzhr361r6s8o" class="article-share-link">分享</a>
       
       
       
@@ -161,16 +161,21 @@ ga('send', 'pageview');
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span>(<span class="string">"https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.esm.browser.js"</span>)</span><br><span class="line">  .then(<span class="function"><span class="params">rep</span> =&gt;</span> &#123; </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Vue'</span>,rep.default)</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
 
 <p>Webpack 提供了 <code>import()</code> 语法，但是 Webpack 并不支持网络模块的导入。 Webpack 可以以本地路径或项目中安装的模块名动态导入模块。</p>
-<p>示例</p>
+<p>示例：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span>(<span class="string">"./a.js"</span>) <span class="comment">// 本地路径</span></span><br><span class="line">  .then(<span class="function"><span class="params">rep</span> =&gt;</span> &#123; </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Vue'</span>,rep.default)</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span>(<span class="string">"vue"</span>) <span class="comment">// 安装的模块名</span></span><br><span class="line">  .then(<span class="function"><span class="params">rep</span> =&gt;</span> &#123; </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'a'</span>,rep.default)</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
 
 <p><em>注： 使用 Webpack 的 <code>import()</code> 传递动态的本地 path 需要一些技巧</em></p>
-<h2 id="Vue-Router"><a href="#Vue-Router" class="headerlink" title="Vue Router"></a>Vue Router</h2><p>Vue Router 配置的 component 属性支持传递一个返回 <code>Promise</code> 方法，在匹配到路由准备渲染组件前会掉用此方法加载组件。</p>
-<p>示例</p>
+<h2 id="Vue-Router"><a href="#Vue-Router" class="headerlink" title="Vue Router"></a>Vue Router</h2><p>Vue Router 配置的 component 属性支持传递一个返回 <code>Promise</code> 的方法，在匹配到路由准备渲染组件前会掉用此方法加载组件。</p>
+<p>示例：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Foo = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'./Foo.vue'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123; <span class="attr">path</span>: <span class="string">'/foo'</span>, <span class="attr">component</span>: Foo &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
 
-<h2 id="加载动画"><a href="#加载动画" class="headerlink" title="加载动画"></a>加载动画</h2><p>待续</p>
+<h2 id="组件加载状态"><a href="#组件加载状态" class="headerlink" title="组件加载状态"></a>组件加载状态</h2><p>Vue 函数式组件的 <code>createElemnt</code> （即 <code>h</code>）方法的第一个参数支持传递一个指定异步渲染的组件、加载时渲染的组件和加载失败渲染的组件的对象。我们可以据此创建一个懒加载容器组件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">lazyLoadView</span>(<span class="params">AsyncView</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> AsyncHandler = <span class="function"><span class="params">()</span> =&gt;</span> (&#123;</span><br><span class="line">    <span class="comment">// 需要加载的组件 (应该是一个 `Promise` 对象)</span></span><br><span class="line">    component: AsyncView,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 异步组件加载时使用的组件</span></span><br><span class="line">    loading: Loading,</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 加载失败时使用的组件</span></span><br><span class="line">    <span class="comment">// error: Error,</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 展示加载时组件的延时时间。默认值是 200 (毫秒)</span></span><br><span class="line">    delay: <span class="number">200</span>,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果提供了超时时间且组件加载也超时了，</span></span><br><span class="line">    <span class="comment">// 则使用加载失败时使用的组件。默认值是：`Infinity`</span></span><br><span class="line">    timeout: <span class="number">10000</span></span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    functional: <span class="literal">true</span>,</span><br><span class="line">    render(h, &#123; data, children &#125;) &#123;</span><br><span class="line">      <span class="keyword">return</span> h(AsyncHandler, data, children);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后修改路由配置：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">"/foo"</span>,</span><br><span class="line">      component: <span class="function"><span class="params">()</span> =&gt;</span></span><br><span class="line">        lazyLoadView(</span><br><span class="line">         <span class="keyword">import</span>(<span class="string">"./Foo.vue"</span>)</span><br><span class="line">          <span class="comment">// 模拟网络延迟</span></span><br><span class="line">          <span class="comment">// new Promise(resolve =&gt; &#123;</span></span><br><span class="line">          <span class="comment">//   window.setTimeout(rep =&gt; &#123;</span></span><br><span class="line">          <span class="comment">//     resolve(import("./Foo.vue"));</span></span><br><span class="line">          <span class="comment">//   &#125;, 5000);</span></span><br><span class="line">          <span class="comment">// &#125;)</span></span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
 <h2 id="最终效果"><a href="#最终效果" class="headerlink" title="最终效果"></a>最终效果</h2><iframe
      src="https://codesandbox.io/embed/vue-router-import-plws9?fontsize=14&hidenavigation=1&theme=dark"
      style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
@@ -185,12 +190,13 @@ ga('send', 'pageview');
 <li><a href="https://github.com/tc39/proposal-dynamic-import" target="_blank" rel="noopener">tc39/proposal-dynamic-import</a></li>
 <li><a href="https://tc39.es/process-document/" target="_blank" rel="noopener">The TC39 Process</a></li>
 <li><a href="https://router.vuejs.org/zh/guide/advanced/lazy-loading.html" target="_blank" rel="noopener">Vue Router - 路由懒加载</a></li>
+<li><a href="https://juejin.im/post/5b90d0fcf265da0aa81bd728" target="_blank" rel="noopener">Vue异步组件处理路由组件加载状态</a></li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.esonwong.com/2020/01/28/%E6%80%8E%E4%B9%88%E7%94%A8-webpack-%E5%AE%9E%E7%8E%B0-js-%E6%A8%A1%E5%9D%97%E6%8C%89%E9%9C%80%E6%87%92%E5%8A%A0%E8%BD%BD%EF%BC%9F/" data-id="ck5ysbshm000194hpe5kpep0q" class="article-share-link">分享</a>
+      <a data-url="https://blog.esonwong.com/2020/01/28/%E6%80%8E%E4%B9%88%E7%94%A8-webpack-%E5%AE%9E%E7%8E%B0-js-%E6%A8%A1%E5%9D%97%E6%8C%89%E9%9C%80%E6%87%92%E5%8A%A0%E8%BD%BD%EF%BC%9F/" data-id="ck609bmcj0001dzhr123407o5" class="article-share-link">分享</a>
       
       
       
@@ -238,7 +244,7 @@ ga('send', 'pageview');
       <ul>
         
           <li>
-            <a href="/2020/01/29/hello-world/">Hello World</a>
+            <a href="/2020/01/30/hello-world/">Hello World</a>
           </li>
         
           <li>
