@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   
@@ -21,13 +22,26 @@
 <meta property="article:tag" content="webpack">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="Eson Wong&#39;s Blog" type="application/atom+xml">
+  <link rel="alternate" href="/atom.xml" title="Eson Wong&#39;s Blog" type="application/atom+xml">
   
   
-    <link rel="icon" href="/favicon.png">
+  <link rel="icon" href="/favicon.png">
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="Eson Wong" />
+  
+
+  <!--Keywords-->
+  
+  <meta name="keywords" content="前端,javascript,emscript,vue,react,webpack" />
+  
+
+
+
   
   
-    
   
   
 <link rel="stylesheet" href="/css/style.css">
@@ -48,7 +62,6 @@ ga('send', 'pageview');
 
 
 <meta name="generator" content="Hexo 4.2.0"></head>
-
 <body>
   <div id="container">
     <div id="wrap">
@@ -91,10 +104,10 @@ ga('send', 'pageview');
       <div class="outer">
         <section id="main">
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Ecmascript-提案：可选链" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2020/01/30/hello-world/" class="article-date">
-  <time datetime="2020-01-30T04:46:49.771Z" itemprop="datePublished">2020-01-30</time>
+    <a href="/2020/01/31/Ecmascript-%E6%8F%90%E6%A1%88%EF%BC%9A%E5%8F%AF%E9%80%89%E9%93%BE/" class="article-date">
+  <time datetime="2020-01-31T20:37:15.000Z" itemprop="datePublished">2020-01-31</time>
 </a>
     
   </div>
@@ -105,7 +118,7 @@ ga('send', 'pageview');
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/01/30/hello-world/">Hello World</a>
+      <a class="article-title" href="/2020/01/31/Ecmascript-%E6%8F%90%E6%A1%88%EF%BC%9A%E5%8F%AF%E9%80%89%E9%93%BE/">Ecmascript 提案：可选链 &#34;?.&#34; </a>
     </h1>
   
 
@@ -115,15 +128,34 @@ ga('send', 'pageview');
       
         <!-- Table of Contents -->
         
-        <p>Hello world!</p>
+        <h2 id="可选链提案"><a href="#可选链提案" class="headerlink" title="可选链提案"></a>可选链提案</h2><p>可选链 Optional Chaining 是一项方便读取对象属性值的 ECMAScript 语法提案。它将检测将要读取属性所属的对象是否为 <code>null</code> 或者 <code>undefined</code>，如果是将会返回 <code>undefinde</code>, 另外也可调用方法时用作于检测方法是否存在，如果存在则执行。已经进入 stage 4(Finished) 阶段，等待加入标准。</p>
+<p>示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> user = &#123; <span class="attr">name</span>: <span class="string">"eson"</span>&#125;;</span><br><span class="line"><span class="keyword">const</span> name = user?.name;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> list = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="keyword">const</span> item0 = list?.[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> func = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line">func.?();</span><br></pre></td></tr></table></figure>
+
+<h2 id="作用和使用场景"><a href="#作用和使用场景" class="headerlink" title="作用和使用场景"></a>作用和使用场景</h2><p>许多 API 或者后端接口返回的结果通常是一个 <code>object</code> 或者 <code>array</code>, 如果没有可用值则会返回 <code>null</code> 或 <code>undefined</code>， 通常只有结果不为 <code>null</code> 或 <code>undefined</code> 的时候我们才会去读取它的属性。<code>?.</code> 可以省去烦人的对象检测。</p>
+<h2 id="使用-bable-插件支持可选链语法"><a href="#使用-bable-插件支持可选链语法" class="headerlink" title="使用 bable 插件支持可选链语法"></a>使用 bable 插件支持可选链语法</h2><p>现在通过 babel 的 proposal-optional-chaining 插件可以提前享用可选链语法。</p>
+<h3 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev @babel/plugin-proposal-optional-chaining</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">yarn add @babel/plugin-proposal-optional-chaining -D</span><br></pre></td></tr></table></figure>
+
+<h3 id="babel-配置"><a href="#babel-配置" class="headerlink" title="babel 配置"></a>babel 配置</h3><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"plugins"</span>: [<span class="string">"@babel/plugin-proposal-optional-chaining"</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><p><a href="https://github.com/tc39/proposal-optional-chaining" target="_blank" rel="noopener">tc39 / proposal-optional-chaining</a></p>
+</li>
+<li><p><a href="https://babeljs.io/docs/en/babel-plugin-proposal-optional-chaining" target="_blank" rel="noopener">@babel/plugin-proposal-optional-chaining</a></p>
+</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.esonwong.com/2020/01/30/hello-world/" data-id="ck609bmcd0000dzhr361r6s8o" class="article-share-link">分享</a>
+      <a data-url="https://blog.esonwong.com/2020/01/31/Ecmascript-%E6%8F%90%E6%A1%88%EF%BC%9A%E5%8F%AF%E9%80%89%E9%93%BE/" data-id="ck67tv8660000eihe1z2d7o7e" class="article-share-link">分享</a>
       
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/" rel="tag">?.</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ECMAScript/" rel="tag">ECMAScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/babel/" rel="tag">babel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/optional-chaining/" rel="tag">optional chaining</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8F%AF%E9%80%89%E9%93%BE/" rel="tag">可选链</a></li></ul>
+
     </footer>
   </div>
   
@@ -196,10 +228,12 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.esonwong.com/2020/01/28/%E6%80%8E%E4%B9%88%E7%94%A8-webpack-%E5%AE%9E%E7%8E%B0-js-%E6%A8%A1%E5%9D%97%E6%8C%89%E9%9C%80%E6%87%92%E5%8A%A0%E8%BD%BD%EF%BC%9F/" data-id="ck609bmcj0001dzhr123407o5" class="article-share-link">分享</a>
+      <a data-url="https://blog.esonwong.com/2020/01/28/%E6%80%8E%E4%B9%88%E7%94%A8-webpack-%E5%AE%9E%E7%8E%B0-js-%E6%A8%A1%E5%9D%97%E6%8C%89%E9%9C%80%E6%87%92%E5%8A%A0%E8%BD%BD%EF%BC%9F/" data-id="ck67tv86c0001eihe452i8i4s" class="article-share-link">分享</a>
       
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ECMAScript/" rel="tag">ECMAScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/import/" rel="tag">import</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%87%92%E5%8A%A0%E8%BD%BD/" rel="tag">懒加载</a></li></ul>
+
     </footer>
   </div>
   
@@ -236,6 +270,13 @@ ga('send', 'pageview');
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title tagcloud">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/" style="font-size: 14px;">?.</a> <a href="/tags/ECMAScript/" style="font-size: 25px;">ECMAScript</a> <a href="/tags/babel/" style="font-size: 14px;">babel</a> <a href="/tags/import/" style="font-size: 14px;">import</a> <a href="/tags/optional-chaining/" style="font-size: 14px;">optional chaining</a> <a href="/tags/vue/" style="font-size: 14px;">vue</a> <a href="/tags/webpack/" style="font-size: 14px;">webpack</a> <a href="/tags/%E5%8F%AF%E9%80%89%E9%93%BE/" style="font-size: 14px;">可选链</a> <a href="/tags/%E6%87%92%E5%8A%A0%E8%BD%BD/" style="font-size: 14px;">懒加载</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
@@ -244,7 +285,7 @@ ga('send', 'pageview');
       <ul>
         
           <li>
-            <a href="/2020/01/30/hello-world/">Hello World</a>
+            <a href="/2020/01/31/Ecmascript-%E6%8F%90%E6%A1%88%EF%BC%9A%E5%8F%AF%E9%80%89%E9%93%BE/">Ecmascript 提案：可选链 &#34;?.&#34; </a>
           </li>
         
           <li>
