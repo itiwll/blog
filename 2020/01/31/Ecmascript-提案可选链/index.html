@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Ecmascript 提案：可选链 &#34;?.&#34;  | Eson Wong&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="可选链提案可选链 Optional Chaining 是一项方便读取对象属性值的 ECMAScript 语法提案。它将检测将要读取属性所属的对象是否为 null 或者 undefined，如果是将会返回 undefinde, 另外也可调用方法时用作于检测方法是否存在，如果存在则执行。已经进入 stage 4(Finished) 阶段，等待加入标准。 示例： 12345678const user &#x3D;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ecmascript 提案：可选链 &quot;?.&quot; ">
+<meta property="og:url" content="https://blog.esonwong.com/2020/01/31/Ecmascript-%E6%8F%90%E6%A1%88%E5%8F%AF%E9%80%89%E9%93%BE/index.html">
+<meta property="og:site_name" content="Eson Wong&#39;s Blog">
+<meta property="og:description" content="可选链提案可选链 Optional Chaining 是一项方便读取对象属性值的 ECMAScript 语法提案。它将检测将要读取属性所属的对象是否为 null 或者 undefined，如果是将会返回 undefinde, 另外也可调用方法时用作于检测方法是否存在，如果存在则执行。已经进入 stage 4(Finished) 阶段，等待加入标准。 示例： 12345678const user &#x3D;">
+<meta property="og:locale" content="zh">
+<meta property="article:published_time" content="2020-01-31T20:37:15.000Z">
+<meta property="article:modified_time" content="2020-02-04T12:29:01.915Z">
+<meta property="article:author" content="Eson Wong">
+<meta property="article:tag" content="可选链">
+<meta property="article:tag" content="optional chaining">
+<meta property="article:tag" content="?.">
+<meta property="article:tag" content="babel">
+<meta property="article:tag" content="ECMAScript">
+<meta name="twitter:card" content="summary">
+  
+  <link rel="alternate" href="/atom.xml" title="Eson Wong&#39;s Blog" type="application/atom+xml">
+  
+  
+  <link rel="icon" href="/favicon.png">
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="Eson Wong" />
+  
+
+  <!--Keywords-->
+  
+  <meta name="keywords" content="可选链,optional chaining,?.,babel,ECMAScript" />
+  
+
+
+
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-96241139-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://blog.esonwong.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Eson Wong&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">编程记录，心得分享</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Ecmascript-提案可选链" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/01/31/Ecmascript-%E6%8F%90%E6%A1%88%E5%8F%AF%E9%80%89%E9%93%BE/" class="article-date">
+  <time datetime="2020-01-31T20:37:15.000Z" itemprop="datePublished">2020-01-31</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Ecmascript 提案：可选链 &#34;?.&#34; 
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h2 id="可选链提案"><a href="#可选链提案" class="headerlink" title="可选链提案"></a>可选链提案</h2><p>可选链 Optional Chaining 是一项方便读取对象属性值的 ECMAScript 语法提案。它将检测将要读取属性所属的对象是否为 <code>null</code> 或者 <code>undefined</code>，如果是将会返回 <code>undefinde</code>, 另外也可调用方法时用作于检测方法是否存在，如果存在则执行。已经进入 stage 4(Finished) 阶段，等待加入标准。</p>
+<p>示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> user = &#123; <span class="attr">name</span>: <span class="string">"eson"</span>&#125;;</span><br><span class="line"><span class="keyword">const</span> name = user?.name;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> list = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="keyword">const</span> item0 = list?.[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> func = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line">func.?();</span><br></pre></td></tr></table></figure>
+
+<h2 id="作用和使用场景"><a href="#作用和使用场景" class="headerlink" title="作用和使用场景"></a>作用和使用场景</h2><p>许多 API 或者后端接口返回的结果通常是一个 <code>object</code> 或者 <code>array</code>, 如果没有可用值则会返回 <code>null</code> 或 <code>undefined</code>， 通常只有结果不为 <code>null</code> 或 <code>undefined</code> 的时候我们才会去读取它的属性。<code>?.</code> 可以省去烦人的对象检测。</p>
+<h2 id="使用-bable-插件支持可选链语法"><a href="#使用-bable-插件支持可选链语法" class="headerlink" title="使用 bable 插件支持可选链语法"></a>使用 bable 插件支持可选链语法</h2><p>现在通过 babel 的 proposal-optional-chaining 插件可以提前享用可选链语法。</p>
+<h3 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev @babel/plugin-proposal-optional-chaining</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">yarn add @babel/plugin-proposal-optional-chaining -D</span><br></pre></td></tr></table></figure>
+
+<h3 id="babel-配置"><a href="#babel-配置" class="headerlink" title="babel 配置"></a>babel 配置</h3><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"plugins"</span>: [<span class="string">"@babel/plugin-proposal-optional-chaining"</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><p><a href="https://github.com/tc39/proposal-optional-chaining" target="_blank" rel="noopener">tc39 / proposal-optional-chaining</a></p>
+</li>
+<li><p><a href="https://babeljs.io/docs/en/babel-plugin-proposal-optional-chaining" target="_blank" rel="noopener">@babel/plugin-proposal-optional-chaining</a></p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://blog.esonwong.com/2020/01/31/Ecmascript-%E6%8F%90%E6%A1%88%E5%8F%AF%E9%80%89%E9%93%BE/" data-id="ck67v18kn0000dvhp4ua40j0v" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/" rel="tag">?.</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ECMAScript/" rel="tag">ECMAScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/babel/" rel="tag">babel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/optional-chaining/" rel="tag">optional chaining</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8F%AF%E9%80%89%E9%93%BE/" rel="tag">可选链</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ 
+<script src="/jquery/jquery.min.js"></script>
+
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/01/28/%E6%80%8E%E4%B9%88%E7%94%A8-webpack-%E5%AE%9E%E7%8E%B0-js-%E6%A8%A1%E5%9D%97%E6%8C%89%E9%9C%80%E6%87%92%E5%8A%A0%E8%BD%BD/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">怎么用 webpack 实现 js 模块按需懒加载？</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+       
+      
+      
+           <div id="gitment_comments"></div>
+    
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#可选链提案"><span class="toc-number">1.</span> <span class="toc-text">可选链提案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作用和使用场景"><span class="toc-number">2.</span> <span class="toc-text">作用和使用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-bable-插件支持可选链语法"><span class="toc-number">3.</span> <span class="toc-text">使用 bable 插件支持可选链语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装插件"><span class="toc-number">3.1.</span> <span class="toc-text">安装插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#babel-配置"><span class="toc-number">3.2.</span> <span class="toc-text">babel 配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">4.</span> <span class="toc-text">参考</span></a></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2020 Eson Wong&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;itiwll@gmail.com
+    </div>
+  </div>
+</footer>
+ 
+<script src="/jquery/jquery.min.js"></script>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+  <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+  <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script> 
+  <script>
+  var gitment = new Gitment({
+    // id: '页面 ID', // 可选。默认为 location.href
+    id: decodeURI(window.location.pathname),
+    owner: 'itiwll',
+    repo: 'blog',
+    oauth: {
+    client_id: '7c83e84529d5a45c3a2e',
+    client_secret: '8276b20b3f3724312b2dcd11d54b590b9891661b',
+    }
+  })
+  gitment.render(document.getElementById("gitment_comments"))
+</script>
+
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ 
+<script src="/js/is.js"></script>
+
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/elevator.js"></script>
+
+  </div>
+</body>
+</html>
