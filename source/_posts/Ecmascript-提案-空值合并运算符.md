@@ -45,20 +45,24 @@ const userGender = user.gender || "male"; // "male"
 ```
 
 ## 使用 bable 插件支持空值合并运算符
-
 ### 安装插件
 
 ``` bash
+npm install --save-dev @babel/plugin-proposal-nullish-coalescing-operator
 # or
+yarn add @babel/plugin-proposal-nullish-coalescing-operator -D
 ```
 
 ### babel 配置
 
 ```json
+{
+  "plugins": ["@babel/plugin-proposal-nullish-coalescing-operator"]
+}
 ```
 
 ## 参考
 
-* [tc39 / proposal-optional-chaining](https://github.com/tc39/proposal-optional-chaining)
-* [@babel/plugin-proposal-optional-chaining](https://babeljs.io/docs/en/babel-plugin-proposal-optional-chaining)
+* [tc3/proposal-nullish-coalescing](https://github.com/tc39/proposal-nullish-coalescing)
+* [@babel/plugin-proposal-nullish-coalescing-operator](https://babeljs.io/docs/en/babel-plugin-proposal-nullish-coalescing-operator)
 
