@@ -15,7 +15,7 @@ tags:
 如果控制合并运算符 `??` 左边的值为 `null` 或 `undefined` ，表达式会返回控制合并运算符右边的值，否则返回左边的值。
 
 已经进入 stage 4(Finished) 阶段，等待加入标准。
-
+<!-- more -->
 示例：
 
 ``` javascript
