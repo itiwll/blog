@@ -6,15 +6,15 @@
   
   <title>怎么用 webpack 实现 js 模块按需懒加载？ | Eson Wong&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="动态导入，ECMAScript import() 提案ECMAScript 有一项允许使用 import() 方法传入 url 返回 Promise 动态导入 ES 模块的提案。已经进入 stage 4(Finished) 阶段，等待加入标准。 示例 1234import(&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;vue@2.6.11&#x2F;dist&#x2F;vue.esm.browser.j">
+  <meta name="description" content="动态导入，ECMAScript import() 提案ECMAScript 有一项允许使用 import() 方法传入 url 返回 Promise 动态导入 ES 模块的提案。已经进入 stage 4(Finished) 阶段，等待加入标准。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="怎么用 webpack 实现 js 模块按需懒加载？">
 <meta property="og:url" content="https://blog.esonwong.com/2020/01/28/%E6%80%8E%E4%B9%88%E7%94%A8-webpack-%E5%AE%9E%E7%8E%B0-js-%E6%A8%A1%E5%9D%97%E6%8C%89%E9%9C%80%E6%87%92%E5%8A%A0%E8%BD%BD/index.html">
 <meta property="og:site_name" content="Eson Wong&#39;s Blog">
-<meta property="og:description" content="动态导入，ECMAScript import() 提案ECMAScript 有一项允许使用 import() 方法传入 url 返回 Promise 动态导入 ES 模块的提案。已经进入 stage 4(Finished) 阶段，等待加入标准。 示例 1234import(&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;vue@2.6.11&#x2F;dist&#x2F;vue.esm.browser.j">
+<meta property="og:description" content="动态导入，ECMAScript import() 提案ECMAScript 有一项允许使用 import() 方法传入 url 返回 Promise 动态导入 ES 模块的提案。已经进入 stage 4(Finished) 阶段，等待加入标准。">
 <meta property="og:locale" content="zh">
 <meta property="article:published_time" content="2020-01-28T11:28:49.000Z">
-<meta property="article:modified_time" content="2020-02-08T01:38:17.780Z">
+<meta property="article:modified_time" content="2020-02-08T01:59:02.800Z">
 <meta property="article:author" content="Eson Wong">
 <meta property="article:tag" content="ECMAScript">
 <meta property="article:tag" content="懒加载">
@@ -128,6 +128,7 @@ ga('send', 'pageview');
         <!-- Table of Contents -->
         
         <h2 id="动态导入，ECMAScript-import-提案"><a href="#动态导入，ECMAScript-import-提案" class="headerlink" title="动态导入，ECMAScript import() 提案"></a>动态导入，ECMAScript <code>import()</code> 提案</h2><p>ECMAScript 有一项允许使用 <code>import()</code> 方法传入 url 返回 <code>Promise</code> 动态导入 ES 模块的提案。已经进入 stage 4(Finished) 阶段，等待加入标准。</p>
+<a id="more"></a>
 <p>示例</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span>(<span class="string">"https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.esm.browser.js"</span>)</span><br><span class="line">  .then(<span class="function"><span class="params">rep</span> =&gt;</span> &#123; </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Vue'</span>,rep.default)</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
 
@@ -167,7 +168,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.esonwong.com/2020/01/28/%E6%80%8E%E4%B9%88%E7%94%A8-webpack-%E5%AE%9E%E7%8E%B0-js-%E6%A8%A1%E5%9D%97%E6%8C%89%E9%9C%80%E6%87%92%E5%8A%A0%E8%BD%BD/" data-id="ck6cxjkag0003chhpa1f022fq" class="article-share-link">分享</a>
+      <a data-url="https://blog.esonwong.com/2020/01/28/%E6%80%8E%E4%B9%88%E7%94%A8-webpack-%E5%AE%9E%E7%8E%B0-js-%E6%A8%A1%E5%9D%97%E6%8C%89%E9%9C%80%E6%87%92%E5%8A%A0%E8%BD%BD/" data-id="ck6cya7mu0003h5hhhx6kdwmd" class="article-share-link">分享</a>
       
       
       
