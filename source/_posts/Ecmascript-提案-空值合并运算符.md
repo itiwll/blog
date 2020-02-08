@@ -2,12 +2,11 @@
 title: 'Ecmascript 提案：空值合并运算符 "??" '
 date: 2020-02-05 20:37:15
 tags: 
-
-  + 空值合并运算符
-  + nullish coalescing
-  + '??'
-  + babel
-  + ECMAScript
+  - 空值合并运算符
+  - nullish coalescing
+  - '??'
+  - babel
+  - ECMAScript
 
 ---
 
@@ -27,7 +26,7 @@ const user = {
     gender: ""
 };
 const userName = user.name ?? "unknown"; // "eson"
-const userAge = user.age ?? 0; // 18
+const userAge = user.age ?? 18; // 0
 const userAddress = user.address ?? "unknown"; // "unknown"
 const userGender = user.gender ?? "male"; // ""
 ```
