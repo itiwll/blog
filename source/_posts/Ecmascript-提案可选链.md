@@ -11,7 +11,7 @@ tags:
 
 ## 可选链提案
 可选链 Optional Chaining 是一项方便读取对象属性值的 ECMAScript 语法提案。它将检测将要读取属性所属的对象是否为 `null` 或者 `undefined`，如果是将会返回 `undefinde`, 另外也可调用方法时用作于检测方法是否存在，如果存在则执行。已经进入 stage 4(Finished) 阶段，等待加入标准。
-
+<!-- more -->
 
 示例：
 ```javascript
