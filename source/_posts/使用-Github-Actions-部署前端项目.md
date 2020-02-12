@@ -10,7 +10,7 @@ tags:
 ---
 
 ## Github Actions 简介
-GitHub Actions 是 Github 推出的一项服务。提供了虚拟服务器环境和 [acrions 市场]，用于 github 上的项目进行持续集成。这对于 Github 上公开的仓库是免费的，私有仓库有服务器运行时间和存储空间的限制,具体请看 [about billing for github actions]。
+GitHub Actions 是 Github 推出的一项服务。提供了虚拟服务器环境和 [Actions 市场]，用于 github 上的项目进行持续集成。这对于 Github 上公开的仓库是免费的，私有仓库有服务器运行时间和存储空间的限制，具体请看 [about billing for github actions]。
 
 <!-- more -->
 ## 教程
@@ -32,23 +32,69 @@ on:
     branches: 
       - master
 ```
-更多触发方式参考 [Triggering a workflow with events]。
+更多触发方式参考 [Triggering a workflow with events] 和 [Workflow syntax for GitHub Actions]。
 ### 配置 jobs 和 build
+事件可以触发的多个 job，这里我们添加一个 build job, 指定运行环境。
+```yml
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+```
 ### 配置 steps
+在 build 下配置 steps。
+```yml
+    steps:
+```
 #### 获取源码
+使用 [Actions 市场] 的 Github 官方发布的 [actions/checkout] 获取仓库代码，
+```yml
+      - name: Checkout
+        uses: actions/checkout@v2
+```
 #### 安装模块和构建
+使用 npm 安装模块和运行 build script。
+```yml
+      - name: Build
+        run: |
+          npm install && npm run build
+```
 #### 部署
+```yml
+      - name: Install SSH key for deploy
+        uses: shimataro/ssh-key-action@v1
+        with:
+          name: id_rsa-deploy
+          private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known-hosts: ${{ secrets.KNOWN_HOSTS_TEST }}
+          config: |                                         # will be appended!
+            Host deploy
+              HostName test.yuanlinbang.net
+              User user-of-deploy
+              IdentityFile ~/.ssh/id_rsa-deploy
+      - name: Deploy
+        run: |
+          rsync -rv $GITHUB_WORKSPACE/dist/ root@test.yuanlinbang.net:/www/mis-desktop-web-test/dist/
+```
 
 ## 示例
+链接：[Github Actions 发布前端项目演示]
+
 
 ## 参考
 - [GitHub Actions Documentation]
 - [Triggering a workflow with events]
-- [acrions 市场]
+- [actions 市场]
 - [about billing for github actions]
+- [Github Actions 发布前端项目演示]
+- [actions/checkout]
 
-[acrions 市场]:https://github.com/marketplace?type=actions
+[Actions 市场]:https://github.com/marketplace?type=actions
 [GitHub Actions Documentation]:https://help.github.com/cn/actions/automating-your-workflow-with-github-actions
 [Triggering a workflow with events]:https://help.github.com/en/actions/configuring-and-managing-workflows/configuring-a-workflow#triggering-a-workflow-with-events
 [about billing for github actions]:https://help.github.com/en/github/setting-up-and-managing-billing-and-payments-on-github/about-billing-for-github-actions#about-billing-for-github-actions
-
+[Github Actions 发布前端项目演示]:https://github.com/itiwll/github-actions-deploy-front-end-example
+[Workflow syntax for GitHub Actions]: https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions
+[actions/checkout]:https://github.com/actions/checkout
