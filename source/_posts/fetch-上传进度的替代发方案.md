@@ -9,9 +9,11 @@ tags:
 ---
 
 ## fetch 无法获取上传文件的进度
+目前 fetch 没有类似 `XMLHttpRequest` 实例的 `upload.onprogress`, 所以需要现实上传进度的话需要使用 `XMLHttpRequest` 来上传文件。
+[相关讨论][github/fetch/issuse/upload progress?]
 
+<!-- more -->
 ## 使用 XMLHttpRequest 替代
-
 ```javascript
 await new Promise((resolve, reject) => {
   const xhr = (this.xhr = new XMLHttpRequest());
@@ -19,7 +21,7 @@ await new Promise((resolve, reject) => {
   xhr.setRequestHeader("auth", "xxx");
   xhr.upload.onprogress = event => {
     if (event.lengthComputable) {
-      this.progress = Math.floor((event.loaded / event.total) * 100);
+      console.log("上传进度", event.loaded / event.total);
     }
   };
   xhr.onerror = () => {
@@ -41,5 +43,8 @@ await new Promise((resolve, reject) => {
   throw new Error(e);
 });
 ```
+## 参考
+- [github/fetch/issuse/upload progress?]
 
-## 定制中的标准
+[github/fetch/issuse/upload progress?]:https://github.com/github/fetch/issues/89
+
