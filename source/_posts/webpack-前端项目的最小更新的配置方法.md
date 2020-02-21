@@ -38,8 +38,20 @@ module.exports = {
 
 如果我们使用 `import()` 懒加载模块，此模块也将被单独打包js文件。
 
+## 输出 content hash 文件名
+为了达到最小更新的的目的，关键就是缓存没有更新的模块。
 
-## 输出 hash 文件名
+为了缓存模块，需要让输出文件的文件名在内容不变的情况下不发生改变。在 webpack 的 output 配置中使用 `contenthash` 占位符指定输出文件名:
+```javascript
+module.exports = {
+  //...
+  output: {
+    //...
+    filename: "[name].[contenthash].js",
+    chunkFilename: "[name].[contenthash].js"
+  },
+}
+```
 
 ## Nginx 缓存时间配置
 
