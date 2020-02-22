@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>webpack 前端项目的最小更新的配置方法 | Eson Wong&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本文将介绍使用 webpack 打包的 web 应用如何在更新时只需下载有变动的模块。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webpack 前端项目的最小更新的配置方法">
+<meta property="og:url" content="https://blog.esonwong.com/webpack-%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E7%9A%84%E6%9C%80%E5%B0%8F%E6%9B%B4%E6%96%B0%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="Eson Wong&#39;s Blog">
+<meta property="og:description" content="本文将介绍使用 webpack 打包的 web 应用如何在更新时只需下载有变动的模块。">
+<meta property="og:locale" content="zh">
+<meta property="og:image" content="data:image/png;base64,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">
+<meta property="article:published_time" content="2020-02-18T08:40:29.000Z">
+<meta property="article:modified_time" content="2020-02-22T02:47:47.787Z">
+<meta property="article:author" content="Eson Wong">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="webpack">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="webpack 配置">
+<meta property="article:tag" content="最小更新">
+<meta property="article:tag" content="教程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="data:image/png;base64,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">
+  
+  <link rel="alternate" href="/atom.xml" title="Eson Wong&#39;s Blog" type="application/atom+xml">
+  
+  
+  <link rel="icon" href="/favicon.png">
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="Eson Wong" />
+  
+
+  <!--Keywords-->
+  
+  <meta name="keywords" content="javascript,webpack,前端,webpack 配置,最小更新,教程" />
+  
+
+
+
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-96241139-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://blog.esonwong.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Eson Wong&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">编程记录，心得分享</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-webpack-前端项目的最小更新的配置方法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/webpack-%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E7%9A%84%E6%9C%80%E5%B0%8F%E6%9B%B4%E6%96%B0%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%B9%E6%B3%95/" class="article-date">
+  <time datetime="2020-02-18T08:40:29.000Z" itemprop="datePublished">2020-02-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      webpack 前端项目的最小更新的配置方法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p><img src="data:image/png;base64,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" alt="webpak"></p>
+<p>本文将介绍使用 webpack 打包的 web 应用如何在更新时只需下载有变动的模块。</p>
+<a id="more"></a>
+
+<h2 id="webpack-的默认输出"><a href="#webpack-的默认输出" class="headerlink" title="webpack 的默认输出"></a>webpack 的默认输出</h2><p>webpack 用于编译 javascript 模块。默认为 <code>entry</code> 配置中指定的每一个入口文件，输出每个入口文件引用的所有模块打包的 js 文件，共同引用的模块将被打包到每个入口的打包文件。</p>
+<blockquote>
+<p>本文的 webpack 特指 webpakc v4。</p>
+</blockquote>
+<h2 id="代码分离"><a href="#代码分离" class="headerlink" title="代码分离"></a>代码分离</h2><p>wepack 提供了 <a href="https://webpack.docschina.org/plugins/split-chunks-plugin/" target="_blank" rel="noopener">SplitChunksPlugin</a> 分离代码，在 webpack 配置中加入 <code>optimization.splitChunks</code> 配置：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="comment">//...</span></span><br><span class="line">  optimization: &#123;</span><br><span class="line">    splitChunks: &#123;</span><br><span class="line">      <span class="comment">// include all types of chunks</span></span><br><span class="line">      chunks: <span class="string">'all'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>共用的模块将被抽出单独打包成js文件。</p>
+<p>如果我们使用 <code>import()</code> 懒加载模块，此模块也将被单独打包js文件。</p>
+<h2 id="输出-content-hash-文件名"><a href="#输出-content-hash-文件名" class="headerlink" title="输出 content hash 文件名"></a>输出 content hash 文件名</h2><p>为了达到最小更新的的目的，关键就是缓存没有更新的模块。</p>
+<p>为了缓存模块，需要让输出文件的文件名在内容不变的情况下不发生改变。在 webpack 的 output 配置中使用 <code>contenthash</code> 占位符指定输出文件名，根据内容计算文件名称：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="comment">//...</span></span><br><span class="line">  output: &#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    filename: <span class="string">"[name].[contenthash].js"</span>,</span><br><span class="line">    chunkFilename: <span class="string">"[name].[contenthash].js"</span></span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Nginx-缓存配置"><a href="#Nginx-缓存配置" class="headerlink" title="Nginx 缓存配置"></a>Nginx 缓存配置</h2><p>以 nginx 为例配置资源缓存。</p>
+<p>对 index.html 进行无缓存配置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location &#x3D; &#x2F;index.html &#123;</span><br><span class="line">	add_header Cache-Control &quot;no-cache, no-store&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其它资源文件设置一个较长时间的缓存</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">location ~ .*\.(gif|jpg|jpeg|png|bmp|swf)$</span><br><span class="line">&#123;</span><br><span class="line">	expires  1y;</span><br><span class="line">&#125;</span><br><span class="line">location ~ .*\.(js|css)?$</span><br><span class="line">&#123;</span><br><span class="line">	expires  1y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最小化前端项目更新的工作完成。</p>
+<h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>发布的时，服务器上有相同的路径和文件名的文件可以不传输，实现增量发布。</li>
+<li>用户在回访网站的时候，未更新的模块将保持缓存，实现缓存效益最大化，大大增加加载速度。</li>
+</ul>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>用户在首次访问加载时会略微增加下载数据量。</li>
+<li><code>contenthash</code>不能在启用 HMR 时使用。</li>
+<li>一个模块更新时会导致整个引用链的更新，包含这个模块应用链的输出文件都需要更新。</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://webpack.docschina.org/guides/code-splitting/#src/components/Sidebar/Sidebar.jsx" target="_blank" rel="noopener">代码分离</a></li>
+<li><a href="https://webpack.docschina.org/plugins/split-chunks-plugin/" target="_blank" rel="noopener">SplitChunksPlugin</a></li>
+<li><a href="webpack-前端项目的最小更新的配置方法.md">webpack-前端项目的最小更新的配置方法</a> </li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://blog.esonwong.com/webpack-%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E7%9A%84%E6%9C%80%E5%B0%8F%E6%9B%B4%E6%96%B0%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%B9%E6%B3%95/" data-id="ck6x06vj50004ahhp1s579538" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack-%E9%85%8D%E7%BD%AE/" rel="tag">webpack 配置</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%80%E5%B0%8F%E6%9B%B4%E6%96%B0/" rel="tag">最小更新</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ 
+<script src="/jquery/jquery.min.js"></script>
+
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+  
+    <a href="/fetch-%E4%B8%8A%E4%BC%A0%E8%BF%9B%E5%BA%A6%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%8F%91%E6%96%B9%E6%A1%88/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">fetch 上传进度的替代发方案</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+       
+      
+      
+           <div id="gitment_comments"></div>
+    
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#webpack-的默认输出"><span class="toc-number">1.</span> <span class="toc-text">webpack 的默认输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码分离"><span class="toc-number">2.</span> <span class="toc-text">代码分离</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输出-content-hash-文件名"><span class="toc-number">3.</span> <span class="toc-text">输出 content hash 文件名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nginx-缓存配置"><span class="toc-number">4.</span> <span class="toc-text">Nginx 缓存配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#优缺点"><span class="toc-number">5.</span> <span class="toc-text">优缺点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#优点"><span class="toc-number">5.1.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缺点"><span class="toc-number">5.2.</span> <span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">6.</span> <span class="toc-text">参考</span></a></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2020 Eson Wong&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;itiwll@gmail.com
+    </div>
+  </div>
+</footer>
+ 
+<script src="/jquery/jquery.min.js"></script>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.css" />
+<script>
+  var gitment = new Gitment({
+    // id: '页面 ID', // 可选。默认为 location.href
+    id: decodeURI(window.location.pathname),
+    owner: 'itiwll',
+    repo: 'blog',
+    oauth: {
+      client_id: '7c83e84529d5a45c3a2e',
+      client_secret: '8276b20b3f3724312b2dcd11d54b590b9891661b',
+    }
+  })
+  gitment.render(document.getElementById("gitment_comments"))
+</script>
+
+
+<!-- author:forvoid end -->
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ 
+<script src="/js/is.js"></script>
+
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/elevator.js"></script>
+
+  </div>
+</body>
+</html>
