@@ -41,7 +41,7 @@ module.exports = {
 ## 输出 content hash 文件名
 为了达到最小更新的的目的，关键就是缓存没有更新的模块。
 
-为了缓存模块，需要让输出文件的文件名在内容不变的情况下不发生改变。在 webpack 的 output 配置中使用 `contenthash` 占位符指定输出文件名:
+为了缓存模块，需要让输出文件的文件名在内容不变的情况下不发生改变。在 webpack 的 output 配置中使用 `contenthash` 占位符指定输出文件名，根据内容计算文件名称：
 ```javascript
 module.exports = {
   //...
@@ -53,28 +53,44 @@ module.exports = {
 }
 ```
 
-## Nginx 缓存时间配置
+## Nginx 缓存配置
+以 nginx 为例配置资源缓存。
 
-## 对比
+对 index.html 进行无缓存配置。
+```
+location = /index.html {
+	add_header Cache-Control "no-cache, no-store";
+}
+```
+其它资源文件设置一个较长时间的缓存
+```
+location ~ .*\.(gif|jpg|jpeg|png|bmp|swf)$
+{
+	expires  1y;
+}
+location ~ .*\.(js|css)?$
+{
+	expires  1y;
+}
+```
+最小化前端项目更新的工作完成。
 
-## 结果
+## 优缺点
+### 优点
+- 发布的时，服务器上有相同的路径和文件名的文件可以不传输，实现增量发布。
+- 用户在回访网站的时候，未更新的模块将保持缓存，实现缓存效益最大化，大大增加加载速度。
+
+### 缺点
+- 用户在首次访问加载时会略微增加下载数据量。
+- `contenthash`不能在启用 HMR 时使用。
+- 一个模块更新时会导致整个引用链的更新，包含这个模块应用链的输出文件都需要更新。
+
 
 ## 参考
 
 - [代码分离]
-
-
-
-
-
-
-
-
-
-
-
-
-
+- [SplitChunksPlugin]
+- [webpack-前端项目的最小更新的配置方法](webpack-前端项目的最小更新的配置方法.md) 
 
 
 
