@@ -1,6 +1,8 @@
 ---
 title: fetch 上传进度的替代发方案
 date: 2020-02-16 08:39:54
+categories:
+  - 技术
 tags:
   - javascript
   - fetch

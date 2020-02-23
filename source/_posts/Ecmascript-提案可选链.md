@@ -1,6 +1,8 @@
 ---
 title: 'Ecmascript 提案：可选链 "?." '
 date: 2020-01-31 20:37:15
+categories:
+  - 技术
 tags: 
   - 可选链
   - optional chaining

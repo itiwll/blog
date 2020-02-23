@@ -1,6 +1,8 @@
 ---
 title: webpack 前端项目的最小更新的配置方法
 date: 2020-02-18 08:40:29
+categories:
+  - 技术
 tags:
   - javascript
   - webpack
