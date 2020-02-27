@@ -1,6 +1,8 @@
 ---
 title: 使用 Github Actions 部署前端项目到
 date: 2020-02-08 09:37:28
+categories:
+  - 技术
 tags:
   - github actions
   - 自动部署

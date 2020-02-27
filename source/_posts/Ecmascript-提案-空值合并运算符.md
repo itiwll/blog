@@ -1,6 +1,8 @@
 ---
 title: 'Ecmascript 提案：空值合并运算符 "??" '
 date: 2020-02-05 20:37:15
+categories:
+  - 技术
 tags: 
   - 空值合并运算符
   - nullish coalescing
