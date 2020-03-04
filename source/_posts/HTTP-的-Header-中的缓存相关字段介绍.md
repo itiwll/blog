@@ -20,6 +20,28 @@ HTTP 请求和响应都包含 header 和 body 两个部分, 缓存相关的字�
 `Expires` 字段存在于 HTTP 响应头当中，仅在 HTTP 1.0 中生效。它的值是 资源过期的日期。现在的浏览器默认使用 HTTP 1.1, Expires 已经基本被淘汰。
 
 ### Cache-Control
+`Cache-Control` 在 HTTP 请求和响应 Header 里。
+
+`Cache-Control` 可能的值为:
+- max-age=\<seconds\>  设置缓存存储的最长时间
+- no-cache  不使用缓存的数据
+- no-store  不缓存数据
+- no-transform
+
+仅存在于请求 Header 的 `Cache-Control` 值:
+- max-stale[=\<seconds\>]  设置共享缓存存储的最长时间
+- min-fresh=\<seconds\>  客户端希望获取一个能在指定的秒数内保持其最新状态的响应
+- only-if-cached 未知
+
+仅存在于响应 Header 中的 `Cache-Control` 值:
+- must-revalidate  过期后不可用
+- public  可以被客户端或者代理服务器缓存
+- private  不能被代理服务器缓存
+- proxy-revalidate  代理服务其缓存的资源过期后不可用
+- s-maxage=\<seconds\>  设置共享缓存存储的最长时间
+
+`Cache-Control` 多个值之间用 `,` 隔开。
+> 共享缓存：代理服务器缓存
 
 ### Last-Modified / If-Modified-Since
 ### Etag / If-None-Match
@@ -29,3 +51,4 @@ HTTP 请求和响应都包含 header 和 body 两个部分, 缓存相关的字�
 
 
 [彻底弄懂HTTP缓存机制及原理]:https://www.cnblogs.com/chenqf/p/6386163.html
+[Cache-Control]:https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Cache-Control
