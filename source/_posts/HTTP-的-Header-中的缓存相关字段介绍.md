@@ -37,13 +37,20 @@ HTTP 请求和响应都包含 header 和 body 两个部分, 缓存相关的字�
 - must-revalidate  过期后不可用
 - public  可以被客户端或者代理服务器缓存
 - private  不能被代理服务器缓存
-- proxy-revalidate  代理服务其缓存的资源过期后不可用
+- proxy-revalidate  共享缓存的资源过期后不可用
 - s-maxage=\<seconds\>  设置共享缓存存储的最长时间
 
 `Cache-Control` 多个值之间用 `,` 隔开。
 > 共享缓存：代理服务器缓存
 
 ### Last-Modified / If-Modified-Since
+#### `Last-Modified`
+存在于响应 Header 中，告诉客户端响应的资源最后的修改时间。
+####  `If-Modified-Since`
+存在于请求 Header 中，告诉响应服务器请求的资源上次服务器返回的资源最后修改时间。
+如果服务器上的资源又被修改过，则服务器应当返回新的资源，否者服务器返回 `304` HTTP 状态码告诉客户端使用缓存的资源.
+
+
 ### Etag / If-None-Match
 
 ## 缓存更新的流程图
