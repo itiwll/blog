@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>HTTP 的 Header 中的缓存相关字段介绍 | Eson Wong&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="HTTP Header 中的缓存相关字段HTTP 请求和响应都包含 header 和 body 两个部分, 缓存相关的字段存在于 header 当中。HTTP 响应 header 中包含  Expires、Cache-Control、Last-Modified、Etag，请求 header 中包含 If-Modified-Since、If-None-Match。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP 的 Header 中的缓存相关字段介绍">
+<meta property="og:url" content="https://blog.esonwong.com/HTTP-%E7%9A%84-Header-%E4%B8%AD%E7%9A%84%E7%BC%93%E5%AD%98%E7%9B%B8%E5%85%B3%E5%AD%97%E6%AE%B5%E4%BB%8B%E7%BB%8D/index.html">
+<meta property="og:site_name" content="Eson Wong&#39;s Blog">
+<meta property="og:description" content="HTTP Header 中的缓存相关字段HTTP 请求和响应都包含 header 和 body 两个部分, 缓存相关的字段存在于 header 当中。HTTP 响应 header 中包含  Expires、Cache-Control、Last-Modified、Etag，请求 header 中包含 If-Modified-Since、If-None-Match。">
+<meta property="og:locale" content="zh">
+<meta property="article:published_time" content="2020-02-28T22:21:02.000Z">
+<meta property="article:modified_time" content="2020-03-07T02:05:07.976Z">
+<meta property="article:author" content="Eson Wong">
+<meta property="article:tag" content="web 开发">
+<meta property="article:tag" content="http缓存相关字段">
+<meta property="article:tag" content="http header">
+<meta property="article:tag" content="缓存">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="缓存技术">
+<meta property="article:tag" content="性能优化">
+<meta name="twitter:card" content="summary">
+  
+  <link rel="alternate" href="/atom.xml" title="Eson Wong&#39;s Blog" type="application/atom+xml">
+  
+  
+  <link rel="icon" href="/favicon.png">
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="Eson Wong" />
+  
+
+  <!--Keywords-->
+  
+  <meta name="keywords" content="web 开发,http缓存相关字段,http header,缓存,前端,缓存技术,性能优化" />
+  
+
+
+
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-96241139-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://blog.esonwong.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Eson Wong&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">编程记录，心得分享</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-HTTP-的-Header-中的缓存相关字段介绍" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/HTTP-%E7%9A%84-Header-%E4%B8%AD%E7%9A%84%E7%BC%93%E5%AD%98%E7%9B%B8%E5%85%B3%E5%AD%97%E6%AE%B5%E4%BB%8B%E7%BB%8D/" class="article-date">
+  <time datetime="2020-02-28T22:21:02.000Z" itemprop="datePublished">2020-02-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      HTTP 的 Header 中的缓存相关字段介绍
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h2 id="HTTP-Header-中的缓存相关字段"><a href="#HTTP-Header-中的缓存相关字段" class="headerlink" title="HTTP Header 中的缓存相关字段"></a>HTTP Header 中的缓存相关字段</h2><p>HTTP 请求和响应都包含 header 和 body 两个部分, 缓存相关的字段存在于 header 当中。HTTP 响应 header 中包含  <code>Expires</code>、<code>Cache-Control</code>、<code>Last-Modified</code>、<code>Etag</code>，请求 header 中包含 <code>If-Modified-Since</code>、<code>If-None-Match</code>。</p>
+<a id="more"></a>
+
+<h3 id="Expires"><a href="#Expires" class="headerlink" title="Expires"></a>Expires</h3><p><code>Expires</code> 字段存在于 HTTP 响应头当中，仅在 HTTP 1.0 中生效。它的值是 资源过期的日期。现在的浏览器默认使用 HTTP 1.1, Expires 已经基本被淘汰。</p>
+<h3 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h3><p><code>Cache-Control</code> 在 HTTP 请求和响应 Header 里。</p>
+<p><code>Cache-Control</code> 可能的值为:</p>
+<ul>
+<li>max-age=&lt;seconds&gt;  设置缓存存储的最长时间</li>
+<li>no-cache 不使用缓存的数据</li>
+<li>no-store 不缓存数据</li>
+<li>no-transform Header 里的某些字段不能由代理修改</li>
+</ul>
+<p>仅存在于请求 Header 的 <code>Cache-Control</code> 值:</p>
+<ul>
+<li>max-stale[=&lt;seconds&gt;]  设置共享缓存存储的最长时间</li>
+<li>min-fresh=&lt;seconds&gt;  客户端希望获取一个能在指定的秒数内保持其最新状态的响应</li>
+<li>only-if-cached 表明客户端只使用缓存，但是会请求验证资源是否还有效</li>
+</ul>
+<p>仅存在于响应 Header 中的 <code>Cache-Control</code> 值:</p>
+<ul>
+<li>must-revalidate  过期后不可用</li>
+<li>public  可以被客户端或者代理服务器缓存</li>
+<li>private  不能被代理服务器缓存</li>
+<li>proxy-revalidate  共享缓存的资源过期后不可用</li>
+<li>s-maxage=&lt;seconds&gt;  设置共享缓存存储的最长时间</li>
+</ul>
+<p><code>Cache-Control</code> 多个值之间用 <code>,</code> 隔开。</p>
+<blockquote>
+<p>共享缓存：代理服务器缓存</p>
+</blockquote>
+<h3 id="Last-Modified-If-Modified-Since"><a href="#Last-Modified-If-Modified-Since" class="headerlink" title="Last-Modified / If-Modified-Since"></a>Last-Modified / If-Modified-Since</h3><h4 id="Last-Modified"><a href="#Last-Modified" class="headerlink" title="Last-Modified"></a>Last-Modified</h4><p>存在于响应 Header 中，告诉客户端响应的资源最后的修改时间。</p>
+<h4 id="If-Modified-Since"><a href="#If-Modified-Since" class="headerlink" title="If-Modified-Since"></a>If-Modified-Since</h4><p>存在于请求 Header 中，告诉响应服务器请求的资源上次服务器返回的资源最后修改时间。<br>如果服务器上的资源又被修改过，则服务器应当返回新的资源，否者服务器返回 <code>304</code> HTTP 状态码告诉客户端使用缓存的资源.</p>
+<h3 id="Etag-If-None-Match"><a href="#Etag-If-None-Match" class="headerlink" title="Etag / If-None-Match"></a>Etag / If-None-Match</h3><h4 id="Etag"><a href="#Etag" class="headerlink" title="Etag"></a>Etag</h4><p>存在于响应 Header 中, 值为的资源的唯一标识符。由服务器决定唯一标识符的生成方法，比如哈希值。</p>
+<h4 id="If-None-Match"><a href="#If-None-Match" class="headerlink" title="If-None-Match"></a>If-None-Match</h4><p>存在于请求 Header 中，告诉响应服务器请求的资源上次服务器返回的资源最后的 <code>Etag</code> 值。<br>如果服务器上的资源的唯一标识符与请求头中的 <code>Etag</code> 的值不一样，则服务器应当返回新的资源，否者服务器返回 <code>304</code> HTTP 状态码告诉客户端使用缓存的资源。唯一标识符 <code>Etag</code> 的规则优先于 <code>Last-Modified</code>。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://blog.esonwong.com/HTTP-%E7%9A%84-Header-%E4%B8%AD%E7%9A%84%E7%BC%93%E5%AD%98%E7%9B%B8%E5%85%B3%E5%AD%97%E6%AE%B5%E4%BB%8B%E7%BB%8D/" data-id="ck7gytyd40004afhp8xin8qa6" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http-header/" rel="tag">http header</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http%E7%BC%93%E5%AD%98%E7%9B%B8%E5%85%B3%E5%AD%97%E6%AE%B5/" rel="tag">http缓存相关字段</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web-%E5%BC%80%E5%8F%91/" rel="tag">web 开发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag">性能优化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98%E6%8A%80%E6%9C%AF/" rel="tag">缓存技术</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ 
+<script src="/jquery/jquery.min.js"></script>
+
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+  
+    <a href="/%E6%80%8E%E4%B9%88%E6%89%8D%E8%83%BD%E5%9D%9A%E6%8C%81%E5%81%9A%E4%B8%80%E4%BB%B6%E4%BA%8B%E6%83%85/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">怎么养才能坚持做一件事情</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+       
+      
+      
+           <div id="gitment_comments"></div>
+    
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP-Header-中的缓存相关字段"><span class="toc-number">1.</span> <span class="toc-text">HTTP Header 中的缓存相关字段</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Expires"><span class="toc-number">1.1.</span> <span class="toc-text">Expires</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cache-Control"><span class="toc-number">1.2.</span> <span class="toc-text">Cache-Control</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Last-Modified-If-Modified-Since"><span class="toc-number">1.3.</span> <span class="toc-text">Last-Modified &#x2F; If-Modified-Since</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Last-Modified"><span class="toc-number">1.3.1.</span> <span class="toc-text">Last-Modified</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#If-Modified-Since"><span class="toc-number">1.3.2.</span> <span class="toc-text">If-Modified-Since</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Etag-If-None-Match"><span class="toc-number">1.4.</span> <span class="toc-text">Etag &#x2F; If-None-Match</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Etag"><span class="toc-number">1.4.1.</span> <span class="toc-text">Etag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#If-None-Match"><span class="toc-number">1.4.2.</span> <span class="toc-text">If-None-Match</span></a></li></ol></li></ol></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2020 Eson Wong&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;itiwll@gmail.com
+    </div>
+  </div>
+</footer>
+ 
+<script src="/jquery/jquery.min.js"></script>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.css" />
+<script>
+  var gitment = new Gitment({
+    // id: '页面 ID', // 可选。默认为 location.href
+    id: decodeURI(window.location.pathname),
+    owner: 'itiwll',
+    repo: 'blog',
+    oauth: {
+      client_id: '7c83e84529d5a45c3a2e',
+      client_secret: '8276b20b3f3724312b2dcd11d54b590b9891661b',
+    }
+  })
+  gitment.render(document.getElementById("gitment_comments"))
+</script>
+
+
+<!-- author:forvoid end -->
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ 
+<script src="/js/is.js"></script>
+
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/elevator.js"></script>
+
+  </div>
+</body>
+</html>
