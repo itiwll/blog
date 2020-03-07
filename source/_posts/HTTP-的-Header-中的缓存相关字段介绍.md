@@ -60,7 +60,9 @@ HTTP 请求和响应都包含 header 和 body 两个部分, 缓存相关的字�
 如果服务器上的资源的唯一标识符与请求头中的 `Etag` 的值不一样，则服务器应当返回新的资源，否者服务器返回 `304` HTTP 状态码告诉客户端使用缓存的资源。唯一标识符 `Etag` 的规则优先于 `Last-Modified`。
 
 
-
+## 参考
+- [彻底弄懂HTTP缓存机制及原理]
+- [Cache-Control]
 
 [彻底弄懂HTTP缓存机制及原理]:https://www.cnblogs.com/chenqf/p/6386163.html
 [Cache-Control]:https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Cache-Control
