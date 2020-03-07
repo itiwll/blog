@@ -8,6 +8,7 @@ tags:
   - fetch
   - 上传文件
   - XMLHttpRequest
+  - web 开发
 ---
 
 ## fetch 无法获取上传文件的进度
