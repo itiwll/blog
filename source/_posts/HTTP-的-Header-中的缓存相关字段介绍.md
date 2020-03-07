@@ -12,6 +12,7 @@ tags:
 categories:
   - 技术
 ---
+![http 缓存]
 
 ## HTTP Header 中的缓存相关字段
 HTTP 请求和响应都包含 header 和 body 两个部分, 缓存相关的字段存在于 header 当中。HTTP 响应 header 中包含  `Expires`、`Cache-Control`、`Last-Modified`、`Etag`，请求 header 中包含 `If-Modified-Since`、`If-None-Match`。
@@ -66,3 +67,4 @@ HTTP 请求和响应都包含 header 和 body 两个部分, 缓存相关的字�
 
 [彻底弄懂HTTP缓存机制及原理]:https://www.cnblogs.com/chenqf/p/6386163.html
 [Cache-Control]:https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Cache-Control
+[http 缓存]:../asset/http-caching.png
