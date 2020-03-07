@@ -11,10 +11,6 @@ tags:
   - 性能优化
 categories:
   - 技术
-todo:
-  - [x] 阅读[彻底弄懂HTTP缓存机制及原理]
-  - [x] 题大纲
-  - [x] 分段完成
 ---
 
 ## HTTP Header 中的缓存相关字段
