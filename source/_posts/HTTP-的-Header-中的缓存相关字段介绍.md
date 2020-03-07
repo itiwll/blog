@@ -24,14 +24,14 @@ HTTP 请求和响应都包含 header 和 body 两个部分, 缓存相关的字�
 
 `Cache-Control` 可能的值为:
 - max-age=\<seconds\>  设置缓存存储的最长时间
-- no-cache  不使用缓存的数据
-- no-store  不缓存数据
-- no-transform
+- no-cache 不使用缓存的数据
+- no-store 不缓存数据
+- no-transform Header 里的某些字段不能由代理修改
 
 仅存在于请求 Header 的 `Cache-Control` 值:
 - max-stale[=\<seconds\>]  设置共享缓存存储的最长时间
 - min-fresh=\<seconds\>  客户端希望获取一个能在指定的秒数内保持其最新状态的响应
-- only-if-cached 未知
+- only-if-cached 表明客户端只使用缓存，但是会请求验证资源是否还有效
 
 仅存在于响应 Header 中的 `Cache-Control` 值:
 - must-revalidate  过期后不可用
@@ -55,9 +55,8 @@ HTTP 请求和响应都包含 header 和 body 两个部分, 缓存相关的字�
 存在于响应 Header 中, 值为的资源的唯一标识符。由服务器决定唯一标识符的生成方法，比如哈希值。
 #### If-None-Match
 存在于请求 Header 中，告诉响应服务器请求的资源上次服务器返回的资源最后的 `Etag` 值。
-如果服务器上的资源的唯一标识符与请求头中的 `Etag` 的值不一样，则服务器应当返回新的资源，否者服务器返回 `304` HTTP 状态码告诉客户端使用缓存的资源.
+如果服务器上的资源的唯一标识符与请求头中的 `Etag` 的值不一样，则服务器应当返回新的资源，否者服务器返回 `304` HTTP 状态码告诉客户端使用缓存的资源。唯一标识符 `Etag` 的规则优先于 `Last-Modified`。
 
-## 缓存更新的流程图
 
 
 
