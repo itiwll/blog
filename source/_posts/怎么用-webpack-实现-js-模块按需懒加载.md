@@ -9,6 +9,7 @@ tags:
   - vue
   - webpack
   - ECMAScript
+  - web 开发
 ---
 ## 动态导入，ECMAScript `import()` 提案
 ECMAScript 有一项允许使用 `import()` 方法传入 url 返回 `Promise` 动态导入 ES 模块的提案。已经进入 stage 4(Finished) 阶段，等待加入标准。
