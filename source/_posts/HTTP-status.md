@@ -53,10 +53,17 @@ Upgrade: websocket
 响应状态是 `202 Accepted` 的话，可能需要客户端继续轮询接口至响应状态为 `200 ok`。
 
 ### 重定向(300–399)
+重定向响应状态的具体意义：[重定向响应](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status#重定向)
 
 ### 客户端错误(400–499)
+4xx 错误是客户端发送的请求本身存在错误返回的状态，包括请求地址错误、请求参数错误、认证错误等。客户端不应该再重新发送请求，而是先解决错误。
+
+客户端错误响应状态的具体意义：[客户端错误响应](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status#客户端响应)
+
 ### 服务器错误 (500–599)
-## 4xx 和 5xx 的区别
+5xx 码告诉客户端其发送的请求是完美通过验证的但服务器端出现了一些问题。客户端可以无需做任务修改来继续向服务端发送请求。
+
+服务器错误响应状态的具体意义：[服务器错误响应](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status#服务端响应)
 
 ## 封装请求库处理异常状态
 ## 参考
