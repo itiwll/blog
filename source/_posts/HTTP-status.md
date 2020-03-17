@@ -13,7 +13,7 @@ categories:
 ![HTTP 状态码]
 
 ## 介绍
-HTTP 状态码是指 HTTP 响应报文里状态行里的 Status-Code，用于指示特定 HTTP 响应的状态和类型。在开发时我们协商接口规范时，需要要求接口返回的状态码符合 [section 10 of RFC 2616] 的定义 ，以便在客户端封装请求模块通过判断状态码统一处理请求异常。
+HTTP 状态码是指 HTTP 响应报文里状态行里的 Status-Code，用于指示特定 HTTP 响应的状态和类型。
 
 HTTP 响应报文状态行由 HTTP-Version、Status-Code、Reason-Phrase 组成：
 ```
@@ -66,6 +66,15 @@ Upgrade: websocket
 服务器错误响应状态的具体意义：[服务器错误响应](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status#服务端响应)
 
 ## 封装请求库处理异常状态
+在开发时我们协商接口规范时，需要要求接口返回的状态码符合 [section 10 of RFC 2616] 的定义 ，以便在客户端封装请求模块通过判断状态码统一处理请求异常。  
+比如： 
+- 接口响应状态为 `401 Unauthorized` 时，客户端提示用户没有权限
+- 接口响应状态为 5xx 时，弹出错误消息
+- 接口响应状态为 `404 Not Found` 时， 提示“发出的请求针对的是不存在的记录，服务器没有进行操作” 
+
+等等...
+
+
 ## 参考
 - [HTTP 响应代码]
 - [section 10 of RFC 2616]
