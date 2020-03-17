@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>HTTP 状态码的意义 | Eson Wong&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="介绍HTTP 状态码是指 HTTP 响应报文里状态行里的 Status-Code，用于指示特定 HTTP 响应的状态和类型。 HTTP 响应报文状态行由 HTTP-Version、Status-Code、Reason-Phrase 组成： 1HTTP&#x2F;1.1 200 OK  响应状态码分为五类信息响应(100–199)100 Continue如果客户端向服务器发送请求的 Header">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP 状态码的意义">
+<meta property="og:url" content="https://blog.esonwong.com/HTTP-status/index.html">
+<meta property="og:site_name" content="Eson Wong&#39;s Blog">
+<meta property="og:description" content="介绍HTTP 状态码是指 HTTP 响应报文里状态行里的 Status-Code，用于指示特定 HTTP 响应的状态和类型。 HTTP 响应报文状态行由 HTTP-Version、Status-Code、Reason-Phrase 组成： 1HTTP&#x2F;1.1 200 OK  响应状态码分为五类信息响应(100–199)100 Continue如果客户端向服务器发送请求的 Header">
+<meta property="og:locale" content="zh">
+<meta property="og:image" content="https://blog.esonwong.com/asset/http-status-codes.jpg">
+<meta property="article:published_time" content="2020-03-10T08:59:29.000Z">
+<meta property="article:modified_time" content="2020-03-17T04:31:58.002Z">
+<meta property="article:author" content="Eson Wong">
+<meta property="article:tag" content="web 开发">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="http">
+<meta property="article:tag" content="开发规范">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.esonwong.com/asset/http-status-codes.jpg">
+  
+  <link rel="alternate" href="/atom.xml" title="Eson Wong&#39;s Blog" type="application/atom+xml">
+  
+  
+  <link rel="icon" href="/favicon.png">
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="Eson Wong" />
+  
+
+  <!--Keywords-->
+  
+  <meta name="keywords" content="web 开发,前端,http,开发规范" />
+  
+
+
+
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-96241139-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://blog.esonwong.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Eson Wong&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">编程记录，心得分享</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-HTTP-status" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/HTTP-status/" class="article-date">
+  <time datetime="2020-03-10T08:59:29.000Z" itemprop="datePublished">2020-03-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      HTTP 状态码的意义
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p><img src="../asset/http-status-codes.jpg" alt="HTTP 状态码"></p>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>HTTP 状态码是指 HTTP 响应报文里状态行里的 Status-Code，用于指示特定 HTTP 响应的状态和类型。</p>
+<p>HTTP 响应报文状态行由 HTTP-Version、Status-Code、Reason-Phrase 组成：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HTTP&#x2F;1.1 200 OK</span><br></pre></td></tr></table></figure>
+
+<h2 id="响应状态码分为五类"><a href="#响应状态码分为五类" class="headerlink" title="响应状态码分为五类"></a>响应状态码分为五类</h2><h3 id="信息响应-100–199"><a href="#信息响应-100–199" class="headerlink" title="信息响应(100–199)"></a>信息响应(100–199)</h3><h4 id="100-Continue"><a href="#100-Continue" class="headerlink" title="100 Continue"></a>100 Continue</h4><p>如果客户端向服务器发送请求的 Header 里包含 <code>Expect: 100-continue</code>头，服务器应当响应 <code>100</code>,然后客户端再向服务器发送 body 数据。</p>
+<h4 id="101-Switching-Protocol"><a href="#101-Switching-Protocol" class="headerlink" title="101 Switching Protocol"></a>101 Switching Protocol</h4><p>在如果客户端请求切换协议，切换协议之前，服务器响应 <code>101</code> 表示服务器也正在切换的协议。</p>
+<p>比如客户端请求切换到 websocket 协议：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GET &#x2F;ws HTTP&#x2F;1.1</span><br><span class="line">Host: xxx.com</span><br><span class="line">Upgrade: websocket</span><br></pre></td></tr></table></figure>
+<p>服务器响应：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">HTTP&#x2F;1.1 101 Switching Protocols</span><br><span class="line">Upgrade: websocket</span><br></pre></td></tr></table></figure>
+<p>接下来将以 websocket 协议进行通信。</p>
+<h4 id="102-Processing-WebDAV"><a href="#102-Processing-WebDAV" class="headerlink" title="102 Processing (WebDAV)"></a>102 Processing (WebDAV)</h4><p>此代码表示服务器已收到并正在处理该请求，但没有响应可用。如果服务器需要很长时间处理一个请求，可以先响应此状态码，处理完再发送 body。</p>
+<h4 id="103-Early-Hints"><a href="#103-Early-Hints" class="headerlink" title="103 Early Hints"></a>103 Early Hints</h4><p>与<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Link" target="_blank" rel="noopener">Link</a>一起使用告知客户端需要预加载的一些文件，可加速网页加载。以 HTML 为列，通常浏览器需要加载 html 文件并解析到外部文件的引用才会开始加载这些文件，而利用此特性可以提前加载这些文件。</p>
+<h3 id="成功响应-200–299"><a href="#成功响应-200–299" class="headerlink" title="成功响应(200–299)"></a>成功响应(200–299)</h3><p>成功响应状态的具体意义：<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status#%E6%88%90%E5%8A%9F%E5%93%8D%E5%BA%94" target="_blank" rel="noopener">成功响应</a></p>
+<p>响应状态是 <code>202 Accepted</code> 的话，可能需要客户端继续轮询接口至响应状态为 <code>200 ok</code>。</p>
+<h3 id="重定向-300–399"><a href="#重定向-300–399" class="headerlink" title="重定向(300–399)"></a>重定向(300–399)</h3><p>重定向响应状态的具体意义：<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status#重定向" target="_blank" rel="noopener">重定向响应</a></p>
+<h3 id="客户端错误-400–499"><a href="#客户端错误-400–499" class="headerlink" title="客户端错误(400–499)"></a>客户端错误(400–499)</h3><p>4xx 错误是客户端发送的请求本身存在错误返回的状态，包括请求地址错误、请求参数错误、认证错误等。客户端不应该再重新发送请求，而是先解决错误。</p>
+<p>客户端错误响应状态的具体意义：<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status#客户端响应" target="_blank" rel="noopener">客户端错误响应</a></p>
+<h3 id="服务器错误-500–599"><a href="#服务器错误-500–599" class="headerlink" title="服务器错误 (500–599)"></a>服务器错误 (500–599)</h3><p>5xx 码告诉客户端其发送的请求是完美通过验证的但服务器端出现了一些问题。客户端可以无需做任务修改来继续向服务端发送请求。</p>
+<p>服务器错误响应状态的具体意义：<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status#服务端响应" target="_blank" rel="noopener">服务器错误响应</a></p>
+<h2 id="封装请求库处理异常状态"><a href="#封装请求库处理异常状态" class="headerlink" title="封装请求库处理异常状态"></a>封装请求库处理异常状态</h2><p>在开发时我们协商接口规范时，需要要求接口返回的状态码符合 <a href="https://tools.ietf.org/html/rfc2616#section-10" target="_blank" rel="noopener">section 10 of RFC 2616</a> 的定义 ，以便在客户端封装请求模块通过判断状态码统一处理请求异常。<br>比如： </p>
+<ul>
+<li>接口响应状态为 <code>401 Unauthorized</code> 时，客户端提示用户没有权限</li>
+<li>接口响应状态为 5xx 时，弹出错误消息</li>
+<li>接口响应状态为 <code>404 Not Found</code> 时， 提示“发出的请求针对的是不存在的记录，服务器没有进行操作” </li>
+</ul>
+<p>等等…</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status" target="_blank" rel="noopener">HTTP 响应代码</a></li>
+<li><a href="https://tools.ietf.org/html/rfc2616#section-10" target="_blank" rel="noopener">section 10 of RFC 2616</a></li>
+<li><a href="https://cloud.tencent.com/developer/article/1540087" target="_blank" rel="noopener">系统服务化构建-状态码设计要点</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://blog.esonwong.com/HTTP-status/" data-id="ck7vehg7t0004b9hph6ei0w2d" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web-%E5%BC%80%E5%8F%91/" rel="tag">web 开发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" rel="tag">开发规范</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ 
+<script src="/jquery/jquery.min.js"></script>
+
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+  
+    <a href="/HTTP-%E7%9A%84-Header-%E4%B8%AD%E7%9A%84%E7%BC%93%E5%AD%98%E7%9B%B8%E5%85%B3%E5%AD%97%E6%AE%B5%E4%BB%8B%E7%BB%8D/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">HTTP 的 Header 中的缓存相关字段介绍</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+       
+      
+      
+           <div id="gitment_comments"></div>
+    
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-number">1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#响应状态码分为五类"><span class="toc-number">2.</span> <span class="toc-text">响应状态码分为五类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#信息响应-100–199"><span class="toc-number">2.1.</span> <span class="toc-text">信息响应(100–199)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#100-Continue"><span class="toc-number">2.1.1.</span> <span class="toc-text">100 Continue</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#101-Switching-Protocol"><span class="toc-number">2.1.2.</span> <span class="toc-text">101 Switching Protocol</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#102-Processing-WebDAV"><span class="toc-number">2.1.3.</span> <span class="toc-text">102 Processing (WebDAV)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#103-Early-Hints"><span class="toc-number">2.1.4.</span> <span class="toc-text">103 Early Hints</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#成功响应-200–299"><span class="toc-number">2.2.</span> <span class="toc-text">成功响应(200–299)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重定向-300–399"><span class="toc-number">2.3.</span> <span class="toc-text">重定向(300–399)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#客户端错误-400–499"><span class="toc-number">2.4.</span> <span class="toc-text">客户端错误(400–499)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#服务器错误-500–599"><span class="toc-number">2.5.</span> <span class="toc-text">服务器错误 (500–599)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#封装请求库处理异常状态"><span class="toc-number">3.</span> <span class="toc-text">封装请求库处理异常状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">4.</span> <span class="toc-text">参考</span></a></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2020 Eson Wong&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;itiwll@gmail.com
+    </div>
+  </div>
+</footer>
+ 
+<script src="/jquery/jquery.min.js"></script>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.css" />
+<script>
+  var gitment = new Gitment({
+    // id: '页面 ID', // 可选。默认为 location.href
+    id: decodeURI(window.location.pathname),
+    owner: 'itiwll',
+    repo: 'blog',
+    oauth: {
+      client_id: '7c83e84529d5a45c3a2e',
+      client_secret: '8276b20b3f3724312b2dcd11d54b590b9891661b',
+    }
+  })
+  gitment.render(document.getElementById("gitment_comments"))
+</script>
+
+
+<!-- author:forvoid end -->
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ 
+<script src="/js/is.js"></script>
+
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/elevator.js"></script>
+
+  </div>
+</body>
+</html>

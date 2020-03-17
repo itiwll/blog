@@ -104,6 +104,85 @@ ga('send', 'pageview');
       <div class="outer">
         <section id="main">
   
+    <article id="post-HTTP-status" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/HTTP-status/" class="article-date">
+  <time datetime="2020-03-10T08:59:29.000Z" itemprop="datePublished">2020-03-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/HTTP-status/">HTTP 状态码的意义</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p><img src="../asset/http-status-codes.jpg" alt="HTTP 状态码"></p>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>HTTP 状态码是指 HTTP 响应报文里状态行里的 Status-Code，用于指示特定 HTTP 响应的状态和类型。</p>
+<p>HTTP 响应报文状态行由 HTTP-Version、Status-Code、Reason-Phrase 组成：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HTTP&#x2F;1.1 200 OK</span><br></pre></td></tr></table></figure>
+
+<h2 id="响应状态码分为五类"><a href="#响应状态码分为五类" class="headerlink" title="响应状态码分为五类"></a>响应状态码分为五类</h2><h3 id="信息响应-100–199"><a href="#信息响应-100–199" class="headerlink" title="信息响应(100–199)"></a>信息响应(100–199)</h3><h4 id="100-Continue"><a href="#100-Continue" class="headerlink" title="100 Continue"></a>100 Continue</h4><p>如果客户端向服务器发送请求的 Header 里包含 <code>Expect: 100-continue</code>头，服务器应当响应 <code>100</code>,然后客户端再向服务器发送 body 数据。</p>
+<h4 id="101-Switching-Protocol"><a href="#101-Switching-Protocol" class="headerlink" title="101 Switching Protocol"></a>101 Switching Protocol</h4><p>在如果客户端请求切换协议，切换协议之前，服务器响应 <code>101</code> 表示服务器也正在切换的协议。</p>
+<p>比如客户端请求切换到 websocket 协议：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GET &#x2F;ws HTTP&#x2F;1.1</span><br><span class="line">Host: xxx.com</span><br><span class="line">Upgrade: websocket</span><br></pre></td></tr></table></figure>
+<p>服务器响应：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">HTTP&#x2F;1.1 101 Switching Protocols</span><br><span class="line">Upgrade: websocket</span><br></pre></td></tr></table></figure>
+<p>接下来将以 websocket 协议进行通信。</p>
+<h4 id="102-Processing-WebDAV"><a href="#102-Processing-WebDAV" class="headerlink" title="102 Processing (WebDAV)"></a>102 Processing (WebDAV)</h4><p>此代码表示服务器已收到并正在处理该请求，但没有响应可用。如果服务器需要很长时间处理一个请求，可以先响应此状态码，处理完再发送 body。</p>
+<h4 id="103-Early-Hints"><a href="#103-Early-Hints" class="headerlink" title="103 Early Hints"></a>103 Early Hints</h4><p>与<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Link" target="_blank" rel="noopener">Link</a>一起使用告知客户端需要预加载的一些文件，可加速网页加载。以 HTML 为列，通常浏览器需要加载 html 文件并解析到外部文件的引用才会开始加载这些文件，而利用此特性可以提前加载这些文件。</p>
+<h3 id="成功响应-200–299"><a href="#成功响应-200–299" class="headerlink" title="成功响应(200–299)"></a>成功响应(200–299)</h3><p>成功响应状态的具体意义：<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status#%E6%88%90%E5%8A%9F%E5%93%8D%E5%BA%94" target="_blank" rel="noopener">成功响应</a></p>
+<p>响应状态是 <code>202 Accepted</code> 的话，可能需要客户端继续轮询接口至响应状态为 <code>200 ok</code>。</p>
+<h3 id="重定向-300–399"><a href="#重定向-300–399" class="headerlink" title="重定向(300–399)"></a>重定向(300–399)</h3><p>重定向响应状态的具体意义：<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status#重定向" target="_blank" rel="noopener">重定向响应</a></p>
+<h3 id="客户端错误-400–499"><a href="#客户端错误-400–499" class="headerlink" title="客户端错误(400–499)"></a>客户端错误(400–499)</h3><p>4xx 错误是客户端发送的请求本身存在错误返回的状态，包括请求地址错误、请求参数错误、认证错误等。客户端不应该再重新发送请求，而是先解决错误。</p>
+<p>客户端错误响应状态的具体意义：<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status#客户端响应" target="_blank" rel="noopener">客户端错误响应</a></p>
+<h3 id="服务器错误-500–599"><a href="#服务器错误-500–599" class="headerlink" title="服务器错误 (500–599)"></a>服务器错误 (500–599)</h3><p>5xx 码告诉客户端其发送的请求是完美通过验证的但服务器端出现了一些问题。客户端可以无需做任务修改来继续向服务端发送请求。</p>
+<p>服务器错误响应状态的具体意义：<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status#服务端响应" target="_blank" rel="noopener">服务器错误响应</a></p>
+<h2 id="封装请求库处理异常状态"><a href="#封装请求库处理异常状态" class="headerlink" title="封装请求库处理异常状态"></a>封装请求库处理异常状态</h2><p>在开发时我们协商接口规范时，需要要求接口返回的状态码符合 <a href="https://tools.ietf.org/html/rfc2616#section-10" target="_blank" rel="noopener">section 10 of RFC 2616</a> 的定义 ，以便在客户端封装请求模块通过判断状态码统一处理请求异常。<br>比如： </p>
+<ul>
+<li>接口响应状态为 <code>401 Unauthorized</code> 时，客户端提示用户没有权限</li>
+<li>接口响应状态为 5xx 时，弹出错误消息</li>
+<li>接口响应状态为 <code>404 Not Found</code> 时， 提示“发出的请求针对的是不存在的记录，服务器没有进行操作” </li>
+</ul>
+<p>等等…</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status" target="_blank" rel="noopener">HTTP 响应代码</a></li>
+<li><a href="https://tools.ietf.org/html/rfc2616#section-10" target="_blank" rel="noopener">section 10 of RFC 2616</a></li>
+<li><a href="https://cloud.tencent.com/developer/article/1540087" target="_blank" rel="noopener">系统服务化构建-状态码设计要点</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://blog.esonwong.com/HTTP-status/" data-id="ck7vehg7t0004b9hph6ei0w2d" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web-%E5%BC%80%E5%8F%91/" rel="tag">web 开发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" rel="tag">开发规范</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
     <article id="post-HTTP-的-Header-中的缓存相关字段介绍" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/HTTP-%E7%9A%84-Header-%E4%B8%AD%E7%9A%84%E7%BC%93%E5%AD%98%E7%9B%B8%E5%85%B3%E5%AD%97%E6%AE%B5%E4%BB%8B%E7%BB%8D/" class="article-date">
@@ -140,7 +219,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.esonwong.com/HTTP-%E7%9A%84-Header-%E4%B8%AD%E7%9A%84%E7%BC%93%E5%AD%98%E7%9B%B8%E5%85%B3%E5%AD%97%E6%AE%B5%E4%BB%8B%E7%BB%8D/" data-id="ck7gznhw400049ahhbpd062bx" class="article-share-link">分享</a>
+      <a data-url="https://blog.esonwong.com/HTTP-%E7%9A%84-Header-%E4%B8%AD%E7%9A%84%E7%BC%93%E5%AD%98%E7%9B%B8%E5%85%B3%E5%AD%97%E6%AE%B5%E4%BB%8B%E7%BB%8D/" data-id="ck7vehg7u0005b9hp8z9fegmv" class="article-share-link">分享</a>
       
       
       
@@ -190,7 +269,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.esonwong.com/%E6%80%8E%E4%B9%88%E6%89%8D%E8%83%BD%E5%9D%9A%E6%8C%81%E5%81%9A%E4%B8%80%E4%BB%B6%E4%BA%8B%E6%83%85/" data-id="ck7gznhwd000e9ahhe5zld4xl" class="article-share-link">分享</a>
+      <a data-url="https://blog.esonwong.com/%E6%80%8E%E4%B9%88%E6%89%8D%E8%83%BD%E5%9D%9A%E6%8C%81%E5%81%9A%E4%B8%80%E4%BB%B6%E4%BA%8B%E6%83%85/" data-id="ck7vehg8a000gb9hp2bzj12lj" class="article-share-link">分享</a>
       
       
       
@@ -240,7 +319,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.esonwong.com/webpack-%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E7%9A%84%E6%9C%80%E5%B0%8F%E6%9B%B4%E6%96%B0%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%B9%E6%B3%95/" data-id="ck7gznhw600069ahhfol3dqy2" class="article-share-link">分享</a>
+      <a data-url="https://blog.esonwong.com/webpack-%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E7%9A%84%E6%9C%80%E5%B0%8F%E6%9B%B4%E6%96%B0%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%B9%E6%B3%95/" data-id="ck7vehg7z0009b9hp7e7y6p20" class="article-share-link">分享</a>
       
       
       
@@ -289,7 +368,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.esonwong.com/fetch-%E4%B8%8A%E4%BC%A0%E8%BF%9B%E5%BA%A6%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%8F%91%E6%96%B9%E6%A1%88/" data-id="ck7gznhw500059ahhbemlhvkn" class="article-share-link">分享</a>
+      <a data-url="https://blog.esonwong.com/fetch-%E4%B8%8A%E4%BC%A0%E8%BF%9B%E5%BA%A6%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%8F%91%E6%96%B9%E6%A1%88/" data-id="ck7vehg7v0006b9hp8i1ahvco" class="article-share-link">分享</a>
       
       
       
@@ -341,7 +420,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.esonwong.com/%E5%A6%82%E4%BD%95%E7%BB%88%E6%AD%A2-fetch-%E8%AF%B7%E6%B1%82/" data-id="ck7gznhwb000a9ahhgl2aa3u8" class="article-share-link">分享</a>
+      <a data-url="https://blog.esonwong.com/%E5%A6%82%E4%BD%95%E7%BB%88%E6%AD%A2-fetch-%E8%AF%B7%E6%B1%82/" data-id="ck7vehg89000eb9hpg7debz3w" class="article-share-link">分享</a>
       
       
       
@@ -391,7 +470,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.esonwong.com/%E4%BD%BF%E7%94%A8-Github-Actions-%E9%83%A8%E7%BD%B2%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE/" data-id="ck7gznhw900099ahhbiqd85sv" class="article-share-link">分享</a>
+      <a data-url="https://blog.esonwong.com/%E4%BD%BF%E7%94%A8-Github-Actions-%E9%83%A8%E7%BD%B2%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE/" data-id="ck7vehg80000ab9hp79ws7l3q" class="article-share-link">分享</a>
       
       
       
@@ -441,7 +520,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.esonwong.com/Ecmascript-%E6%8F%90%E6%A1%88-%E7%A9%BA%E5%80%BC%E5%90%88%E5%B9%B6%E8%BF%90%E7%AE%97%E7%AC%A6/" data-id="ck7gznhvv00009ahh21ak4z6s" class="article-share-link">分享</a>
+      <a data-url="https://blog.esonwong.com/Ecmascript-%E6%8F%90%E6%A1%88-%E7%A9%BA%E5%80%BC%E5%90%88%E5%B9%B6%E8%BF%90%E7%AE%97%E7%AC%A6/" data-id="ck7vehg7j0000b9hp4edo1zxv" class="article-share-link">分享</a>
       
       
       
@@ -490,7 +569,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.esonwong.com/Ecmascript-%E6%8F%90%E6%A1%88%E5%8F%AF%E9%80%89%E9%93%BE/" data-id="ck7gznhw000019ahh9yvphfba" class="article-share-link">分享</a>
+      <a data-url="https://blog.esonwong.com/Ecmascript-%E6%8F%90%E6%A1%88%E5%8F%AF%E9%80%89%E9%93%BE/" data-id="ck7vehg7p0001b9hp92gxhoek" class="article-share-link">分享</a>
       
       
       
@@ -539,7 +618,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.esonwong.com/%E6%80%8E%E4%B9%88%E7%94%A8-webpack-%E5%AE%9E%E7%8E%B0-js-%E6%A8%A1%E5%9D%97%E6%8C%89%E9%9C%80%E6%87%92%E5%8A%A0%E8%BD%BD/" data-id="ck7gznhwe000g9ahh6x1h9h2f" class="article-share-link">分享</a>
+      <a data-url="https://blog.esonwong.com/%E6%80%8E%E4%B9%88%E7%94%A8-webpack-%E5%AE%9E%E7%8E%B0-js-%E6%A8%A1%E5%9D%97%E6%8C%89%E9%9C%80%E6%87%92%E5%8A%A0%E8%BD%BD/" data-id="ck7vehg8c000jb9hp336g3cb1" class="article-share-link">分享</a>
       
       
       
@@ -581,7 +660,7 @@ ga('send', 'pageview');
   <div class="widget-wrap">
     <h3 class="widget-title categories">分类</h3>
     <div class="widget" id="categories">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%87%AA%E6%88%91%E6%8F%90%E5%8D%87/">自我提升</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%87%AA%E6%88%91%E6%8F%90%E5%8D%87/">自我提升</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -591,7 +670,7 @@ ga('send', 'pageview');
   <div class="widget-wrap">
     <h3 class="widget-title tagcloud">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/" style="font-size: 14px;">?.</a> <a href="/tags/" style="font-size: 14px;">??</a> <a href="/tags/AbortController/" style="font-size: 14px;">AbortController</a> <a href="/tags/ECMAScript/" style="font-size: 22.25px;">ECMAScript</a> <a href="/tags/XMLHttpRequest/" style="font-size: 14px;">XMLHttpRequest</a> <a href="/tags/babel/" style="font-size: 16.75px;">babel</a> <a href="/tags/fetch/" style="font-size: 16.75px;">fetch</a> <a href="/tags/github-actions/" style="font-size: 14px;">github actions</a> <a href="/tags/http-header/" style="font-size: 14px;">http header</a> <a href="/tags/http%E7%BC%93%E5%AD%98%E7%9B%B8%E5%85%B3%E5%AD%97%E6%AE%B5/" style="font-size: 14px;">http缓存相关字段</a> <a href="/tags/import/" style="font-size: 14px;">import</a> <a href="/tags/javascript/" style="font-size: 19.5px;">javascript</a> <a href="/tags/nullish-coalescing/" style="font-size: 14px;">nullish coalescing</a> <a href="/tags/optional-chaining/" style="font-size: 14px;">optional chaining</a> <a href="/tags/vue/" style="font-size: 14px;">vue</a> <a href="/tags/web-%E5%BC%80%E5%8F%91/" style="font-size: 25px;">web 开发</a> <a href="/tags/webpack/" style="font-size: 16.75px;">webpack</a> <a href="/tags/webpack-%E9%85%8D%E7%BD%AE/" style="font-size: 14px;">webpack 配置</a> <a href="/tags/%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6/" style="font-size: 14px;">上传文件</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 22.25px;">前端</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E9%83%A8%E7%BD%B2/" style="font-size: 14px;">前端部署</a> <a href="/tags/%E5%8F%AF%E9%80%89%E9%93%BE/" style="font-size: 14px;">可选链</a> <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" style="font-size: 16.75px;">性能优化</a> <a href="/tags/%E6%87%92%E5%8A%A0%E8%BD%BD/" style="font-size: 14px;">懒加载</a> <a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 16.75px;">教程</a> <a href="/tags/%E6%9C%80%E5%B0%8F%E6%9B%B4%E6%96%B0/" style="font-size: 14px;">最小更新</a> <a href="/tags/%E7%A9%BA%E5%80%BC%E5%90%88%E5%B9%B6%E8%BF%90%E7%AE%97%E7%AC%A6/" style="font-size: 14px;">空值合并运算符</a> <a href="/tags/%E7%BB%88%E6%AD%A2-fetch/" style="font-size: 14px;">终止 fetch</a> <a href="/tags/%E7%BC%93%E5%AD%98/" style="font-size: 14px;">缓存</a> <a href="/tags/%E7%BC%93%E5%AD%98%E6%8A%80%E6%9C%AF/" style="font-size: 14px;">缓存技术</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 14px;">自动化</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/" style="font-size: 14px;">自动部署</a> <a href="/tags/%E8%87%AA%E6%88%91%E6%8F%90%E5%8D%87/" style="font-size: 14px;">自我提升</a>
+      <a href="/tags/" style="font-size: 14px;">?.</a> <a href="/tags/" style="font-size: 14px;">??</a> <a href="/tags/AbortController/" style="font-size: 14px;">AbortController</a> <a href="/tags/ECMAScript/" style="font-size: 20.6px;">ECMAScript</a> <a href="/tags/XMLHttpRequest/" style="font-size: 14px;">XMLHttpRequest</a> <a href="/tags/babel/" style="font-size: 16.2px;">babel</a> <a href="/tags/fetch/" style="font-size: 16.2px;">fetch</a> <a href="/tags/github-actions/" style="font-size: 14px;">github actions</a> <a href="/tags/http/" style="font-size: 14px;">http</a> <a href="/tags/http-header/" style="font-size: 14px;">http header</a> <a href="/tags/http%E7%BC%93%E5%AD%98%E7%9B%B8%E5%85%B3%E5%AD%97%E6%AE%B5/" style="font-size: 14px;">http缓存相关字段</a> <a href="/tags/import/" style="font-size: 14px;">import</a> <a href="/tags/javascript/" style="font-size: 18.4px;">javascript</a> <a href="/tags/nullish-coalescing/" style="font-size: 14px;">nullish coalescing</a> <a href="/tags/optional-chaining/" style="font-size: 14px;">optional chaining</a> <a href="/tags/vue/" style="font-size: 14px;">vue</a> <a href="/tags/web-%E5%BC%80%E5%8F%91/" style="font-size: 25px;">web 开发</a> <a href="/tags/webpack/" style="font-size: 16.2px;">webpack</a> <a href="/tags/webpack-%E9%85%8D%E7%BD%AE/" style="font-size: 14px;">webpack 配置</a> <a href="/tags/%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6/" style="font-size: 14px;">上传文件</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 22.8px;">前端</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E9%83%A8%E7%BD%B2/" style="font-size: 14px;">前端部署</a> <a href="/tags/%E5%8F%AF%E9%80%89%E9%93%BE/" style="font-size: 14px;">可选链</a> <a href="/tags/%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" style="font-size: 14px;">开发规范</a> <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" style="font-size: 16.2px;">性能优化</a> <a href="/tags/%E6%87%92%E5%8A%A0%E8%BD%BD/" style="font-size: 14px;">懒加载</a> <a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 16.2px;">教程</a> <a href="/tags/%E6%9C%80%E5%B0%8F%E6%9B%B4%E6%96%B0/" style="font-size: 14px;">最小更新</a> <a href="/tags/%E7%A9%BA%E5%80%BC%E5%90%88%E5%B9%B6%E8%BF%90%E7%AE%97%E7%AC%A6/" style="font-size: 14px;">空值合并运算符</a> <a href="/tags/%E7%BB%88%E6%AD%A2-fetch/" style="font-size: 14px;">终止 fetch</a> <a href="/tags/%E7%BC%93%E5%AD%98/" style="font-size: 14px;">缓存</a> <a href="/tags/%E7%BC%93%E5%AD%98%E6%8A%80%E6%9C%AF/" style="font-size: 14px;">缓存技术</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 14px;">自动化</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/" style="font-size: 14px;">自动部署</a> <a href="/tags/%E8%87%AA%E6%88%91%E6%8F%90%E5%8D%87/" style="font-size: 14px;">自我提升</a>
     </div>
   </div>
 
@@ -601,6 +680,10 @@ ga('send', 'pageview');
     <h3 class="widget-title recent-posts">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/HTTP-status/">HTTP 状态码的意义</a>
+          </li>
         
           <li>
             <a href="/HTTP-%E7%9A%84-Header-%E4%B8%AD%E7%9A%84%E7%BC%93%E5%AD%98%E7%9B%B8%E5%85%B3%E5%AD%97%E6%AE%B5%E4%BB%8B%E7%BB%8D/">HTTP 的 Header 中的缓存相关字段介绍</a>
@@ -618,10 +701,6 @@ ga('send', 'pageview');
             <a href="/fetch-%E4%B8%8A%E4%BC%A0%E8%BF%9B%E5%BA%A6%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%8F%91%E6%96%B9%E6%A1%88/">fetch 上传进度的替代发方案</a>
           </li>
         
-          <li>
-            <a href="/%E5%A6%82%E4%BD%95%E7%BB%88%E6%AD%A2-fetch-%E8%AF%B7%E6%B1%82/">如何终止 fetch 请求</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -631,7 +710,7 @@ ga('send', 'pageview');
   <div class="widget-wrap">
     <h3 class="widget-title archive">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a><span class="archive-list-count">2</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a><span class="archive-list-count">2</span></li></ul>
     </div>
   </div>
 
