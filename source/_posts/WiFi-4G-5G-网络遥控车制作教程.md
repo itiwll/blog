@@ -77,4 +77,4 @@ sudo ./network-rc/node ./network-rc/index.js
 
 [network-rc]:https://github.com/itiwll/network-rc
 [树莓派 GPIO 连接小车]:../asset/树莓派-GPIO-连接小车.jpg
-[WiFi/4G/5G 网络遥控车制作教程]:../asset/network-rc.jpg
+[WiFi/4G/5G 网络遥控车制作教程]:../asset/4g网络rc遥控车02-开篇-封面.jpg
