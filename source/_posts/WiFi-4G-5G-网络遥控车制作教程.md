@@ -12,9 +12,8 @@ tags:
   - 树莓派小车
   - WiFi/4G/5G 网络遥控车制作教程
 categories:
-  - 树莓派
-  - 网络遥控车
   - 教程
+  - 网络遥控车
 ---
 ![WiFi/4G/5G 网络遥控车制作教程]
 ## 简介
@@ -28,6 +27,8 @@ categories:
 - 环奇743A (286元，某宝上找不到了)
 - 杜邦线(母对母x1, 公对母x4) (3元)
 - 其它固定材料
+
+<!-- more -->
 
 ## 树莓派软件安装运行
 ### 安装 network-rc
@@ -62,6 +63,9 @@ sudo ./network-rc/node ./network-rc/index.js
 
 ## 启动
 树莓派接通电源，开机，运行软件。小车接通电源，开机。打开浏览器，开始享用吧。
+
+## 视频教程
+<iframe src="//player.bilibili.com/player.html?aid=882676306&bvid=BV1iK4y1r7mD&cid=177948237&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
 ## 预告
 作为一个可以网络控制且拥有网络图传的小车，它的梦想是自己周游世界（没有熊孩子的世界）。下次我会教大家如何通过 4G 网络来控制小车。
