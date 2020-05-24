@@ -32,7 +32,7 @@ categories:
 
 ## 树莓派软件安装运行
 ### 安装 network-rc
-0. 树莓派安装系统连接摄像头，连接wifi    
+0. 树莓派安装 buster 版本以上系统连接摄像头，连接wifi    
 > 网络上有很多树莓派系统安装教程，请自行搜索.
 1. 在树莓派上下载 [network-rc] 软件  
 ```
@@ -72,15 +72,16 @@ sudo ./network-rc/node ./network-rc/index.js
 作为一个可以网络控制且拥有网络图传的小车，它的梦想是自己周游世界（没有熊孩子的世界）。下次我会教大家如何通过 4G 网络来控制小车。
 
 ## 参考
+- [Bilibili EsonWong](https://space.bilibili.com/96740361)
 - [network-rc]
 - [WiFi/4G/5G 网络遥控车制作教程]
 - [4G 5G 网络 RC 遥控车03 - 无限距离远程遥控？]
 - [树莓派 4G 网络遥控车图传延迟测试]
 - [4G/5G 网络 RC 遥控车 04 - 人工智能(zhang)，自动驾驶，人体跟随]
+- [ 4G/5G 网络 RC 遥控车 - 05 摄像头！麦克风！云台！语音对讲！ ]
 
 
-## 连接
-- [Bilibili EsonWong](https://space.bilibili.com/96740361)
+## 链接
 
 [network-rc]:https://github.com/itiwll/network-rc
 [树莓派 4G 网络遥控车图传延迟测试]:https://www.bilibili.com/video/BV15K411W7bK
@@ -89,3 +90,4 @@ sudo ./network-rc/node ./network-rc/index.js
 [树莓派 GPIO 连接小车]:../asset/树莓派-GPIO-连接小车.jpg
 [WiFi/4G/5G 网络遥控车制作教程]:../asset/4g网络rc遥控车02-开篇-封面.jpg
 [4g 网络 rc 遥控车03 - 无限距离远程遥控？]: ../asset/4g%E7%BD%91%E7%BB%9C%20RC%20%E9%81%A5%E6%8E%A7%E8%BD%A603%20-%20%E6%97%A0%E9%99%90%E8%B7%9D%E7%A6%BB%E8%BF%9C%E7%A8%8B%E9%81%A5%E6%8E%A7%EF%BC%9F-%20%E5%B0%81%E9%9D%A2.jpg
+[4G/5G 网络 RC 遥控车 - 05 摄像头！麦克风！云台！语音对讲！]:https://www.bilibili.com/video/BV14C4y1p7ap/
