@@ -32,7 +32,7 @@ network-rc 最新版本已经包含 AI 功能。
 在树莓派上使用
 
 ```bash
-wget https://itiwll.synology.me:5012/network-rc.tar.gz
+wget https://esonwong.synology.me:5012/network-rc.tar.gz
 ```
 
 下载 network-rc 始终会下载当前最新版本。

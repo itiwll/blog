@@ -36,7 +36,7 @@ categories:
 > 网络上有很多树莓派系统安装教程，请自行搜索.
 1. 在树莓派上下载 [network-rc] 软件  
 ```
-wget https://itiwll.synology.me:5012/network-rc.tar.gz
+wget https://esonwong.synology.me:5012/network-rc.tar.gz
 ```
 2. 解压文件  
 ```
