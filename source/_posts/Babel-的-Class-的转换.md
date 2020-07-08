@@ -39,7 +39,7 @@ new A();
 可以看到 `class A{}` 被转化成了一个函数 `A`。除此之外还生成了一个函数 `_classCallCheck` 检测 `A` 是否用 `new` 关键只来调用的。
 
 ## 构造函数
-下面我们来添加一个 `constructor` 方法到 `class A{}` 里
+我们来添加一个 `constructor` 方法到 `class A{}` 里
 ```javascript
 class A {
   constructor(){
@@ -48,7 +48,8 @@ class A {
 }
 
 // ------------ 转换 ------------------ //
-// function _classCallCheck(){}
+
+// 略：function _classCallCheck(){}
 var A = function A() {
   _classCallCheck(this, A);
 
@@ -57,15 +58,36 @@ var A = function A() {
 ```
 转换后 `constructor` 方法内的代码内容被简单的搬到 `function A(){}` 内部。 
 ## 属性
+类的公有属性声明仍然处于实验性功能第3阶段。开启此特性我们要在 PULGINS 里添加 `@babel/plugin-proposal-class-properties` 插件。
+添加一个属性：
+```javascript
+class A {
+  constructor(){
+    this.propA = "A"
+  }
+  propB = 1;
+  
+}
 
-### get/set
+// ------------ 转换 ------------------ //
+
+// 略：function _classCallCheck(){}
+var A = function A() {
+  _classCallCheck(this, A);
+  this.propB = 1;
+  this.propA = "A";
+};
+```
+公有属性 `propB` 转换成 `fuxntion A(){}` 函数内的的 `this.propB`。
+> 私有属性同样还没通过标准，需要添加 `@babel/plugin-proposal-class-properties` 插件来转换。
 ## 方法
-## 私有属性和方法
-## 继承
 
+## 继承
 ## 参考
 - [Babel: Try it out]
+- [Class 的基本语法]
+- [类 - JavaScript | MDN]
 
 [Class 的基本语法]:https://es6.ruanyifeng.com/#docs/class
 [Babel: Try it out]:https://babeljs.io/repl
-
+[类 - JavaScript | MDN]:https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Classes
