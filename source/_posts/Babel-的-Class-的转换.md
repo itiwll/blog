@@ -80,8 +80,46 @@ var A = function A() {
 ```
 公有属性 `propB` 转换成 `fuxntion A(){}` 函数内的的 `this.propB`。
 > 私有属性同样还没通过标准，需要添加 `@babel/plugin-proposal-class-properties` 插件来转换。
-## 方法
+## 静态方法
+添加一个静态方法：
+```javascript
+class A {
+  static staticMethod(){
+    console.log("static method");
+  } 
+}
+// ------------ 转换 ------------------ //
 
+// 略：function _classCallCheck(){}
+function _defineProperties(target, props) { 
+  for (var i = 0; i < props.length; i++) { 
+    var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); 
+  } 
+}
+
+function _createClass(Constructor, protoProps, staticProps) { 
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps); 
+  return Constructor; 
+}
+
+var A = function () {
+  function A() {
+    _classCallCheck(this, A);
+  }
+
+  _createClass(A, null, [{
+    key: "staticMethod",
+    value: function staticMethod() {
+      console.log("static method");
+    }
+  }]);
+
+  return A;
+}();
+```
+Bable 使用闭包函数并创建了一个 `_createClass` 函数来给 `function A(){}` 添加静态方法。
+## 实例方法
 ## 继承
 ## 参考
 - [Babel: Try it out]
