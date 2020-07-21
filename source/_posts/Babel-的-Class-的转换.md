@@ -81,11 +81,11 @@ var A = function A() {
 公有属性 `propB` 转换成 `fuxntion A(){}` 函数内的的 `this.propB`。
 > 私有属性同样还没通过标准，需要添加 `@babel/plugin-proposal-class-properties` 插件来转换。
 ## 静态方法
-添加一个静态方法：
+添加一个方法：
 ```javascript
 class A {
-  static staticMethod(){
-    console.log("static method");
+  method(){
+    console.log("method");
   } 
 }
 // ------------ 转换 ------------------ //
@@ -109,18 +109,18 @@ var A = function () {
   }
 
   _createClass(A, null, [{
-    key: "staticMethod",
+    key: "method",
     value: function staticMethod() {
-      console.log("static method");
+      console.log("method");
     }
   }]);
 
   return A;
 }();
 ```
-Bable 使用闭包函数并创建了一个 `_createClass` 函数来给 `function A(){}` 添加静态方法。
-## 实例方法
-## 继承
+Bable 使用闭包函数并创建了一个 `_createClass` 函数来给 `function A(){}` 添加方法。
+
+
 ## 参考
 - [Babel: Try it out]
 - [Class 的基本语法]
