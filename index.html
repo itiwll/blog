@@ -104,6 +104,106 @@ ga('send', 'pageview');
       <div class="outer">
         <section id="main">
   
+    <article id="post-javascript-create-object" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/javascript-create-object/" class="article-date">
+  <time datetime="2020-08-05T23:16:09.000Z" itemprop="datePublished">2020-08-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/javascript-create-object/">JavaScript 中创建见对象的设计模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h1 id="创建方式"><a href="#创建方式" class="headerlink" title="创建方式"></a>创建方式</h1><h2 id="1-字面量"><a href="#1-字面量" class="headerlink" title="1. 字面量"></a>1. 字面量</h2><p>我们一般使用字面量的形式直接创建对象，但是这种创建方式对于创建大量相似对象的时候，会产生大量的重复代码。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> cat1 = &#123;</span><br><span class="line">	name: <span class="string">"cat1"</span>,</span><br><span class="line">  type: <span class="string">"cat"</span>,</span><br><span class="line">	run: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">"小猫快跑"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> cat2 = &#123;</span><br><span class="line">  name: <span class="string">"cat2"</span>,</span><br><span class="line">  type: <span class="string">"cat"</span>,</span><br><span class="line">	run: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">"小猫快跑"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但 JavaScript 和一般的面向对象的语言不同，在 ES6 之前它没有类的概念。但是我们可以使用函数来进行模拟，从而产生出可复用的对象。</p>
+<h3 id="缺陷"><a href="#缺陷" class="headerlink" title="缺陷"></a>缺陷</h3><ul>
+<li>不能产生可服用的对象</li>
+</ul>
+<h2 id="2-工厂模式"><a href="#2-工厂模式" class="headerlink" title="2. 工厂模式"></a>2. 工厂模式</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createCat</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line"> <span class="keyword">const</span> object = &#123;</span><br><span class="line">	 name: name,</span><br><span class="line">   type: <span class="string">"cat"</span>,</span><br><span class="line">	 run: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		 <span class="built_in">console</span>.log(<span class="string">"小猫快跑"</span>);</span><br><span class="line">	 &#125;</span><br><span class="line"> &#125;;</span><br><span class="line"> <span class="keyword">return</span> object;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> cat1 = createCat(<span class="string">"cat1"</span>);</span><br><span class="line"><span class="keyword">const</span> cat2 = createCat(<span class="string">"cat2"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>工厂模式的主要工作原理是用函数来封装创建对象的细节，从而通过调用函数来达到复用的目的。但是它有一个很大的问题就是创建出来的对象无法和某个类型联系起来，它只是简单的封装了复用代码，而没有建立起对象和类型间的关系。</p>
+<h3 id="缺陷-1"><a href="#缺陷-1" class="headerlink" title="缺陷"></a>缺陷</h3><ul>
+<li>无法识别实力的对象类型</li>
+</ul>
+<h2 id="3-构造函数模式"><a href="#3-构造函数模式" class="headerlink" title="3.构造函数模式"></a>3.构造函数模式</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cat</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name;</span><br><span class="line">	<span class="keyword">this</span>.type = <span class="string">"cat"</span>;</span><br><span class="line">	<span class="keyword">this</span>.run = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		 <span class="built_in">console</span>.log(<span class="string">"小猫快跑"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> cat1 = <span class="keyword">new</span> Cat(<span class="string">"cat1"</span>);</span><br><span class="line"><span class="keyword">const</span> cat2 = <span class="keyword">new</span> Cat(<span class="string">"cat2"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>JavaScript 中每一个函数都可以作为构造函数，只要一个函数是通过 new 来调用的，那么我们就可以把它称为构造函数。<br>执行构造函数 <code>new Cat()</code>:</p>
+<ol>
+<li>首先会创建一个新对象</li>
+<li>然后将新对象的原型<code>__proto__</code>指向构造函数的 prototype 属性</li>
+<li>然后将执行上下文中的 this 指向这个新对象</li>
+<li>最后再执行整个函数，如果返回值不是对象，则返回新建的对象。</li>
+</ol>
+<p>因为 this 的值指向了新建的对象，因此我们可以使用 this 给对象赋值。构造函数模式相对于工厂模式的优点是，所创建的对象和构造函数建立起了联系，因此我们可以通过原型来识别对象的类型。但是构造函数存在一个缺点就是，造成了不必要的函数对象的创建，因为在 js 中函数也是一个对象，因此如果对象属性中如果包含函数的话，那么每次我们都会新建一个函数对象，浪费了不必要的内存空间，因为函数是所有的实例都可以通用的。</p>
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>所创建的对象和构造函数建立起了联系，因此我们可以通过原型来识别对象的类型</li>
+</ul>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>实例的函数属性<code>run</code>会重复创建，<code>run</code>是可以通用的，浪费了不必要的内存空间</li>
+</ul>
+<h2 id="4-原型模式"><a href="#4-原型模式" class="headerlink" title="4. 原型模式"></a>4. 原型模式</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cat</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">Cat.prototype.type = <span class="string">"cat"</span>;</span><br><span class="line">Cat.prototype.run = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"小猫快跑"</span>)</span><br><span class="line">&#125;</span><br><span class="line">Cat.prototype.colors = [<span class="string">"orange"</span>]; </span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> cat1 = <span class="keyword">new</span> Cat();</span><br><span class="line"><span class="keyword">const</span> cat2 = <span class="keyword">new</span> Cat();</span><br><span class="line"></span><br><span class="line">cat1.colors[<span class="number">0</span>] = <span class="string">"black"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(cat2.colors); <span class="comment">// ["black"]</span></span><br></pre></td></tr></table></figure>
+
+<p>因为每一个函数都有一个<code>prototype</code>属性，这个属性是一个对象，它包含了通过构造函数创建的所有实例都能共享的属性和方法。因此我们可以使用原型对象来添加公用属性和方法，从而实现代码的复用。</p>
+<h3 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>通过<code>prototype</code>对象共用属性和方法</li>
+</ul>
+<h3 id="缺陷-2"><a href="#缺陷-2" class="headerlink" title="缺陷"></a>缺陷</h3><ul>
+<li>无法传递初始化参数</li>
+<li>共用的引用类型的属性的修改会影响所有实例</li>
+</ul>
+<h2 id="5-组合使用构造函数模式和原型模式"><a href="#5-组合使用构造函数模式和原型模式" class="headerlink" title="5. 组合使用构造函数模式和原型模式"></a>5. 组合使用构造函数模式和原型模式</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cat</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name;</span><br><span class="line">	<span class="keyword">this</span>.type = <span class="string">"cat"</span>;</span><br><span class="line">  <span class="keyword">this</span>.colors = [];</span><br><span class="line">&#125;</span><br><span class="line">Cat.prototype.run = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"小猫快跑"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> cat1 = <span class="keyword">new</span> Cat(<span class="string">"cat1"</span>);</span><br><span class="line"><span class="keyword">const</span> cat2 = <span class="keyword">new</span> Cat(<span class="string">"cat2"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>这是创建自定义类型的最常见方式。因为构造函数模式和原型模式分开使用都存在一些问题，因此我们可以组合使用这两种模式，通过构造函数来初始化对象的属性，通过原型对象来实现函数方法的复用。这种方法很好的解决了两种模式单独使用时的缺点，但是有一点不足的就是，因为使用了两种不同的模式，所以对于代码的封装性不够好。</p>
+<h3 id="优点-2"><a href="#优点-2" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>采用了构造函数模式和原型模式的优点，这种混成模式是目前使用最广泛，认同度最高的一种创建自定类型的方法。</li>
+</ul>
+<h3 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>用了两种不同的模式，所以对于代码的封装性不够好。</li>
+</ul>
+<h2 id="6-动态原型模式"><a href="#6-动态原型模式" class="headerlink" title="6. 动态原型模式"></a>6. 动态原型模式</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cat</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name;</span><br><span class="line">	<span class="keyword">this</span>.type = <span class="string">"cat"</span>;</span><br><span class="line">  <span class="keyword">this</span>.colors = [];</span><br><span class="line">	<span class="keyword">if</span>(type <span class="keyword">of</span> <span class="keyword">this</span>.run !== <span class="string">'function'</span>)&#123;</span><br><span class="line">	  Cat.prototype.run = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	    <span class="built_in">console</span>.log(<span class="string">"小猫快跑"</span>)</span><br><span class="line">	  &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这一种模式将原型方法赋值的创建过程移动到了构造函数的内部，通过对属性是否存在的判断，可以实现仅在第一次调用函数时对原型对象赋值一次的效果。这一种方式很好地对上面的混合模式进行了封装。</p>
+<h3 id="优点-3"><a href="#优点-3" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>封装了原型</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://blog.esonwong.com/javascript-create-object/" data-id="ckdhiuvl9000ec9hgavov34et" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ECMAScript/" rel="tag">ECMAScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/" rel="tag">Javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web-%E5%BC%80%E5%8F%91/" rel="tag">Web 开发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/class/" rel="tag">class</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag">技术</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" rel="tag">面向对象</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
     <article id="post-Babel-的-Class-的转换" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/Babel-%E7%9A%84-Class-%E7%9A%84%E8%BD%AC%E6%8D%A2/" class="article-date">
@@ -140,11 +240,11 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.esonwong.com/Babel-%E7%9A%84-Class-%E7%9A%84%E8%BD%AC%E6%8D%A2/" data-id="ckd1pxup800008ahpf3uwfh5w" class="article-share-link">分享</a>
+      <a data-url="https://blog.esonwong.com/Babel-%E7%9A%84-Class-%E7%9A%84%E8%BD%AC%E6%8D%A2/" data-id="ckdhiuvkt0000c9hgaa1m4xmp" class="article-share-link">分享</a>
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ECMAScript/" rel="tag">ECMAScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/babel/" rel="tag">babel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/class/" rel="tag">class</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ECMAScript/" rel="tag">ECMAScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/" rel="tag">Javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web-%E5%BC%80%E5%8F%91/" rel="tag">Web 开发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/babel/" rel="tag">babel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/class/" rel="tag">class</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag">技术</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li></ul>
 
     </footer>
   </div>
@@ -191,7 +291,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.esonwong.com/%E7%BD%91%E7%BB%9C%E9%81%A5%E6%8E%A7%E8%BD%A6%E4%BA%92%E8%81%94%E7%BD%91%E6%8E%A7%E5%88%B6%E6%95%99%E7%A8%8B/" data-id="ckd1pxupy000v8ahp94lb7a34" class="article-share-link">分享</a>
+      <a data-url="https://blog.esonwong.com/%E7%BD%91%E7%BB%9C%E9%81%A5%E6%8E%A7%E8%BD%A6%E4%BA%92%E8%81%94%E7%BD%91%E6%8E%A7%E5%88%B6%E6%95%99%E7%A8%8B/" data-id="ckdhiuvlh000uc9hgeqm08yn1" class="article-share-link">分享</a>
       
       
       
@@ -249,7 +349,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.esonwong.com/WiFi-4G-5G-%E7%BD%91%E7%BB%9C%E9%81%A5%E6%8E%A7%E8%BD%A6%E5%88%B6%E4%BD%9C%E6%95%99%E7%A8%8B/" data-id="ckd1pxupm00098ahp9aqk7zrh" class="article-share-link">分享</a>
+      <a data-url="https://blog.esonwong.com/WiFi-4G-5G-%E7%BD%91%E7%BB%9C%E9%81%A5%E6%8E%A7%E8%BD%A6%E5%88%B6%E4%BD%9C%E6%95%99%E7%A8%8B/" data-id="ckdhiuvl50009c9hg5vo3d3ay" class="article-share-link">分享</a>
       
       
       
@@ -328,7 +428,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.esonwong.com/HTTP-status/" data-id="ckd1pxupi00058ahpde394mio" class="article-share-link">分享</a>
+      <a data-url="https://blog.esonwong.com/HTTP-status/" data-id="ckdhiuvl20005c9hgcowi965w" class="article-share-link">分享</a>
       
       
       
@@ -378,7 +478,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.esonwong.com/HTTP-%E7%9A%84-Header-%E4%B8%AD%E7%9A%84%E7%BC%93%E5%AD%98%E7%9B%B8%E5%85%B3%E5%AD%97%E6%AE%B5%E4%BB%8B%E7%BB%8D/" data-id="ckd1pxupj00068ahpe1pccsai" class="article-share-link">分享</a>
+      <a data-url="https://blog.esonwong.com/HTTP-%E7%9A%84-Header-%E4%B8%AD%E7%9A%84%E7%BC%93%E5%AD%98%E7%9B%B8%E5%85%B3%E5%AD%97%E6%AE%B5%E4%BB%8B%E7%BB%8D/" data-id="ckdhiuvl30006c9hg2bl3ajwk" class="article-share-link">分享</a>
       
       
       
@@ -428,7 +528,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.esonwong.com/%E6%80%8E%E4%B9%88%E6%89%8D%E8%83%BD%E5%9D%9A%E6%8C%81%E5%81%9A%E4%B8%80%E4%BB%B6%E4%BA%8B%E6%83%85/" data-id="ckd1pxupu000n8ahpbhzvbdh4" class="article-share-link">分享</a>
+      <a data-url="https://blog.esonwong.com/%E6%80%8E%E4%B9%88%E6%89%8D%E8%83%BD%E5%9D%9A%E6%8C%81%E5%81%9A%E4%B8%80%E4%BB%B6%E4%BA%8B%E6%83%85/" data-id="ckdhiuvlf000pc9hgevhaag3g" class="article-share-link">分享</a>
       
       
       
@@ -478,7 +578,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.esonwong.com/webpack-%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E7%9A%84%E6%9C%80%E5%B0%8F%E6%9B%B4%E6%96%B0%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%B9%E6%B3%95/" data-id="ckd1pxupp000e8ahpel67eboi" class="article-share-link">分享</a>
+      <a data-url="https://blog.esonwong.com/webpack-%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E7%9A%84%E6%9C%80%E5%B0%8F%E6%9B%B4%E6%96%B0%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%B9%E6%B3%95/" data-id="ckdhiuvla000gc9hggyebazq1" class="article-share-link">分享</a>
       
       
       
@@ -527,7 +627,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.esonwong.com/fetch-%E4%B8%8A%E4%BC%A0%E8%BF%9B%E5%BA%A6%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%8F%91%E6%96%B9%E6%A1%88/" data-id="ckd1pxupn000a8ahpb537dteg" class="article-share-link">分享</a>
+      <a data-url="https://blog.esonwong.com/fetch-%E4%B8%8A%E4%BC%A0%E8%BF%9B%E5%BA%A6%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%8F%91%E6%96%B9%E6%A1%88/" data-id="ckdhiuvl6000ac9hgek6v9qqs" class="article-share-link">分享</a>
       
       
       
@@ -579,61 +679,11 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.esonwong.com/%E5%A6%82%E4%BD%95%E7%BB%88%E6%AD%A2-fetch-%E8%AF%B7%E6%B1%82/" data-id="ckd1pxupt000k8ahp5b4y9ofq" class="article-share-link">分享</a>
+      <a data-url="https://blog.esonwong.com/%E5%A6%82%E4%BD%95%E7%BB%88%E6%AD%A2-fetch-%E8%AF%B7%E6%B1%82/" data-id="ckdhiuvld000mc9hgeeai4ed5" class="article-share-link">分享</a>
       
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AbortController/" rel="tag">AbortController</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ECMAScript/" rel="tag">ECMAScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fetch/" rel="tag">fetch</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web-%E5%BC%80%E5%8F%91/" rel="tag">web 开发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BB%88%E6%AD%A2-fetch/" rel="tag">终止 fetch</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
- 
-
-
-  
-    <article id="post-使用-Github-Actions-部署前端项目" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/%E4%BD%BF%E7%94%A8-Github-Actions-%E9%83%A8%E7%BD%B2%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE/" class="article-date">
-  <time datetime="2020-02-08T09:37:28.000Z" itemprop="datePublished">2020-02-08</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/%E4%BD%BF%E7%94%A8-Github-Actions-%E9%83%A8%E7%BD%B2%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE/">使用 Github Actions 部署前端项目到</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Github-Actions-简介"><a href="#Github-Actions-简介" class="headerlink" title="Github Actions 简介"></a>Github Actions 简介</h2><p>GitHub Actions 是 Github 推出的一项服务。提供了虚拟服务器环境和 <a href="https://github.com/marketplace?type=actions" target="_blank" rel="noopener">Actions 市场</a>，用于 github 上的项目进行持续集成。这对于 Github 上公开的仓库是免费的，私有仓库有服务器运行时间和存储空间的限制，具体请看 <a href="https://help.github.com/en/github/setting-up-and-managing-billing-and-payments-on-github/about-billing-for-github-actions#about-billing-for-github-actions" target="_blank" rel="noopener">about billing for github actions</a>。</p>
-<h2 id="教程"><a href="#教程" class="headerlink" title="教程"></a>教程</h2><p>下面介绍怎么如使用 GitHub Actions 部署一个前端项目到 linux 服务器上。</p>
-        
-          <p class="article-more-link">
-            <a href="/%E4%BD%BF%E7%94%A8-Github-Actions-%E9%83%A8%E7%BD%B2%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE/#more">继续阅读全文 »</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://blog.esonwong.com/%E4%BD%BF%E7%94%A8-Github-Actions-%E9%83%A8%E7%BD%B2%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE/" data-id="ckd1pxupr000g8ahp8u4p78hg" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github-actions/" rel="tag">github actions</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web-%E5%BC%80%E5%8F%91/" rel="tag">web 开发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E9%83%A8%E7%BD%B2/" rel="tag">前端部署</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" rel="tag">自动化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/" rel="tag">自动部署</a></li></ul>
 
     </footer>
   </div>
@@ -675,7 +725,7 @@ ga('send', 'pageview');
   <div class="widget-wrap">
     <h3 class="widget-title categories">分类</h3>
     <div class="widget" id="categories">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%99%E7%A8%8B/%E7%BD%91%E7%BB%9C%E9%81%A5%E6%8E%A7%E8%BD%A6/">网络遥控车</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%87%AA%E6%88%91%E6%8F%90%E5%8D%87/">自我提升</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%99%E7%A8%8B/%E7%BD%91%E7%BB%9C%E9%81%A5%E6%8E%A7%E8%BD%A6/">网络遥控车</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%87%AA%E6%88%91%E6%8F%90%E5%8D%87/">自我提升</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -685,7 +735,7 @@ ga('send', 'pageview');
   <div class="widget-wrap">
     <h3 class="widget-title tagcloud">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/" style="font-size: 14px;">?.</a> <a href="/tags/" style="font-size: 14px;">??</a> <a href="/tags/AbortController/" style="font-size: 14px;">AbortController</a> <a href="/tags/ECMAScript/" style="font-size: 22.8px;">ECMAScript</a> <a href="/tags/WiFi-4G-5G-%E7%BD%91%E7%BB%9C%E9%81%A5%E6%8E%A7%E8%BD%A6/" style="font-size: 16.2px;">WiFi/4G/5G 网络遥控车</a> <a href="/tags/WiFi-4G-5G-%E7%BD%91%E7%BB%9C%E9%81%A5%E6%8E%A7%E8%BD%A6%E5%88%B6%E4%BD%9C%E6%95%99%E7%A8%8B/" style="font-size: 16.2px;">WiFi/4G/5G 网络遥控车制作教程</a> <a href="/tags/XMLHttpRequest/" style="font-size: 14px;">XMLHttpRequest</a> <a href="/tags/babel/" style="font-size: 18.4px;">babel</a> <a href="/tags/class/" style="font-size: 14px;">class</a> <a href="/tags/fetch/" style="font-size: 16.2px;">fetch</a> <a href="/tags/github-actions/" style="font-size: 14px;">github actions</a> <a href="/tags/http/" style="font-size: 14px;">http</a> <a href="/tags/http-header/" style="font-size: 14px;">http header</a> <a href="/tags/http%E7%BC%93%E5%AD%98%E7%9B%B8%E5%85%B3%E5%AD%97%E6%AE%B5/" style="font-size: 14px;">http缓存相关字段</a> <a href="/tags/import/" style="font-size: 14px;">import</a> <a href="/tags/javascript/" style="font-size: 18.4px;">javascript</a> <a href="/tags/nullish-coalescing/" style="font-size: 14px;">nullish coalescing</a> <a href="/tags/optional-chaining/" style="font-size: 14px;">optional chaining</a> <a href="/tags/vue/" style="font-size: 14px;">vue</a> <a href="/tags/web-%E5%BC%80%E5%8F%91/" style="font-size: 25px;">web 开发</a> <a href="/tags/webpack/" style="font-size: 16.2px;">webpack</a> <a href="/tags/webpack-%E9%85%8D%E7%BD%AE/" style="font-size: 14px;">webpack 配置</a> <a href="/tags/%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6/" style="font-size: 14px;">上传文件</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 22.8px;">前端</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E9%83%A8%E7%BD%B2/" style="font-size: 14px;">前端部署</a> <a href="/tags/%E5%8F%AF%E9%80%89%E9%93%BE/" style="font-size: 14px;">可选链</a> <a href="/tags/%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" style="font-size: 14px;">开发规范</a> <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" style="font-size: 16.2px;">性能优化</a> <a href="/tags/%E6%87%92%E5%8A%A0%E8%BD%BD/" style="font-size: 14px;">懒加载</a> <a href="/tags/%E6%8A%80%E6%9C%AF/" style="font-size: 16.2px;">技术</a> <a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 20.6px;">教程</a> <a href="/tags/%E6%97%A0%E9%99%90%E8%B7%9D%E7%A6%BB/" style="font-size: 14px;">无限距离</a> <a href="/tags/%E6%9C%80%E5%B0%8F%E6%9B%B4%E6%96%B0/" style="font-size: 14px;">最小更新</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" style="font-size: 16.2px;">树莓派</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%B0%8F%E8%BD%A6/" style="font-size: 16.2px;">树莓派小车</a> <a href="/tags/%E7%A9%BA%E5%80%BC%E5%90%88%E5%B9%B6%E8%BF%90%E7%AE%97%E7%AC%A6/" style="font-size: 14px;">空值合并运算符</a> <a href="/tags/%E7%BB%88%E6%AD%A2-fetch/" style="font-size: 14px;">终止 fetch</a> <a href="/tags/%E7%BC%93%E5%AD%98/" style="font-size: 14px;">缓存</a> <a href="/tags/%E7%BC%93%E5%AD%98%E6%8A%80%E6%9C%AF/" style="font-size: 14px;">缓存技术</a> <a href="/tags/%E7%BD%91%E7%BB%9C-RC/" style="font-size: 16.2px;">网络 RC</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E5%9B%BE%E4%BC%A0/" style="font-size: 16.2px;">网络图传</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E9%81%A5%E6%8E%A7%E8%BD%A6/" style="font-size: 16.2px;">网络遥控车</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 14px;">自动化</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/" style="font-size: 14px;">自动部署</a> <a href="/tags/%E8%87%AA%E6%88%91%E6%8F%90%E5%8D%87/" style="font-size: 14px;">自我提升</a>
+      <a href="/tags/" style="font-size: 14px;">?.</a> <a href="/tags/" style="font-size: 14px;">??</a> <a href="/tags/AbortController/" style="font-size: 14px;">AbortController</a> <a href="/tags/ECMAScript/" style="font-size: 21.33px;">ECMAScript</a> <a href="/tags/Javascript/" style="font-size: 15.83px;">Javascript</a> <a href="/tags/Web-%E5%BC%80%E5%8F%91/" style="font-size: 15.83px;">Web 开发</a> <a href="/tags/WiFi-4G-5G-%E7%BD%91%E7%BB%9C%E9%81%A5%E6%8E%A7%E8%BD%A6/" style="font-size: 15.83px;">WiFi/4G/5G 网络遥控车</a> <a href="/tags/WiFi-4G-5G-%E7%BD%91%E7%BB%9C%E9%81%A5%E6%8E%A7%E8%BD%A6%E5%88%B6%E4%BD%9C%E6%95%99%E7%A8%8B/" style="font-size: 15.83px;">WiFi/4G/5G 网络遥控车制作教程</a> <a href="/tags/XMLHttpRequest/" style="font-size: 14px;">XMLHttpRequest</a> <a href="/tags/babel/" style="font-size: 17.67px;">babel</a> <a href="/tags/class/" style="font-size: 15.83px;">class</a> <a href="/tags/fetch/" style="font-size: 15.83px;">fetch</a> <a href="/tags/github-actions/" style="font-size: 14px;">github actions</a> <a href="/tags/http/" style="font-size: 14px;">http</a> <a href="/tags/http-header/" style="font-size: 14px;">http header</a> <a href="/tags/http%E7%BC%93%E5%AD%98%E7%9B%B8%E5%85%B3%E5%AD%97%E6%AE%B5/" style="font-size: 14px;">http缓存相关字段</a> <a href="/tags/import/" style="font-size: 14px;">import</a> <a href="/tags/javascript/" style="font-size: 17.67px;">javascript</a> <a href="/tags/nullish-coalescing/" style="font-size: 14px;">nullish coalescing</a> <a href="/tags/optional-chaining/" style="font-size: 14px;">optional chaining</a> <a href="/tags/vue/" style="font-size: 14px;">vue</a> <a href="/tags/web-%E5%BC%80%E5%8F%91/" style="font-size: 25px;">web 开发</a> <a href="/tags/webpack/" style="font-size: 15.83px;">webpack</a> <a href="/tags/webpack-%E9%85%8D%E7%BD%AE/" style="font-size: 14px;">webpack 配置</a> <a href="/tags/%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6/" style="font-size: 14px;">上传文件</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 23.17px;">前端</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E9%83%A8%E7%BD%B2/" style="font-size: 14px;">前端部署</a> <a href="/tags/%E5%8F%AF%E9%80%89%E9%93%BE/" style="font-size: 14px;">可选链</a> <a href="/tags/%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" style="font-size: 14px;">开发规范</a> <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" style="font-size: 15.83px;">性能优化</a> <a href="/tags/%E6%87%92%E5%8A%A0%E8%BD%BD/" style="font-size: 14px;">懒加载</a> <a href="/tags/%E6%8A%80%E6%9C%AF/" style="font-size: 19.5px;">技术</a> <a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 21.33px;">教程</a> <a href="/tags/%E6%97%A0%E9%99%90%E8%B7%9D%E7%A6%BB/" style="font-size: 14px;">无限距离</a> <a href="/tags/%E6%9C%80%E5%B0%8F%E6%9B%B4%E6%96%B0/" style="font-size: 14px;">最小更新</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" style="font-size: 15.83px;">树莓派</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%B0%8F%E8%BD%A6/" style="font-size: 15.83px;">树莓派小车</a> <a href="/tags/%E7%A9%BA%E5%80%BC%E5%90%88%E5%B9%B6%E8%BF%90%E7%AE%97%E7%AC%A6/" style="font-size: 14px;">空值合并运算符</a> <a href="/tags/%E7%BB%88%E6%AD%A2-fetch/" style="font-size: 14px;">终止 fetch</a> <a href="/tags/%E7%BC%93%E5%AD%98/" style="font-size: 14px;">缓存</a> <a href="/tags/%E7%BC%93%E5%AD%98%E6%8A%80%E6%9C%AF/" style="font-size: 14px;">缓存技术</a> <a href="/tags/%E7%BD%91%E7%BB%9C-RC/" style="font-size: 15.83px;">网络 RC</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E5%9B%BE%E4%BC%A0/" style="font-size: 15.83px;">网络图传</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E9%81%A5%E6%8E%A7%E8%BD%A6/" style="font-size: 15.83px;">网络遥控车</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 14px;">自动化</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/" style="font-size: 14px;">自动部署</a> <a href="/tags/%E8%87%AA%E6%88%91%E6%8F%90%E5%8D%87/" style="font-size: 14px;">自我提升</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 14px;">设计模式</a> <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" style="font-size: 14px;">面向对象</a>
     </div>
   </div>
 
@@ -695,6 +745,10 @@ ga('send', 'pageview');
     <h3 class="widget-title recent-posts">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/javascript-create-object/">JavaScript 中创建见对象的设计模式</a>
+          </li>
         
           <li>
             <a href="/Babel-%E7%9A%84-Class-%E7%9A%84%E8%BD%AC%E6%8D%A2/">Babel 的 Class 的转换</a>
@@ -712,10 +766,6 @@ ga('send', 'pageview');
             <a href="/HTTP-status/">HTTP 状态码的意义</a>
           </li>
         
-          <li>
-            <a href="/HTTP-%E7%9A%84-Header-%E4%B8%AD%E7%9A%84%E7%BC%93%E5%AD%98%E7%9B%B8%E5%85%B3%E5%AD%97%E6%AE%B5%E4%BB%8B%E7%BB%8D/">HTTP 的 Header 中的缓存相关字段介绍</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -725,7 +775,7 @@ ga('send', 'pageview');
   <div class="widget-wrap">
     <h3 class="widget-title archive">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a><span class="archive-list-count">2</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a><span class="archive-list-count">2</span></li></ul>
     </div>
   </div>
 
