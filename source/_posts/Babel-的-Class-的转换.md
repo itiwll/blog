@@ -7,6 +7,11 @@ tags:
   - babel
   - ECMAScript
   - class
+  - Web 开发
+  - 前端
+  - 教程
+  - 技术
+  - Javascript
 ---
 ![babel class 转换](../asset/babel.png)
 

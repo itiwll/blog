@@ -10,6 +10,8 @@ tags:
   - babel
   - ECMAScript
   - web 开发
+  - 前端
+  - 技术
 ---
 
 ## 简介
