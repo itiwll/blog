@@ -14,7 +14,6 @@ tags:
   - 教程
   - 技术
 ---
-# JavaScript 中创建对象的设计模式 
 ![object](../asset/object.png)
 ## 1. 字面量
 
