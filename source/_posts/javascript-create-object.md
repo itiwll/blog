@@ -1,5 +1,5 @@
 ---
-title: JavaScript 中创建见对象的设计模式 
+title: JavaScript 中创建对象的设计模式 
 date: 2020-08-05 23:16:09
 categories:
   - 技术
