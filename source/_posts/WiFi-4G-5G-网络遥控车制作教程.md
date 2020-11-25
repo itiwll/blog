@@ -22,8 +22,8 @@ categories:
 ## 材料
 
 - 树莓派3B+ (300元)
-- 树莓派摄像头 (15元)
-- 移动电源 (60元) 
+- 树莓派摄像头 (15元) / ps3 摄像头 (40远)
+- 移动电源 (60元) / USB输出降压模块 (?元)
 - 环奇743A (286元，某宝上找不到了)
 - 杜邦线(母对母x1, 公对母x4) (3元)
 - 其它固定材料
@@ -49,7 +49,7 @@ sudo ./network-rc/node ./network-rc/index.js
 4. 用同一局域网网下的浏览器里打开 http://树莓派的ip地址:8080 即可看到控制界面
 
 ## 环奇743A 改装
-如果你是用其它车的话，只要舵机和电调的接线和控制信号通用即可。
+如果你是用其它车的话，只要舵机和电调的接线和控制信号通用即可(__仅支持三线的电调和舵机__)。
 
 ![树莓派 GPIO 连接小车]
 
@@ -80,8 +80,9 @@ sudo ./network-rc/node ./network-rc/index.js
 - [4G/5G 网络 RC 遥控车 04 - 人工智能(zhang)，自动驾驶，人体跟随]
 - [ 4G/5G 网络 RC 遥控车 - 05 摄像头！麦克风！云台！语音对讲！ ]
 
+## 交流微信群
+![Network-RC 微信交流群]
 
-## 链接
 
 [network-rc]:https://github.com/itiwll/network-rc
 [树莓派 4G 网络遥控车图传延迟测试]:https://www.bilibili.com/video/BV15K411W7bK
@@ -91,3 +92,4 @@ sudo ./network-rc/node ./network-rc/index.js
 [WiFi/4G/5G 网络遥控车制作教程]:../asset/4g网络rc遥控车02-开篇-封面.jpg
 [4g 网络 rc 遥控车03 - 无限距离远程遥控？]: ../asset/4g%E7%BD%91%E7%BB%9C%20RC%20%E9%81%A5%E6%8E%A7%E8%BD%A603%20-%20%E6%97%A0%E9%99%90%E8%B7%9D%E7%A6%BB%E8%BF%9C%E7%A8%8B%E9%81%A5%E6%8E%A7%EF%BC%9F-%20%E5%B0%81%E9%9D%A2.jpg
 [4G/5G 网络 RC 遥控车 - 05 摄像头！麦克风！云台！语音对讲！]:https://www.bilibili.com/video/BV14C4y1p7ap/
+[Network-RC 微信交流群]: ../asset/wechat-group-qrcode.jpg
