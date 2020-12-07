@@ -32,8 +32,13 @@ categories:
 
 ## 树莓派软件安装运行
 ### 安装 network-rc
-0. 树莓派安装 buster 版本以上系统连接摄像头，连接wifi    
+
+0. 树莓派安装 buster 版本以上系统连接摄像头，连接wifi。
+   
+> **注意：最新系统存在兼通性问题， 使用此版本系统<http://downloads.raspberrypi.org/raspbian/images/raspbian-2020-02-07/>**
+  
 > 网络上有很多树莓派系统安装教程，请自行搜索.
+
 1. 在树莓派上下载 [network-rc] 软件  
 ```
 wget https://network-rc.esonwong.com/download/network-rc.tar.gz
