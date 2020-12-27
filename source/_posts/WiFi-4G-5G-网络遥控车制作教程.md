@@ -25,7 +25,7 @@ categories:
 - 树莓派摄像头 (15元) / ps3 摄像头 (40远)
 - 移动电源 (60元) / USB输出降压模块 (?元)
 - 环奇743A (286元，某宝上找不到了)
-- 杜邦线(母对母x1, 公对母x4) (3元)
+- 杜邦线(公对公x1, 公对母x4) (3元)
 - 其它固定材料
 
 <!-- more -->
@@ -43,7 +43,7 @@ categories:
 1. 在树莓派上下载 [network-rc] 软件
 
 ```bash
-wget https://github.com/itiwll/network-rc/releases/download/v0.9.9/network-rc-v0.9.9.tar.gz
+wget https://network-rc.esonwong.com/download/network-rc.tar.gz
 ```
 
 2. 解压文件
