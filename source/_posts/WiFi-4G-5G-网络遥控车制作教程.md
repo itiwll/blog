@@ -31,24 +31,30 @@ categories:
 <!-- more -->
 
 ## 树莓派软件安装运行
+
 ### 安装 network-rc
 
 0. 树莓派安装 buster 版本以上系统连接摄像头，连接wifi。
-   
+
 > **注意：最新系统存在兼通性问题， 使用此版本系统<http://downloads.raspberrypi.org/raspbian/images/raspbian-2020-02-07/>**
   
 > 网络上有很多树莓派系统安装教程，请自行搜索.
 
-1. 在树莓派上下载 [network-rc] 软件  
-```
+1. 在树莓派上下载 [network-rc] 软件
+
+```bash
 wget https://github.com/itiwll/network-rc/releases/download/v0.9.9/network-rc-v0.9.9.tar.gz
 ```
-2. 解压文件  
-```
+
+2. 解压文件
+
+```bash
 tar -zxvf network-rc.tar.gz
 ```
-3. 运行程序  
-```
+
+3. 运行程序
+
+```bash
 sudo ./network-rc/node ./network-rc/index.js
 ```
 4. 用同一局域网网下的浏览器里打开 http://树莓派的ip地址:8080 即可看到控制界面
@@ -77,6 +83,7 @@ sudo ./network-rc/node ./network-rc/index.js
 作为一个可以网络控制且拥有网络图传的小车，它的梦想是自己周游世界（没有熊孩子的世界）。下次我会教大家如何通过 4G 网络来控制小车。
 
 ## 参考
+
 - [Bilibili EsonWong](https://space.bilibili.com/96740361)
 - [network-rc]
 - [WiFi/4G/5G 网络遥控车制作教程]
