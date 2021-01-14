@@ -4,9 +4,9 @@
 
 # Site
 title: Eson Wong's Blog
-subtitle: '编程记录，心得分享'
-description: Eson Wong's Blog，编程记录，心得分享
-keywords: 前端,javascript,emscript,vue,react,webpack
+subtitle: '编程笔记，投资记录, 读书总结, 生活心得'
+description: Eson Wong's Blog，编程笔记，投资记录, 读书总结, 生活心得
+keywords: 前端,javascript,emscript,vue,react,webpack,读书,投资记录,network-rc,教程 
 author:  Eson Wong
 language: zh
 timezone: ''
@@ -126,4 +126,5 @@ feed:
 
 
 links:
-  ༄晨辉༅'s blog: https://iotch.xyz
+  EsonWong's blog: https://github.com/itiwl
+  EsonWong's bilibili: https://space.bilibili.com/96740361
