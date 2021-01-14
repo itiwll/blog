@@ -99,6 +99,8 @@ sudo ./network-rc/node ./network-rc/index.js
 
 ## 交流微信群
 
+入群方法添: 加微信 EsonWong_ 备注 Network RC
+
 ## 捐赠
 
 ![微信赞赏吗](../asset/wechat-donate.jpg)
