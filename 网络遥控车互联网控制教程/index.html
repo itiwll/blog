@@ -17,7 +17,7 @@
 <meta property="og:image" content="https://blog.esonwong.com/asset/wifi%E7%83%AD%E7%82%B9.png">
 <meta property="og:image" content="https://blog.esonwong.com/asset/wechat-donate.jpg">
 <meta property="article:published_time" content="2020-04-15T09:59:56.000Z">
-<meta property="article:modified_time" content="2021-01-18T03:19:17.209Z">
+<meta property="article:modified_time" content="2021-01-18T08:16:47.293Z">
 <meta property="article:author" content="Eson Wong">
 <meta property="article:tag" content="教程">
 <meta property="article:tag" content="技术">
@@ -156,8 +156,8 @@ ga('send', 'pageview');
 </blockquote>
 <p>此时树莓派是没有公网的 ip 地址的，还不能通过互联网连接到遥控车。</p>
 <h2 id="外网访问-网络穿透"><a href="#外网访问-网络穿透" class="headerlink" title="外网访问 - 网络穿透"></a>外网访问 - 网络穿透</h2><p>我们通过使用 frp 网络穿透软件实现互联网对遥控车的访问。 network-rc 于 v0.5.0 版本里内置了 frp 客户端和作者提供的 frp 服务的配置。</p>
-<p>使用下面的命令运行即可开启网络穿透功能：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./network-rc/node ./network-rc/index.js -f -o 9011 --tsl -p &#123;你的控制界面登陆密码&#125;</span><br></pre></td></tr></table></figure>
+<p>使用下面的命令运行即可开启网络穿透功能(不需要<code>{}</code>)：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./network-rc/node ./network-rc/index.js -f -o 9011 --tsl -p &#123;你想设置的控制界面登陆密码&#125;</span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>由于可通过互联网访问，务必设置连接密码。作者提供的 frp 服务器可用端口为 9002～9060</p>
@@ -165,24 +165,26 @@ ga('send', 'pageview');
 <p>网络穿透成功后即可通过 <a href="http://home.esonwong.com:9011" target="_blank" rel="noopener">http://home.esonwong.com:9011</a>  (9011替换成你设置的端口号) 访问你的遥控车控制界面。</p>
 <p>作者提供的免费的 frp 服务器(v0.9.11 已恢复)，是运行在自家用的路由器上的，广东电信的网络。如果各位小伙伴离湖北比较远或者 4G/5G 核心、控制端的网络和 frp 穿透服务器属于不通的运营商会增加视频传输延迟。</p>
 <blockquote>
-<p>受电信运营商的影响，作者提供的 frp 服务不稳定。</p>
+<p>受电信运营商的影响，作者提供的 frp 服务不是特别问题。</p>
 </blockquote>
-<h3 id="网友的免费-frp-网络穿透服务器"><a href="#网友的免费-frp-网络穿透服务器" class="headerlink" title="网友的免费 frp 网络穿透服务器"></a>网友的免费 frp 网络穿透服务器</h3><p>另外也有网友提供的免费的 frp 服务器。搜索引擎搜索“免费的 frp”，可以找到好心的网友提供的免费的 frp 服务器。</p>
+<h3 id="免费-frp-网络穿透服务器"><a href="#免费-frp-网络穿透服务器" class="headerlink" title="免费 frp 网络穿透服务器"></a>免费 frp 网络穿透服务器</h3><p>搜索引擎搜索“免费的 frp”，可以找到好心的网友提供的免费的 frp 服务器。</p>
 <p>需要找到以下服务器的配置：</p>
 <ul>
 <li>服务器地址 <code>server_addr</code></li>
 <li>服务器端口 <code>server_port</code></li>
-<li>服务器 token <code>token</code></li>
+<li>服务 token <code>token</code></li>
+<li>用户名 user</li>
 </ul>
 <p>使用其它穿透服务器的命令(不需要<code>{}</code>)：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo node index.js -f -o &#123;访问端口&#125; -p &#123;你的控制界面登陆密码&#125; --frpServer &#123;服务器地址&#125; --frpServerPort &#123;服务器端口&#125; -frpServerToken &#123;服务器token&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo node index.js -f -o &#123;访问端口&#125; -p &#123;你想设置的控制界面登陆密码&#125; --frpServer &#123;服务器地址&#125; --frpServerPort &#123;服务器端口&#125; -frpServerToken &#123;frp 的 token&#125; --frpServerUser &#123;frp 的用户名&#125;</span><br></pre></td></tr></table></figure>
+
 
 <h2 id="开机启动-network-rc"><a href="#开机启动-network-rc" class="headerlink" title="开机启动 network-rc"></a>开机启动 network-rc</h2><p>为了方便接上电源即可控制遥控车，我们将 network-rc 设置为开机启动。</p>
 <p>增加 network-rc 服务，在 <code>/etc/systemd/system/</code> 目录下新建 <code>network-rc.service</code> 文件，替换下方文本里的 network-rc 路径和密码(不需要<code>{}</code>）保存到文件里。</p>
 <blockquote>
 <p>创建和编辑 <code>/etc/systemd/system/network-rc.service</code> 文件需要 root 。</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description&#x3D;network-rc</span><br><span class="line">After&#x3D;syslog.target  network.target</span><br><span class="line">Wants&#x3D;network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">User&#x3D;root</span><br><span class="line">Type&#x3D;simple</span><br><span class="line">ExecStart&#x3D;&#123;network-rc文件夹路径&#125;&#x2F;node &#123;network-rc文件夹路径&#125;&#x2F;index.js -f -o &#123;访问端口&#125; -p &#123;你的密码&#125; --tsl</span><br><span class="line"># 比如 ExecStart&#x3D;&#x2F;home&#x2F;pi&#x2F;network-rc&#x2F;node &#x2F;home&#x2F;pi&#x2F;network-rc&#x2F;index.js -f -o 9011 -p password --tsl</span><br><span class="line">Restart&#x3D; always</span><br><span class="line">RestartSec&#x3D;1min</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy&#x3D;multi-user.target</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description&#x3D;network-rc</span><br><span class="line">After&#x3D;syslog.target  network.target</span><br><span class="line">Wants&#x3D;network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">User&#x3D;root</span><br><span class="line">Type&#x3D;simple</span><br><span class="line">ExecStart&#x3D;&#123;network-rc文件夹路径&#125;&#x2F;node &#123;network-rc文件夹路径&#125;&#x2F;index.js -f -o &#123;访问端口&#125; -p &#123;你想设置的控制界面登陆密码&#125; --tsl</span><br><span class="line"># 比如 ExecStart&#x3D;&#x2F;home&#x2F;pi&#x2F;network-rc&#x2F;node &#x2F;home&#x2F;pi&#x2F;network-rc&#x2F;index.js -f -o 9011 -p password --tsl</span><br><span class="line">Restart&#x3D; always</span><br><span class="line">RestartSec&#x3D;1min</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy&#x3D;multi-user.target</span><br></pre></td></tr></table></figure>
 
 <p>设置开机启动服务:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> network-rc.service</span><br></pre></td></tr></table></figure>
@@ -207,7 +209,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.esonwong.com/%E7%BD%91%E7%BB%9C%E9%81%A5%E6%8E%A7%E8%BD%A6%E4%BA%92%E8%81%94%E7%BD%91%E6%8E%A7%E5%88%B6%E6%95%99%E7%A8%8B/" data-id="ckk2028p5000vbong6x2t8w8m" class="article-share-link">分享</a>
+      <a data-url="https://blog.esonwong.com/%E7%BD%91%E7%BB%9C%E9%81%A5%E6%8E%A7%E8%BD%A6%E4%BA%92%E8%81%94%E7%BD%91%E6%8E%A7%E5%88%B6%E6%95%99%E7%A8%8B/" data-id="ckk2aoxpn000v63k9e7i06u7s" class="article-share-link">分享</a>
       
       
       
@@ -311,7 +313,7 @@ ga('send', 'pageview');
       
         <strong class="toc-title">文章目录</strong>
         <div class="toc-widget-list">
-              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4G-5G-网络连接"><span class="toc-number">2.</span> <span class="toc-text">4G&#x2F;5G 网络连接</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#UBS-4G-5G网卡"><span class="toc-number">2.1.</span> <span class="toc-text">UBS 4G&#x2F;5G网卡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WiFi"><span class="toc-number">2.2.</span> <span class="toc-text">WiFi</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#外网访问-网络穿透"><span class="toc-number">3.</span> <span class="toc-text">外网访问 - 网络穿透</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#网友的免费-frp-网络穿透服务器"><span class="toc-number">3.1.</span> <span class="toc-text">网友的免费 frp 网络穿透服务器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开机启动-network-rc"><span class="toc-number">4.</span> <span class="toc-text">开机启动 network-rc</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4G-网络下延迟测试"><span class="toc-number">5.</span> <span class="toc-text">4G 网络下延迟测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4G-网络下的实际遥控效果"><span class="toc-number">6.</span> <span class="toc-text">4G 网络下的实际遥控效果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#交流微信群"><span class="toc-number">7.</span> <span class="toc-text">交流微信群</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">8.</span> <span class="toc-text">参考</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#捐赠"><span class="toc-number">9.</span> <span class="toc-text">捐赠</span></a></li></ol>
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4G-5G-网络连接"><span class="toc-number">2.</span> <span class="toc-text">4G&#x2F;5G 网络连接</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#UBS-4G-5G网卡"><span class="toc-number">2.1.</span> <span class="toc-text">UBS 4G&#x2F;5G网卡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WiFi"><span class="toc-number">2.2.</span> <span class="toc-text">WiFi</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#外网访问-网络穿透"><span class="toc-number">3.</span> <span class="toc-text">外网访问 - 网络穿透</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#免费-frp-网络穿透服务器"><span class="toc-number">3.1.</span> <span class="toc-text">免费 frp 网络穿透服务器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开机启动-network-rc"><span class="toc-number">4.</span> <span class="toc-text">开机启动 network-rc</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4G-网络下延迟测试"><span class="toc-number">5.</span> <span class="toc-text">4G 网络下延迟测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4G-网络下的实际遥控效果"><span class="toc-number">6.</span> <span class="toc-text">4G 网络下的实际遥控效果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#交流微信群"><span class="toc-number">7.</span> <span class="toc-text">交流微信群</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">8.</span> <span class="toc-text">参考</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#捐赠"><span class="toc-number">9.</span> <span class="toc-text">捐赠</span></a></li></ol>
           </div>
       </div>
     </div>
