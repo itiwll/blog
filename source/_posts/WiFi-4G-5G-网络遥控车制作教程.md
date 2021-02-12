@@ -39,7 +39,7 @@ categories:
 
 0. 树莓派安装 buster 版本以上系统连接摄像头，连接 wifi。
 
-> **注意：最新系统存在兼通性问题， 使用此版本系统<http://downloads.raspberrypi.org/raspbian/images/raspbian-2020-02-07/>**
+> **注意：在最新树莓派系统上存在兼通性问题， 使用此版本系统<http://downloads.raspberrypi.org/raspbian/images/raspbian-2020-02-07/>**
 
 > 网络上有很多树莓派系统安装教程，请自行搜索.
 
