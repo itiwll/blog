@@ -23,8 +23,9 @@ categories:
 在树莓派的终端里运行下面代码:
 
 ```bash
-bash <(curl -sL [https://network-rc.esonwong.com/download/install.sh](https://network-rc.esonwong.com/download/install.sh))
+sudo bash <(curl -sL https://network-rc.esonwong.com/download/install.sh)
 ```
+<!-- more -->
 
 ## 选择穿透方法
 
