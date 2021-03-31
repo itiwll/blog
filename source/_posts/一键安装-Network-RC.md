@@ -17,6 +17,11 @@ categories:
   
 ---
 
+## 树莓派安装系统
+
+树莓派安装系统，系统设置里开启摄像头，连接网络。
+
+> **注意：在最新树莓派系统上存在兼通性问题， 使用此版本系统<http://downloads.raspberrypi.org/raspbian/images/raspbian-2020-02-07/>**
 
 ## 一键安装命令
 
@@ -26,6 +31,8 @@ categories:
 sudo bash <(curl -sL https://network-rc.esonwong.com/download/install.sh)
 ```
 <!-- more -->
+
+
 
 ## 选择穿透方法
 
@@ -50,7 +57,7 @@ sudo bash <(curl -sL https://network-rc.esonwong.com/download/install.sh)
 
 ## 查看运行状态
 
-查看运行状态的代码是:
+查看运行状态的命令是:
 
 ```bash
 journalctl -u network-rc.service -e
