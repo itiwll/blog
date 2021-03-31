@@ -39,13 +39,14 @@ sudo bash <(curl -sL https://network-rc.esonwong.com/download/install.sh)
 ### 使用内置穿透
 
 输入 `yes` 回车
-方向键选择穿透服务器
 
-## 使用自定义穿透
+~~~方向键选择穿透服务器~~~
 
-输入`no`
-输入 frp 配置信息
-输入 https 证书的路径
+### 使用自定义穿透
+
+1. 输入`no`
+2. 输入 frp 配置信息
+3. 输入 https 证书的路径
 
 ## 连接信息
 
