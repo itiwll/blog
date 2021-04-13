@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh">
 <meta property="og:image" content="https://blog.esonwong.com/asset/http-caching.png">
 <meta property="article:published_time" content="2020-02-28T22:21:02.000Z">
-<meta property="article:modified_time" content="2021-04-10T05:34:48.950Z">
+<meta property="article:modified_time" content="2021-04-13T03:27:36.933Z">
 <meta property="article:author" content="Eson Wong">
 <meta property="article:tag" content="前端">
 <meta property="article:tag" content="web 开发">
@@ -172,6 +172,9 @@ ga('send', 'pageview');
 <h4 id="If-Modified-Since"><a href="#If-Modified-Since" class="headerlink" title="If-Modified-Since"></a>If-Modified-Since</h4><p>存在于请求 Header 中，告诉响应服务器请求的资源上次服务器返回的资源最后修改时间。<br>如果服务器上的资源又被修改过，则服务器应当返回新的资源，否者服务器返回 <code>304</code> HTTP 状态码告诉客户端使用缓存的资源.</p>
 <h3 id="Etag-If-None-Match"><a href="#Etag-If-None-Match" class="headerlink" title="Etag / If-None-Match"></a>Etag / If-None-Match</h3><h4 id="Etag"><a href="#Etag" class="headerlink" title="Etag"></a>Etag</h4><p>存在于响应 Header 中, 值为的资源的唯一标识符。由服务器决定唯一标识符的生成方法，比如哈希值。</p>
 <h4 id="If-None-Match"><a href="#If-None-Match" class="headerlink" title="If-None-Match"></a>If-None-Match</h4><p>存在于请求 Header 中，告诉响应服务器请求的资源上次服务器返回的资源最后的 <code>Etag</code> 值。<br>如果服务器上的资源的唯一标识符与请求头中的 <code>Etag</code> 的值不一样，则服务器应当返回新的资源，否者服务器返回 <code>304</code> HTTP 状态码告诉客户端使用缓存的资源。唯一标识符 <code>Etag</code> 的规则优先于 <code>Last-Modified</code>。</p>
+<h3 id="最佳缓存设置"><a href="#最佳缓存设置" class="headerlink" title="最佳缓存设置"></a>最佳缓存设置</h3><p>nginx 设置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">add_header Cache-Control &quot;no-cache,public,max-age&#x3D;7200&quot;;</span><br></pre></td></tr></table></figure>
+
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li><a href="https://www.cnblogs.com/chenqf/p/6386163.html" target="_blank" rel="noopener">彻底弄懂HTTP缓存机制及原理</a></li>
 <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Cache-Control" target="_blank" rel="noopener">Cache-Control</a></li>
@@ -180,7 +183,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.esonwong.com/HTTP-%E7%9A%84-Header-%E4%B8%AD%E7%9A%84%E7%BC%93%E5%AD%98%E7%9B%B8%E5%85%B3%E5%AD%97%E6%AE%B5%E4%BB%8B%E7%BB%8D/" data-id="cknbb0ea80007j9oy3crje7qx" class="article-share-link">分享</a>
+      <a data-url="https://blog.esonwong.com/HTTP-%E7%9A%84-Header-%E4%B8%AD%E7%9A%84%E7%BC%93%E5%AD%98%E7%9B%B8%E5%85%B3%E5%AD%97%E6%AE%B5%E4%BB%8B%E7%BB%8D/" data-id="cknfgscyq0007ern75ausgm9m" class="article-share-link">分享</a>
       
       
       
@@ -284,7 +287,7 @@ ga('send', 'pageview');
       
         <strong class="toc-title">文章目录</strong>
         <div class="toc-widget-list">
-              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP-Header-中的缓存相关字段"><span class="toc-number">1.</span> <span class="toc-text">HTTP Header 中的缓存相关字段</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Expires"><span class="toc-number">1.1.</span> <span class="toc-text">Expires</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cache-Control"><span class="toc-number">1.2.</span> <span class="toc-text">Cache-Control</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Last-Modified-If-Modified-Since"><span class="toc-number">1.3.</span> <span class="toc-text">Last-Modified &#x2F; If-Modified-Since</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Last-Modified"><span class="toc-number">1.3.1.</span> <span class="toc-text">Last-Modified</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#If-Modified-Since"><span class="toc-number">1.3.2.</span> <span class="toc-text">If-Modified-Since</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Etag-If-None-Match"><span class="toc-number">1.4.</span> <span class="toc-text">Etag &#x2F; If-None-Match</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Etag"><span class="toc-number">1.4.1.</span> <span class="toc-text">Etag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#If-None-Match"><span class="toc-number">1.4.2.</span> <span class="toc-text">If-None-Match</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">2.</span> <span class="toc-text">参考</span></a></li></ol>
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP-Header-中的缓存相关字段"><span class="toc-number">1.</span> <span class="toc-text">HTTP Header 中的缓存相关字段</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Expires"><span class="toc-number">1.1.</span> <span class="toc-text">Expires</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cache-Control"><span class="toc-number">1.2.</span> <span class="toc-text">Cache-Control</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Last-Modified-If-Modified-Since"><span class="toc-number">1.3.</span> <span class="toc-text">Last-Modified &#x2F; If-Modified-Since</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Last-Modified"><span class="toc-number">1.3.1.</span> <span class="toc-text">Last-Modified</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#If-Modified-Since"><span class="toc-number">1.3.2.</span> <span class="toc-text">If-Modified-Since</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Etag-If-None-Match"><span class="toc-number">1.4.</span> <span class="toc-text">Etag &#x2F; If-None-Match</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Etag"><span class="toc-number">1.4.1.</span> <span class="toc-text">Etag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#If-None-Match"><span class="toc-number">1.4.2.</span> <span class="toc-text">If-None-Match</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最佳缓存设置"><span class="toc-number">1.5.</span> <span class="toc-text">最佳缓存设置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">2.</span> <span class="toc-text">参考</span></a></li></ol>
           </div>
       </div>
     </div>
