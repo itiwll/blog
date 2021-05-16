@@ -28,7 +28,7 @@ categories:
 在树莓派的终端里运行下面代码:
 
 ```bash
-sudo bash <(curl -sL https://network-rc.esonwong.com/download/install.sh)
+bash <(curl -sL https://network-rc.esonwong.com/download/install.sh)
 ```
 <!-- more -->
 
