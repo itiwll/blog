@@ -20,6 +20,8 @@ HTTP 响应报文状态行由 HTTP-Version、Status-Code、Reason-Phrase 组成�
 HTTP/1.1 200 OK
 ```
 
+<!-- more -->
+
 ## 响应状态码分为五类
 ### 信息响应(100–199)
 #### 100 Continue
