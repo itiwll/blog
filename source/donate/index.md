@@ -9,4 +9,4 @@ date: 2021-01-14 11:04:44
 
 ## Paypal Donate QR Code
 
-![Paypal Donate](../asset/paypal-donate.jpg)
+![Paypal Donate](../asset/paypal-donate.png)
