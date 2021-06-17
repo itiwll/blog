@@ -20,6 +20,9 @@ categories:
 
 ## 简介
 
+本篇部分内容已过时，安装 Network RC 和使用内置穿透的教程见 [Network RC 一键安装](https://blog.esonwong.com/%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85-Network-RC/)。
+
+
 本教程介绍使用树莓派和遥控车制作一台可以通过网络控制的遥控车。软件使用我开发的 [network-rc]。
 
 ## 材料
