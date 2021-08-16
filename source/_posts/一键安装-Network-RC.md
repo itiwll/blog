@@ -21,14 +21,13 @@ categories:
 
 树莓派安装系统，系统设置里开启摄像头，连接网络。
 
-> **注意：在最新树莓派系统上存在兼通性问题， 使用此版本系统<http://downloads.raspberrypi.org/raspbian/images/raspbian-2020-02-07/>**，**不要更新系统**。
 
 ## 一键安装命令
 
 在树莓派的终端里运行下面代码:
 
 ```bash
-bash <(curl -sL https://network-rc.esonwong.com/download/install.sh)
+bash <(curl -sL https://network-rc.esonwong.com/download/install-beta.sh)
 ```
 <!-- more -->
 
@@ -39,8 +38,6 @@ bash <(curl -sL https://network-rc.esonwong.com/download/install.sh)
 ### 使用内置穿透
 
 输入 `yes` 回车
-
-~~~方向键选择穿透服务器~~~
 
 ### 使用自定义穿透
 
