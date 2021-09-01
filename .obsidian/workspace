@@ -1,0 +1,97 @@
+{
+  "main": {
+    "id": "cb22c946378c3ab2",
+    "type": "split",
+    "children": [
+      {
+        "id": "c0bce4a4e81bb3b4",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "Todo.md",
+            "mode": "source"
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "d80a070d72426f70",
+    "type": "split",
+    "children": [
+      {
+        "id": "4aa9c78f90909362",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "6fee6e2e9fb41944",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "c909027049f6d06b",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "837a2dc1c665b6f8",
+    "type": "split",
+    "children": [
+      {
+        "id": "305d9cb22dfe9ae9",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "5363cec4de8e6e3b",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Todo.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "c0bce4a4e81bb3b4",
+  "lastOpenFiles": [
+    "Todo.md",
+    "source/_posts/一键安装-Network-RC.md",
+    "source/_posts/weekly-2021-08-29.md",
+    "source/_posts/weekly-2021-09-05.md",
+    "source/_posts/weekly-2021-08-29 1.md"
+  ]
+}
