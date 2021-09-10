@@ -114,3 +114,4 @@ public/
 !/public/CNAME
 .deploy*/
 
+.obsidian
