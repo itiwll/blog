@@ -113,18 +113,26 @@ email: 'itiwll@gmail.com'
 
 social:
   github: https://github.com/itiwll
+  email: 'itiwll@gmail.com'
+  twitter: https://twitter.com/eson000
 
 # WeChat 微信公众号二维码url
 wechat_url: /asset/wechat.png ## 启用wechat widget才会生效
 
 google_analytics: UA-96241139-3
 
+menu:
+  首页: /
+  推特: https://twitter.com/eson000
+  捐赠: /donate
 rss: /atom.xml
+
 feed:
   # Generate atom feed
   type: atom
 
 
 links:
-  EsonWong's blog: https://github.com/itiwl
-  EsonWong's bilibili: https://space.bilibili.com/96740361
+  Eson Wong's twitter:  https://twitter.com/eson000
+  Eson Wong's blog: https://github.com/itiwl
+  Eson Wong's bilibili: https://space.bilibili.com/96740361
