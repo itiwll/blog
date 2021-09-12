@@ -1,6 +1,7 @@
 ---
 
 title: Network RC 一键安装
+date: 2021-06-29 08:41:37
 tags:
   - 网络遥控车
   - 技术
@@ -27,7 +28,7 @@ categories:
 在树莓派的终端里运行下面代码:
 
 ```bash
-bash <(curl -sL https://network-rc.esonwong.com/download/install-beta.sh)
+bash <(curl -sL https://network-rc.esonwong.com/download/install.sh)
 ```
 <!-- more -->
 
