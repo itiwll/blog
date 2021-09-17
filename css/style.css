@@ -305,7 +305,7 @@ body {
   padding-right: 4px;
 }
 .follow .github:before,
-.follow .weibo:before,
+.follow .twitter:before,
 .follow .email:before,
 .follow .zhihu:before,
 .follow .wechat:before {
@@ -1599,17 +1599,17 @@ span.ua .location:before {
   text-decoration: none !important;
 }
 .follow .github:before {
-  content: "\f092" !important;
+  content: "\f09b" !important;
 }
 .follow .github:hover {
   color: #333;
   cursor: pointer;
   background-color: #f5f5d5 /*#eee*/;
 }
-.follow .weibo:before {
-  content: "\f18a" !important;
+.follow .twitter:before {
+  content: "\f099" !important;
 }
-.follow .weibo:hover {
+.follow .twitter:hover {
   color: #333;
   cursor: pointer;
   background-color: #f5f5d5 /*#eee*/;
