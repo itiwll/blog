@@ -62,4 +62,4 @@ Apple 的设备里有一个“快捷指令”应用程序。
 [怎么才能坚持做一件事情]: ./how-to-persist
 [罗振宇 知识就是力量：怎样逼自己成为一个上进的人]: https://www.youtube.com/watch?v=1YI1k1iTFd8&list=PLgKcFbbQ9Io4YqBIIh-U0ujdO9f8jHKfN&index=2&t=735s
 [强化]: https://zh.wikipedia.org/wiki/%E5%A2%9E%E5%BC%B7
-[坚持]: ../asset/坚持.jpg
+[坚持]: /asset/坚持.jpg

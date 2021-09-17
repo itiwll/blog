@@ -104,8 +104,8 @@ AI 驾驶基于图像和动作学习，能根据你的想象力实现各种驾�
 ### 人体跟随
 
 
-[ai 驾驶]: ../asset/4G:5G%20网络RC遥控车04%20-%20AI%20学习教程？-封面.jpg
-[network-rc 主菜单]: ../asset/network-rc-menu.png
-[network-rc ai 样本采集]: ../asset/network-rc-ai-sample.png
-[network-rc ai 学习训练]: ../asset/network-rc-ai-learning.png
-[network-rc ai 自动驾驶]: ../asset/network-rc-ai-drive.png
+[ai 驾驶]: /asset/4G:5G%20网络RC遥控车04%20-%20AI%20学习教程？-封面.jpg
+[network-rc 主菜单]: /asset/network-rc-menu.png
+[network-rc ai 样本采集]: /asset/network-rc-ai-sample.png
+[network-rc ai 学习训练]: /asset/network-rc-ai-learning.png
+[network-rc ai 自动驾驶]: /asset/network-rc-ai-drive.png
