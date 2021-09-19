@@ -70,7 +70,7 @@ jobs:
 
 首先要准备可以在目标服务器上发布的私钥和 known-hosts，添加到仓库设置的 Secrets 中，命名为 `SSH_PRIVATE_KEY` 和 `KNOWN_HOSTS_TEST` 这样可以避免被暴露而在配置中使用。用 [shimataro/ssh-key-action] 安装私钥到 Github Action 的虚拟服务器。
 
-![添加服务器发布私钥](../asset/add-secret.png)
+![添加服务器发布私钥](/asset/add-secret.png)
 
 
 ```yml

@@ -82,7 +82,7 @@ Upgrade: websocket
 - [section 10 of RFC 2616]
 - [系统服务化构建-状态码设计要点]
 
-[HTTP 状态码]:../asset/http-status-codes.jpg
+[HTTP 状态码]:/asset/http-status-codes.jpg
 [section 10 of RFC 2616]:https://tools.ietf.org/html/rfc2616#section-10
 [HTTP 响应代码]:https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status
 [系统服务化构建-状态码设计要点]:https://cloud.tencent.com/developer/article/1540087
