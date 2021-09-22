@@ -8,7 +8,7 @@ tags:
   - 笔记
 ---
 
-![The Common Sense of Management](../asset/the-common-sense-of-management.jpeg)
+![The Common Sense of Management](/asset/the-common-sense-of-management.jpeg)
 
 > “在西方的管理理论中很少探讨责任的问题，因为在西方文化中，责任是非常清晰的，人们在行为习惯中就形成了个人责任的意识，责任成为一个从业人员的基本素质。但是中国传统文化一直强调中庸，强调求和与迁就，人们不习惯于个人承担责任，反而比较习惯从众，加上民间盛行“枪打出头鸟”“法不责众”的说法，人们更是希望责任淹没在多数人中，所以对于责任意识而言我们可以说是先天弱势。”
 

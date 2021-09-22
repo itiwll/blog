@@ -13,7 +13,7 @@ tags:
   - 技术
   - Javascript
 ---
-![babel class 转换](../asset/babel.png)
+![babel class 转换](/asset/babel.png)
 
 ES6 加入了 Class 的语法，Class 的大部分功能 ES5 都可以做到，我们可以把 `class` 看作是一个语法糖。本篇文章我们一步步来看看 Babel 是怎么把 `class` 转换成 ES5 语法的。
 
