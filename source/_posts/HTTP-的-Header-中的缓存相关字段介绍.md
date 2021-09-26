@@ -89,4 +89,4 @@ add_header Cache-Control "no-cache,public,max-age=7200";
 
 [彻底弄懂HTTP缓存机制及原理]:https://www.cnblogs.com/chenqf/p/6386163.html
 [Cache-Control]:https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Cache-Control
-[http 缓存]:../asset/http-caching.png
+[http 缓存]:/asset/http-caching.png
