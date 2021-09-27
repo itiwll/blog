@@ -47,7 +47,7 @@ categories:
 2. 在树莓派上下载 [network-rc] 软件
 
     ```bash
-    wget https://network-rc.esonwong.com/download/network-rc.tar.gz
+    wget https://download.esonwong.com/network-rc/network-rc.tar.gz
 
     # 备用地址下载
     wget https://esonwong.synology.me:5011/download/network-rc.tar.gz
