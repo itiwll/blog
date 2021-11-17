@@ -33,15 +33,13 @@ Scriptable 是一个免费的 iOS 应用程序，可以在 iOS 上用 Javascript
 3. 把代码拷贝到 Scriptable 中
 
    [Github 地址](https://github.com/itiwll/scriptable-widget)
-   脚本: 
+   脚本:
+
    ```javascript
     // 作者： @eson000
-    // Scriptable twitter followers count
+    // Scriptable twitter follow count
 
-    const userName = "eson000",
-
-    // 到 https://developer.twitter.com/en/portal/dashboard 获取token
-    bearerToken = "xxxxx";
+    const userName = args[0] || "eson000";
 
     let widget
 
@@ -51,24 +49,28 @@ Scriptable 是一个免费的 iOS 应用程序，可以在 iOS 上用 Javascript
       let avatar = await loadAvatar(info.profile_image_url.replace("_normal", "_bigger"));
 
       widget = await createWidget(info, avatar)
+      // widget = await createLogWidget(info);
     } catch (e) {
       console.error(e)
       widget = await createLogWidget(e.message);
     }
 
     if (config.runsInWidget) {
+      // The script runs inside a widget, so we pass our instance of ListWidget to be shown inside the widget on the Home Screen.
       Script.setWidget(widget);
     } else {
+      // The script runs inside the app, so we preview the widget.
       widget.presentMedium();
     }
 
+    // Calling Script.complete() signals to Scriptable that the script have finished running.
     // This can speed up the execution, in particular when running the script from Shortcuts or using Siri.
     Script.complete();
 
     async function createLogWidget(logObj) {
       let widget = new ListWidget();
 
-      let descriptionElement = widget.addText(JSON.stringify(logObj));·
+      let descriptionElement = widget.addText(JSON.stringify(logObj));
       descriptionElement.minimumScaleFactor = 0.5;
       descriptionElement.textColor = Color.red();
       descriptionElement.font = Font.systemFont(18);
@@ -122,11 +124,8 @@ Scriptable 是一个免费的 iOS 应用程序，可以在 iOS 上用 Javascript
     }
 
     async function load() {
-      let url = `https://api.twitter.com/2/users/by/username/${userName}?user.fields=public_metrics,profile_image_url`;
+      let url = `https://api.esonwong.com/widget/twitter/profile/${userName}`;
       let req = new Request(url);
-      req.headers = {
-        Authorization: `Bearer ${bearerToken}`,
-      };
       return await req.loadJSON();
     }
 
@@ -137,13 +136,11 @@ Scriptable 是一个免费的 iOS 应用程序，可以在 iOS 上用 Javascript
     }
    ```
 
-4. 替换脚本中的 userName 和 bearerToken
-
-   > bearerToken 需要在 <https://developer.twitter.com/en/portal/dashboard> 申请
-
+4. 替换脚本中的 userName 为你要查看的 Twitter 用户名
 5. 在 Home Screen 中添加 Widget
 6. 设置 Widget，选择第 5 步之前添加的脚本
 
 ## 参考资料
 
 - [Scriptable](https://scriptable.app)
+- [Github itiwll/scriptable-widget](https://github.com/itiwll/scriptable-widget)
