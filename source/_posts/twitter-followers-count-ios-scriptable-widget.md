@@ -34,6 +34,7 @@ Scriptable 是一个免费的 iOS 应用程序，可以在 iOS 上用 Javascript
 2. 在 Scriptable 中添加 Script
 3. 把代码拷贝到 Scriptable 中
 
+   [Github 地址](https://github.com/itiwll/scriptable-widget)
    脚本: 
    ```javascript
     // 作者： @eson000
