@@ -3,7 +3,7 @@ title: Babel 的 Class 的转换
 date: 2020-07-01 22:15:45
 categories:
   - 技术
-    - Web 开发
+  - Web 开发
 tags: 
   - babel
   - ECMAScript
