@@ -3,6 +3,7 @@ title: 如何终止 fetch 请求
 date: 2020-02-14 09:30:00
 categories:
   - 技术
+  - Web 开发
 tags:
   - 前端
   - javascript

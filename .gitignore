@@ -112,6 +112,7 @@ db.json
 node_modules/
 public/
 !/public/CNAME
+!/public/favicon.png
 .deploy*/
 
 .obsidian

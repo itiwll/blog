@@ -3,11 +3,11 @@ title: 'Ecmascript 提案：空值合并运算符 "??" '
 date: 2020-02-05 20:37:15
 categories:
   - 技术
-tags: 
+  - Web 开发
+tags:
   - 空值合并运算符
   - nullish coalescing
-  - '??'
-  - babel
+  - Babel
   - ECMAScript
   - web 开发
   - 前端
@@ -19,15 +19,17 @@ tags:
 如果控制合并运算符 `??` 左边的值为 `null` 或 `undefined` ，表达式会返回控制合并运算符右边的值，否则返回左边的值。
 
 已经进入 stage 4(Finished) 阶段，等待加入标准。
+
 <!-- more -->
+
 示例：
 
-``` javascript
+```javascript
 const user = {
-    name: "eson",
-    age: 0,
-    address: null,
-    gender: ""
+  name: "eson",
+  age: 0,
+  address: null,
+  gender: "",
 };
 const userName = user.name ?? "unknown"; // "eson"
 const userAge = user.age ?? 18; // 0
@@ -41,16 +43,17 @@ const userGender = user.gender ?? "male"; // ""
 
 如：
 
-``` javascript
+```javascript
 const userAge = user.age || 18; // 18
 const userAddress = user.address || "unknown"; // "unknown"
 const userGender = user.gender || "male"; // "male"
 ```
 
 ## 使用 bable 插件支持空值合并运算符
+
 ### 安装插件
 
-``` bash
+```bash
 npm install --save-dev @babel/plugin-proposal-nullish-coalescing-operator
 # or
 yarn add @babel/plugin-proposal-nullish-coalescing-operator -D
@@ -66,6 +69,5 @@ yarn add @babel/plugin-proposal-nullish-coalescing-operator -D
 
 ## 参考
 
-* [tc3/proposal-nullish-coalescing](https://github.com/tc39/proposal-nullish-coalescing)
-* [@babel/plugin-proposal-nullish-coalescing-operator](https://babeljs.io/docs/en/babel-plugin-proposal-nullish-coalescing-operator)
-
+- [tc3/proposal-nullish-coalescing](https://github.com/tc39/proposal-nullish-coalescing)
+- [@babel/plugin-proposal-nullish-coalescing-operator](https://babeljs.io/docs/en/babel-plugin-proposal-nullish-coalescing-operator)
