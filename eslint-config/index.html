@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png">
+  <link rel="mask-icon" href="/favicon.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.esonwong.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="ESLint 是一个 ECMAScript&#x2F;JavaScript 代码检查工具，它可以检查你的代码是否遵循了规范，它的目标是保证代码的一致性和避免错误。 本篇文章介绍一下 ESLint 的配置方式。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="怎么配置 ESLint ？">
+<meta property="og:url" content="https://blog.esonwong.com/eslint-config/index.html">
+<meta property="og:site_name" content="Eson Wong&#39;s Blog">
+<meta property="og:description" content="ESLint 是一个 ECMAScript&#x2F;JavaScript 代码检查工具，它可以检查你的代码是否遵循了规范，它的目标是保证代码的一致性和避免错误。 本篇文章介绍一下 ESLint 的配置方式。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.esonwong.com/asset/eslint-logo.svg">
+<meta property="article:published_time" content="2021-11-20T16:26:58.000Z">
+<meta property="article:modified_time" content="2021-11-21T06:18:08.174Z">
+<meta property="article:author" content="Eson Wong">
+<meta property="article:tag" content="Babel">
+<meta property="article:tag" content="ECMAScript">
+<meta property="article:tag" content="Web 开发">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="Javascript">
+<meta property="article:tag" content="开发规范">
+<meta property="article:tag" content="ESLint">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.esonwong.com/asset/eslint-logo.svg">
+
+<link rel="canonical" href="https://blog.esonwong.com/eslint-config/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>怎么配置 ESLint ？ | Eson Wong's Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-96241139-3"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-96241139-3');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Eson Wong's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Eson Wong's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">编程笔记，投资记录, 读书总结, 生活心得</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.esonwong.com/eslint-config/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/favicon.png">
+      <meta itemprop="name" content="Eson Wong">
+      <meta itemprop="description" content="Eson Wong's Blog，编程笔记，投资记录, 读书总结, 生活心得">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Eson Wong's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          怎么配置 ESLint ？
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-11-20 16:26:58" itemprop="dateCreated datePublished" datetime="2021-11-20T16:26:58+00:00">2021-11-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-11-21 06:18:08" itemprop="dateModified" datetime="2021-11-21T06:18:08+00:00">2021-11-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/Web-%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">Web 开发</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/eslint-config/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="eslint-config/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <img src="/asset/eslint-logo.svg" width="200px" />
+
+<p>ESLint 是一个 ECMAScript/JavaScript 代码检查工具，它可以检查你的代码是否遵循了规范，它的目标是保证代码的一致性和避免错误。</p>
+<p>本篇文章介绍一下 ESLint 的配置方式。</p>
+<span id="more"></span>
+
+<h2 id="脚手架和编辑器中的"><a href="#脚手架和编辑器中的" class="headerlink" title="脚手架和编辑器中的"></a>脚手架和编辑器中的</h2><p>Web 前端开发的脚手架中一般会引入 eslint-loader 来帮我们检查代码的规范。编辑器中也有 ESLint 插件，可以帮我们检查代码的规范。代码编辑器的 ESLint 功能或插件和 eslint-loader 都遵循下面介绍的配置方式。</p>
+<h2 id="ESLint-的配置方式"><a href="#ESLint-的配置方式" class="headerlink" title="ESLint 的配置方式"></a>ESLint 的配置方式</h2><p>ESLint 有三种配置方式：</p>
+<ol>
+<li>注释配置<br>使用注释把配置信息直接嵌入到一个代码源文件中。</li>
+<li>项目配置文件<br>在项目根目录中使用 JavaScript、JSON 或者 YAML 文件为整个项目指定配置信息。可以配置一个独立的 <code>.eslintrc.*</code> 文件，或者直接在 <code>package.json</code> 文件里的 <code>eslintConfig</code> 字段指定配置，ESLint 会查找和自动读取它们。<br>如果同一目录下 <code>.eslintrc.*</code> 和 <code>package.json</code> 的 <code>eslintConfig</code> 字段同时存在 <code>.eslintrc.*</code> 优先级高会被使用。</li>
+<li>用户配置<br>如果你在你的 Home 目录(通常是<code>~/</code>)有一个配置文件，ESLint 只有在无法找到其他配置文件时才使用它。</li>
+</ol>
+<blockquote>
+<p>优先级: 注释配置 &gt; 项目配置文件 <code>.eslintrc.*</code> &gt; 项目配置文件 <code>package.json</code> 的 <code>eslintConfig</code> 字段 &gt; 用户配置</p>
+</blockquote>
+<p>另外你可以在代码编辑器或者脚手架的 eslint-loader 配置中指定一个配置文件。它的优先级将大于项目配置文件, 小于注释配置。</p>
+<h2 id="配置文件的内容"><a href="#配置文件的内容" class="headerlink" title="配置文件的内容"></a>配置文件的内容</h2><p>下面介绍一下 ESLint 的配置文件中的一些字段。</p>
+<h3 id="extends"><a href="#extends" class="headerlink" title="extends"></a>extends</h3><p><code>extends</code> 字段指定一个或多个基础配置，最终的配置将从这些基础配置继扩展和覆盖。可以是字符串，或者是一个数组。如果是数组，最终的配置会在前面的配置的基础上扩展和覆盖。</p>
+<p>ESLint 内置了两种基础配置：</p>
+<ul>
+<li>eslint:recommended<br>这个配置启用一些在 <a target="_blank" rel="noopener" href="https://cn.eslint.org/docs/rules/">ESLint 可用规则列表</a> 中有对勾标记的核心规格。</li>
+<li>eslint:all<br>这个配置启用 <a target="_blank" rel="noopener" href="https://cn.eslint.org/docs/rules/">ESLint 可用规则列表</a> 中所有的核心规则<blockquote>
+<p>重要：这些配置不推荐在产品中使用，因为它随着 ESLint 版本进行更改。使用的话，请自己承担风险。</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>如果你在编辑器中使用 Prettier 自动格式化需要安装 <code>eslint-plugin-prettier</code>，并在 <code>extends</code> 添加 <code>plugin:prettier/recommended</code>。以避免 Prettier 与 ESLint 的格式化冲突。</p>
+</blockquote>
+<p>json 配置示例：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// .eslintrc.json</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;extends&quot;</span>: [<span class="string">&quot;eslint:recommended&quot;</span>, <span class="string">&quot;plugin:prettier/recommended&quot;</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="root"><a href="#root" class="headerlink" title="root"></a>root</h3><p>默认情况下，ESLint 会在所有父级目录里寻找配置文件，一直到根目录。如果你想要你所有项目都遵循一个特定的约定时，这将会很有用，但有时候会导致意想不到的结果。为了将 ESLint 限制到一个特定的项目，在你项目根目录下的 <code>package.json</code> 文件或者 <code>.eslintrc.*</code> 文件里设置 <code>&quot;root&quot;: true</code>。ESLint 一旦发现配置文件中有 <code>&quot;root&quot;: true</code>，它就会停止在父级目录中寻找配置。</p>
+<h3 id="rules"><a href="#rules" class="headerlink" title="rules"></a>rules</h3><p><code>rules</code> 字段中的每一条规则的 key 可以在 <a target="_blank" rel="noopener" href="https://cn.eslint.org/docs/rules/">ESLint 可用规则列表</a> 中找到。</p>
+<p>value 可以是一个字符串、数字的规则开关值，或包含开关值和规则选项的数组。</p>
+<p>规则开关的值可以是下列值之一：</p>
+<ul>
+<li><code>off</code> 或 <code>0</code> - 关闭规则</li>
+<li><code>warn</code> 或 <code>1</code> - 开启规则，规则不通过时，会输出警告</li>
+<li><code>error</code> 或 <code>2</code> - 开启规则，规则不通过时，会输出错误，并终止构建</li>
+</ul>
+<p>json 配置示例：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// .eslintrc.json</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;root&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">&quot;rules&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;eqeqeq&quot;</span>: <span class="string">&quot;off&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;curly&quot;</span>: <span class="string">&quot;error&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;quotes&quot;</span>: [<span class="string">&quot;error&quot;</span>, <span class="string">&quot;double&quot;</span>]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="env-和-globals"><a href="#env-和-globals" class="headerlink" title="env 和 globals"></a>env 和 globals</h3><p><code>env</code> 定义一个或多个环境，每个环境都有一组预定义的全局变量，ESLint 对这些全局变量进行检查。需要额外的环境变量可在 <code>globals</code> 字段中定义。</p>
+<p>json 配置示例：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// .eslintrc.json</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;env&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;browser&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">&quot;node&quot;</span>: <span class="literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">&quot;globals&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;$&quot;</span>: <span class="string">&quot;readonly&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;token&quot;</span>: <span class="string">&quot;writable&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="其它常用配置介绍"><a href="#其它常用配置介绍" class="headerlink" title="其它常用配置介绍"></a>其它常用配置介绍</h3><ul>
+<li><p>parser<br>指定解析器，默认为 <code>esprima</code>, 其他常用的有：</p>
+<ul>
+<li><code>babel-eslint</code> 一个对 Babel 解析器的包装，使其能够与 ESLint 兼容。</li>
+<li><code>@typescript-eslint/parser</code> 将 TypeScript 转换成与 estree 兼容的形式，以便在 ESLint 中使用。</li>
+</ul>
+</li>
+<li><p>plugins<br>ESLint 的插件。</p>
+</li>
+<li><p>processor<br>插件可能会提供处理器。处理器可以从其他类型的文件中提取 JavaScript 代码，然后让 ESLint 处理，或者处理器可以出于某种目的在预处理中转换 JavaScript 代 码。</p>
+</li>
+</ul>
+<h3 id="过滤文件和目录"><a href="#过滤文件和目录" class="headerlink" title="过滤文件和目录"></a>过滤文件和目录</h3><p><code>.eslintignore</code> 文件可以用来过滤 ESLint 处理的文件和目录。用法和 <code>.gitignore</code> 相同。</p>
+<p>如果没有 <code>.eslintignore</code> 文件，ESLint 将在 package.json 文件中查找 eslintIgnore 键，来检查要忽略的文件。</p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://eslint.org/docs/user-guide/configuring">ESLint 文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://cn.eslint.org/docs/rules/">ESLint 可用规则列表</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>请我喝杯咖啡吧！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/asset/wechat-donate.jpg" alt="Eson Wong 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/asset/alipay-donate.jpg" alt="Eson Wong 支付宝">
+        <p>支付宝</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/asset/paypal-donate.png" alt="Eson Wong 贝宝">
+        <p>贝宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/eson000">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Babel/" rel="tag"># Babel</a>
+              <a href="/tags/ECMAScript/" rel="tag"># ECMAScript</a>
+              <a href="/tags/Web-%E5%BC%80%E5%8F%91/" rel="tag"># Web 开发</a>
+              <a href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag"># 前端</a>
+              <a href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag"># 技术</a>
+              <a href="/tags/Javascript/" rel="tag"># Javascript</a>
+              <a href="/tags/%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" rel="tag"># 开发规范</a>
+              <a href="/tags/ESLint/" rel="tag"># ESLint</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/twitter-followers-count-ios-scriptable-widget/" rel="prev" title="iOS 的 Scriptable app 的 Twitter fo数统计 Widget">
+      <i class="fa fa-chevron-left"></i> iOS 的 Scriptable app 的 Twitter fo数统计 Widget
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%84%9A%E6%89%8B%E6%9E%B6%E5%92%8C%E7%BC%96%E8%BE%91%E5%99%A8%E4%B8%AD%E7%9A%84"><span class="nav-number">1.</span> <span class="nav-text">脚手架和编辑器中的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ESLint-%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%B9%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">ESLint 的配置方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%9A%84%E5%86%85%E5%AE%B9"><span class="nav-number">3.</span> <span class="nav-text">配置文件的内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#extends"><span class="nav-number">3.1.</span> <span class="nav-text">extends</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#root"><span class="nav-number">3.2.</span> <span class="nav-text">root</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rules"><span class="nav-number">3.3.</span> <span class="nav-text">rules</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#env-%E5%92%8C-globals"><span class="nav-number">3.4.</span> <span class="nav-text">env 和 globals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E5%AE%83%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E4%BB%8B%E7%BB%8D"><span class="nav-number">3.5.</span> <span class="nav-text">其它常用配置介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%87%E6%BB%A4%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95"><span class="nav-number">3.6.</span> <span class="nav-text">过滤文件和目录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="nav-number">4.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Eson Wong"
+      src="/favicon.png">
+  <p class="site-author-name" itemprop="name">Eson Wong</p>
+  <div class="site-description" itemprop="description">Eson Wong's Blog，编程笔记，投资记录, 读书总结, 生活心得</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/eson000" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;eson000" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/itiwll" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;itiwll" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.youtube.com/c/itiwll" title="YouTube → https:&#x2F;&#x2F;www.youtube.com&#x2F;c&#x2F;itiwll" rel="noopener" target="_blank"><i class="fab fa-youtube fa-fw"></i>YouTube</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:itiwll@gmail.com" title="E-Mail → mailto:itiwll@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Eson Wong</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://eson-blog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://blog.esonwong.com/eslint-config/";
+    this.page.identifier = "eslint-config/";
+    this.page.title = "怎么配置 ESLint ？";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://eson-blog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
