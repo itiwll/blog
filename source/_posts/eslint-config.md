@@ -76,9 +76,9 @@ json 配置示例：
 
 ### rules
 
-`rules` 字段中的每一条规则的 key 可以在 [ESLint 可用规则列表] 中找到。
+`rules` 字段中的每一条规则的键名可以在 [ESLint 可用规则列表] 中找到。
 
-value 可以是一个字符串、数字的规则开关值，或包含开关值和规则选项的数组。
+值可以是一个字符串、数字的规则开关值，或包含开关值和规则选项的数组。
 
 规则开关的值可以是下列值之一：
 
@@ -134,11 +134,11 @@ json 配置示例：
 - processor
   插件可能会提供处理器。处理器可以从其他类型的文件中提取 JavaScript 代码，然后让 ESLint 处理，或者处理器可以出于某种目的在预处理中转换 JavaScript 代 码。
 
-### 过滤文件和目录
+## 过滤文件和目录
 
 `.eslintignore` 文件可以用来过滤 ESLint 处理的文件和目录。用法和 `.gitignore` 相同。
 
-如果没有 `.eslintignore` 文件，ESLint 将在 package.json 文件中查找 eslintIgnore 键，来检查要忽略的文件。
+如果没有 `.eslintignore` 文件，ESLint 将在 package.json 文件中查找 `eslintIgnore` 键，来检查要忽略的文件。
 
 ## 参考文档
 
