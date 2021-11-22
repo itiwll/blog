@@ -13,6 +13,9 @@ tags:
   - Javascript
   - Babel
   - 开发规范
+  - VSCode
+  - 团队协作
+  - Prettier
 ---
 
 <img src="/asset/eslint-logo.svg" width="200px" />
