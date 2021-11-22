@@ -59,14 +59,14 @@ ESLint 内置了两种基础配置：
   这个配置启用 [ESLint 可用规则列表] 中所有的核心规则
   > 重要：这些配置不推荐在产品中使用，因为它随着 ESLint 版本进行更改。使用的话，请自己承担风险。
 
-> 如果你在编辑器中使用 Prettier 自动格式化需要安装 `eslint-plugin-prettier`，并在 `extends` 添加 `plugin:prettier/recommended`。以避免 Prettier 与 ESLint 的格式化冲突。
+> 如果你在编辑器中使用 Prettier 自动格式化需要安装 `eslint-config-prettier`，并在 `extends` 添加 `prettier`。以避免 Prettier 与 ESLint 的格式化冲突。
 
 json 配置示例：
 
 ```json
 // .eslintrc.json
-{
-  "extends": ["eslint:recommended", "plugin:prettier/recommended"]
+{····
+  "extends": ["eslint:recommended", "prettier"]
 }
 ```
 
@@ -128,11 +128,11 @@ json 配置示例：
   - `babel-eslint` 一个对 Babel 解析器的包装，使其能够与 ESLint 兼容。
   - `@typescript-eslint/parser` 将 TypeScript 转换成与 estree 兼容的形式，以便在 ESLint 中使用。
 
-- plugins
-  ESLint 的插件。
-
 - processor
   插件可能会提供处理器。处理器可以从其他类型的文件中提取 JavaScript 代码，然后让 ESLint 处理，或者处理器可以出于某种目的在预处理中转换 JavaScript 代 码。
+
+- plugins
+  ESLint 的插件，可以为 ESLint 添加配置、规则、解析器等。
 
 ## 过滤文件和目录
 
