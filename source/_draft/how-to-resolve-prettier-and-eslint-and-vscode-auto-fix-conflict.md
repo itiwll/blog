@@ -37,6 +37,28 @@ Prettier 和 ESlint 配置不当，会导致代码格式化和代码检查的冲
 
 ### Prettier 的配置
 
+#### htmlWhitespaceSensitivity
+
+默认 Prettier 配置的 `"htmlWhitespaceSensitivity": "css"` 在格式化时会认为 HTML 行内元素的空格和换行是有意义的，不会按其他规则格式化时在标签内部头部和尾部添加换行。因为行内元素内的起始换行和结束换行会在浏览器中渲染出空格。而且会导致一些情况下的行内元素的 `>` 前换行，不太美观。
+
+```html
+<!-- <span> 是行内元素, <div> 块级元素 -->
+
+<!-- input -->
+<span class="dolorum atque aspernatur">Est molestiae sunt facilis qui rem.</span>
+<div class="voluptatem architecto at">Architecto rerum architecto incidunt sint.</div>
+
+<!-- output -->
+<span class="dolorum atque aspernatur"
+  >Est molestiae sunt facilis qui rem.</span
+>
+<div class="voluptatem architecto at">
+  Architecto rerum architecto incidunt sint.
+</div>
+```
+
+为了保持行内元素不被添加换行，且不出出现 `>` 前换行，我们可以设置 `"htmlWhitespaceSensitivity": "ignore"`。
+
 ```json
 {
   "htmlWhitespaceSensitivity": "ignore"
