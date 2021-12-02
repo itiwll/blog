@@ -12,19 +12,19 @@ tags:
 ---
 
 
+<img src="/asset/twitter-followers-count-ios-scriptable-widget.jpeg" width="320px" alt="twitter followers count widget"/>
 Scriptable 是一个免费的 iOS 应用程序，可以在 iOS 上用 Javascript 来创建 Home Screen 的 Widget。
 
-<img src="https://scriptable.app/assets/appicon.png" width="128px"/>
 
 <!-- more -->
 
+<img src="https://scriptable.app/assets/appicon.png" width="128px"/>
 商店地址： [Scriptable](https://apps.apple.com/us/app/scriptable/id1405459188)
 
 ## Twitter Followers Count Widget Script
 
 我尝试写了第一个脚本，用来在 Home Screen 创建一个 Widget 显示 Twitter 的 Followers Count。
 
-![twitter followers count widget](/asset/twitter-followers-count-ios-scriptable-widget.jpeg)
 
 ## 使用方法
 
