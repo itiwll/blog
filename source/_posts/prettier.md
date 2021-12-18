@@ -1,7 +1,7 @@
 ---
 title: Prettier 入门教程
 author: Eson Wong
-date: 2021-12-12 08:00:00
+date: 2021-12-12 12:00:00
 categories:
   - 技术
   - Web 开发
