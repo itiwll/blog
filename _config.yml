@@ -129,7 +129,7 @@ theme_config:
 
   reward_settings:
     # If true, reward will be displayed in every article by default.
-    enable: true
+    enable: false
     animation: true
     comment: 请我喝杯咖啡吧！
   reward:
