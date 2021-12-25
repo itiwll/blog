@@ -19,6 +19,7 @@ Scriptable 是一个免费的 iOS 应用程序，可以在 iOS 上用 Javascript
 <!-- more -->
 
 <img src="https://scriptable.app/assets/appicon.png" width="128px"/>
+
 商店地址： [Scriptable](https://apps.apple.com/us/app/scriptable/id1405459188)
 
 ## Twitter Followers Count Widget Script
