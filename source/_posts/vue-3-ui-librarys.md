@@ -92,7 +92,7 @@ Naive UI|中后台|Typescript|JSX|Typescript Style|Vite|
   - themes
   ```
 
-## For 小黎：
+## For 小黎
 
 我在整理查找这些资料的的时看到 [Naive UI 作者创作这个组件库的经历](https://www.zhihu.com/question/463736268/answer/1928240435)，才回想起自己学到的对于完成一个目标的方法：把目标细分，能够获得连绵不断的反馈。我觉得写一个组件库这个目标对于我们来说太大了，在它达到一个可用的状态之前，我们不能得到足够的反馈，来让我们保持热心维持下去。
 
