@@ -33,7 +33,7 @@ function HelloWorld() {
 
 // 格式化后
 function HelloWorld() {
-  return "Hello" + "World"
+  return "Hello" + "World";
 }
 ```
 
@@ -83,11 +83,11 @@ const options = {
 };
 
 const formatResult = prettier.format("foo();", options);
-console.log("formatResult:", formatResult); 
+console.log("formatResult:", formatResult);
 // output: "formatResult: foo()"
 
 const checkResult = prettier.check("foo();", options);
-console.log("checkResult:", checkResult); 
+console.log("checkResult:", checkResult);
 // output: "checkResult: false"
 ```
 
@@ -139,25 +139,7 @@ Prettier 提供了一个 [在线格式化 playground](https://prettier.io/playgr
 
 TSLint 和 Stylelint 如法炮制。具体可参看以下项目：
 
-* [tslint-config-prettier](https://github.com/prettier/tslint-config-prettier)
-* [stylelint-config-prettier](https://github.com/prettier/stylelint-config-prettier)
-
-## 其它
-
-如果你不喜欢 Prettier 将 HTML 、Vue 模板 或者 JSX 等的默认配置 `"whitespace-sensitive": "css"` 格式化时把一对尖括号分为两行：
-
-```html
-<!-- input -->
-<span class="dolorum atque aspernatur">Est molestiae sunt facilis qui rem.</span>
-<div class="voluptatem architecto at">Architecto rerum architecto incidunt sint.</div>
-
-<!-- output -->
-<span class="dolorum atque aspernatur"
-  >Est molestiae sunt facilis qui rem.</span
->
-<div class="voluptatem architecto at">
-  Architecto rerum architecto incidunt sint.
-</div>
-```
+- [tslint-config-prettier](https://github.com/prettier/tslint-config-prettier)
+- [stylelint-config-prettier](https://github.com/prettier/stylelint-config-prettier)
 
 可以配置 Prettier 的 `whitespace-sensitive` 选项为 `ignore`。
