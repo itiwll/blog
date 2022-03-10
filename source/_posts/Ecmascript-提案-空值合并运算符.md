@@ -9,7 +9,7 @@ tags:
   - nullish coalescing
   - Babel
   - ECMAScript
-  - web 开发
+  - Web 开发
   - 前端
   - 技术
 ---

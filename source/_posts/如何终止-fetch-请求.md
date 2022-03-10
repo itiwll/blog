@@ -10,7 +10,7 @@ tags:
   - ECMAScript
   - fetch
   - 终止 fetch
-  - web 开发
+  - Web 开发
 ---
 
 ## fetch 介绍
