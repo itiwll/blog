@@ -1,11 +1,9 @@
 ---
-
 title: Network RC 一键安装
 date: 2021-06-29 08:41:37
 tags:
   - 网络遥控车
   - 技术
-  - WiFi/4G/5G 网络遥控车
   - 教程
   - 树莓派
   - 网络图传
@@ -14,13 +12,11 @@ tags:
 categories:
   - 教程
   - 网络遥控车
-  
 ---
 
 ## 树莓派安装系统
 
 树莓派安装系统，系统设置里开启摄像头，连接网络。
-
 
 ## 一键安装命令
 
@@ -29,9 +25,8 @@ categories:
 ```bash
 bash <(curl -sL https://download.esonwong.com/network-rc/install.sh)
 ```
+
 <!-- more -->
-
-
 
 ## 选择穿透方法
 

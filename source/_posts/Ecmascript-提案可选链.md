@@ -6,9 +6,9 @@ categories:
   - Web 开发
 tags:
   - 可选链
-  - optional chaining
   - Babel
   - ECMAScript
+  - Javascript
   - web 开发
 ---
 

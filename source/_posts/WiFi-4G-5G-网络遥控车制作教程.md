@@ -4,7 +4,6 @@ date: 2020-04-09 10:26:19
 tags:
   - 网络遥控车
   - 技术
-  - WiFi/4G/5G 网络遥控车
   - 教程
   - 树莓派
   - 网络图传
@@ -21,7 +20,6 @@ categories:
 
 本篇部分内容已过时，安装 Network RC 和使用内置穿透的教程见 [Network RC - 制作教程](https://network-rc.esonwong.com/guide.html)。
 
-
 本教程介绍使用树莓派和遥控车制作一台可以通过网络控制的遥控车。软件使用我开发的 [network-rc]。
 
 ## 材料
@@ -29,7 +27,7 @@ categories:
 - 树莓派 3B+ (300 元)
 - 树莓派摄像头 (15 元) / ps3 摄像头 (40 远)
 - 移动电源 (60 元) / USB 输出降压模块 (?元)
-- 环奇 743A (286 元，某宝上找不到了, 3线 PWM 信号的电调和舵机的车都可以)
+- 环奇 743A (286 元，某宝上找不到了, 3 线 PWM 信号的电调和舵机的车都可以)
 - 杜邦线(公对公 x1, 公对母 x4) (3 元)
 - 其它固定材料
 
@@ -41,28 +39,28 @@ categories:
 
 1. 树莓派安装系统，系统设置里开启摄像头，连接网络。
 
-    > 网络上有很多树莓派系统安装教程，请自行搜索.
+   > 网络上有很多树莓派系统安装教程，请自行搜索.
 
 2. 在树莓派上下载 [network-rc] 软件
 
-    ```bash
-    wget https://download.esonwong.com/network-rc/network-rc.tar.gz
+   ```bash
+   wget https://download.esonwong.com/network-rc/network-rc.tar.gz
 
-    # 备用地址下载
-    wget https://esonwong.synology.me:5011/download/network-rc.tar.gz
-    ```
+   # 备用地址下载
+   wget https://esonwong.synology.me:5011/download/network-rc.tar.gz
+   ```
 
 3. 解压文件
 
-    ```bash
-    tar -zxvf network-rc.tar.gz
-    ```
+   ```bash
+   tar -zxvf network-rc.tar.gz
+   ```
 
 4. 运行程序
 
-    ```bash
-    sudo ./network-rc/node ./network-rc/index.js
-    ```
+   ```bash
+   sudo ./network-rc/node ./network-rc/index.js
+   ```
 
 5. 用同一局域网网下的浏览器里打开 `http://树莓派的ip地址:8080` 即可看到控制界面
 

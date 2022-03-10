@@ -5,7 +5,7 @@ categories:
   - 技术
   - Web 开发
 tags:
-  - javascript
+  - Javascript
   - webpack
   - 前端
   - webpack 配置
