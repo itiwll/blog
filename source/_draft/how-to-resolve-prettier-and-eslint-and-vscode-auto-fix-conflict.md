@@ -57,14 +57,6 @@ Prettier 和 ESlint 配置不当，会导致代码格式化和代码检查的冲
 </div>
 ```
 
-为了保持行内元素不被添加换行，且不出出现 `>` 前换行，我们可以设置 `"htmlWhitespaceSensitivity": "ignore"`。
-
-```json
-{
-  "htmlWhitespaceSensitivity": "ignore"
-}
-```
-
 ### VSCode
 
 VSCode 体验
