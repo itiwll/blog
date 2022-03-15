@@ -165,8 +165,8 @@ theme_config:
 
   valine:
     enable: true
-    appid: KbF6FyltIJvWf7qXolhhpbr2-MdYXbMMI
-    appkey: F2dxYSHYlLL5pbWh8SvvVjDT
+    appid: mUM1GDfux5APofDqovRyp7Sc-gzGzoHsz
+    appkey: v1Fs19OEhra5VSwIIFwvMzti
     notify: true # Mail notifier
     verify: true # Verification code
     placeholder: 半亩方塘一鉴开，天光云影共徘徊。问渠那得清如许？为有源头活水来 # Comment box placeholder
