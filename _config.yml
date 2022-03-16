@@ -170,15 +170,16 @@ theme_config:
     notify: true # Mail notifier
     verify: true # Verification code
     placeholder: 半亩方塘一鉴开，天光云影共徘徊。问渠那得清如许？为有源头活水来 # Comment box placeholder
-    avatar: mm # Gravatar style
+    avatar: # Gravatar style
     guest_info: nick,mail,link # Custom comment header
+    requiredFields: nick,mail
     pageSize: 10 # Pagination size
     language: zh-cn # Language, available values: en, zh-cn
     visitor: true # Article reading statistic
     comment_count: true # If false, comment count will only be displayed in post page, not in home page
-    recordIP: false # Whether to record the commenter IP
+    recordIP: true # Whether to record the commenter IP
     serverURLs: # When the custom domain name is enabled, fill it in here (it will be detected automatically by default, no need to fill in)
-    #post_meta_order: 0
+    enableQQ: true
 
   # add_this_id: ra-61967633971a97e9
 
