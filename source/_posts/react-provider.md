@@ -27,7 +27,7 @@ React context 是 React 提供的基本工具，用于在组件间共享状态�
 
 ## 什么是 React Context?
 
-React context 允许我们不使用 props 来传递数据的情况下，在组件间共享数据。它能让我们更容易的跨组件共享状态。
+React context 允许我们不对组件树的每层组件手动添加 props 来传递数据的情况下，在组件间共享数据。它能让我们更容易的跨组件共享状态。
 
 ## 什么时候使用 React Context?
 
