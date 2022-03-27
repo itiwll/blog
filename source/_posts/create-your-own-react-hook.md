@@ -1,7 +1,7 @@
 ---
 title: 怎么创建自定义 React Hooks?
 author: Eson Wong
-date: 2022-03-21 00:00:00.000
+date: 2022-03-27 00:00:00.000
 categories:
   - 技术
   - Web 开发
@@ -43,11 +43,11 @@ const App = () => {
 };
 ```
 
-自定义 React Hooks 是以 "use" 开头命名创建一个函数，它可以在内部调用其它 React Hooks。以将组件中可复用的逻辑提取出来，供多个组件使用。
+自定义 React Hooks 是以 `use` 开头命名创建一个函数，它可以在内部调用其它 React Hooks。以将组件中可复用的逻辑提取出来，供多个组件使用。
 
 ## React Hooks 的使用规则
 
-1. 只能在函数组件中使用
+1. 只能在函数组件中使用, 不能在类组件中使用。
 2. 只能在函数组件内顶层使用。不能在循环语句、条件语句、嵌套函数中使用。
 
    ```jsx
@@ -104,29 +104,24 @@ const App = () => {
    };
    ```
 
-3. 在 `App.js` 中使用 `useTitle` Hook 来设置标题。
+## 使用自定义 React Hooks
 
-   ```js
-   // src/App.js
-   import React, { useState, useEffect } from "react";
-   import useTitle from "./hooks/useTitle";
+在 `App.js` 中使用 `useTitle` Hook 来设置标题。
 
-   const App = () => {
-     const [count, setCount] = useState(0);
+```js
+// src/App.js
+import React from "react";
+import useTitle from "./hooks/useTitle";
 
-     useTitle(`You clicked ${count} times`);
+const App = () => {
+  useTitle("App");
 
-     useEffect(() => {
-       document.title = `You clicked ${count} times`;
-     });
-
-     return (
-       <div>
-         <p>You clicked {count} times</p>
-         <button onClick={() => setCount(count + 1)}>Click me</button>
-       </div>
-     );
-   };
-   ```
+  return (
+    <div>
+      <H1>{title}</H1>
+    </div>
+  );
+};
+```
 
 [create your own react hooks]: https://blog.logrocket.com/create-your-own-react-hooks/
