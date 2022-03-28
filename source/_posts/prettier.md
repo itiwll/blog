@@ -141,5 +141,3 @@ TSLint 和 Stylelint 如法炮制。具体可参看以下项目：
 
 - [tslint-config-prettier](https://github.com/prettier/tslint-config-prettier)
 - [stylelint-config-prettier](https://github.com/prettier/stylelint-config-prettier)
-
-可以配置 Prettier 的 `whitespace-sensitive` 选项为 `ignore`。
