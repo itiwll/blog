@@ -28,7 +28,7 @@ ESLint 是一个 ECMAScript/JavaScript 代码检查工具，它可以检查你�
 
 ## 脚手架和编辑器中的
 
-Web 前端开发的脚手架中一般会引入 eslint-loader 来帮我们检查代码的规范。编辑器中也有 ESLint 插件，可以帮我们检查代码的规范。代码编辑器的 ESLint 功能或插件和 eslint-loader 都遵循下面介绍的配置方式。
+Web 前端开发的脚手架中一般会引入 eslint-loader 来帮我们检查代码的规范。编辑器中也有 ESLint 插件来帮我们做同样的事情。代码编辑器的 ESLint 功能或插件和 eslint-loader 都遵循下面介绍的配置方式。
 
 ## ESLint 的配置方式
 
