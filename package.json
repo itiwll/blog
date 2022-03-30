@@ -8,7 +8,8 @@
     "clean": "hexo clean",
     "deploy": "hexo deploy",
     "start": "hexo server",
-    "preinstall": "git submodule update --init"
+    "preinstall": "git submodule update --init",
+    "prepare": "husky install"
   },
   "hexo": {
     "version": "5.4.0"
@@ -25,5 +26,13 @@
     "hexo-renderer-marked": "^4.1.0",
     "hexo-renderer-stylus": "^2.0.1",
     "hexo-server": "^2.0.0"
+  },
+  "devDependencies": {
+    "husky": "^7.0.0",
+    "lint-staged": ">=10",
+    "prettier": "^2.6.1"
+  },
+  "lint-staged": {
+    "source/**/*.{js,css,md}": "prettier --write"
   }
 }
