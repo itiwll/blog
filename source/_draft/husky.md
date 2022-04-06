@@ -14,7 +14,6 @@ tags:
   - Javascript
   - Babel
   - 开发规范
-  - VSCode
   - 团队协作
   - Git
 ---
