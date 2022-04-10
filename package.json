@@ -34,5 +34,6 @@
   },
   "lint-staged": {
     "source/**/*.{js,css,md}": "prettier --write"
-  }
+  },
+  "license": "by-nc-nd"
 }
