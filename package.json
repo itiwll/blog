@@ -15,7 +15,6 @@
     "version": "5.4.0"
   },
   "dependencies": {
-    "@commitlint/cli": "^16.2.3",
     "hexo": "^5.4.0",
     "hexo-generator-archive": "^1.0.0",
     "hexo-generator-category": "^1.0.0",
@@ -29,6 +28,8 @@
     "hexo-server": "^2.0.0"
   },
   "devDependencies": {
+    "@commitlint/config-conventional": "^16.2.1",
+    "@commitlint/cli": "^16.2.3",
     "husky": ">=7",
     "lint-staged": ">=10",
     "prettier": "^2.6.1"
