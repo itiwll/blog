@@ -105,7 +105,6 @@ dist
 
 
 # hexo add
-.DS_Store
 Thumbs.db
 db.json
 *.log
@@ -116,3 +115,10 @@ public/
 .deploy*/
 
 .obsidian
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+package-lock.json
+pnpm-lock.yaml
+.DS_Store
