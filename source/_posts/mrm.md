@@ -1,5 +1,5 @@
 ---
-title: Mrm 使用和入门
+title: Mrm 使用入门
 author: Eson Wong
 date: 2022-04-17 12:00:00
 categories:
